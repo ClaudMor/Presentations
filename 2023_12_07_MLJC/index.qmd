@@ -203,7 +203,7 @@ Introduction to Deep Learning
 
 Given a Graph:
 
-![](images/network.png){fig-align="center" height=150}
+![](images/network.PNG){fig-align="center" height=150}
 
 . . .
 
@@ -318,13 +318,13 @@ Graph Representation Learning | Graph Machine Learning
 
 ::: {.column width="50%" .scrollable}
 
-1. ![](images/WL_1.png){fig-align="center" height=150} <!-- fig-align="center" height=200 -->
+1. ![](images/WL_1.PNG){fig-align="center" height=150} <!-- fig-align="center" height=200 -->
 
-2. ![](images/WL_2.png){fig-align="right" height=150} <!-- height=200 -->
+2. ![](images/WL_2.PNG){fig-align="right" height=150} <!-- height=200 -->
 
-3. ![](images/WL_3.png){fig-align="right" height=150} <!-- height=200 -->
+3. ![](images/WL_3.PNG){fig-align="right" height=150} <!-- height=200 -->
 
-4. ![](images/WL_4.png){fig-align="right" height=150} <!-- height=200 -->
+4. ![](images/WL_4.PNG){fig-align="right" height=150} <!-- height=200 -->
 
 :::
 
@@ -339,14 +339,14 @@ Graph Representation Learning | Graph Machine Learning
 
 [**Obs.**]{.underline} WL-Kernel **cannot distinguish** all non-isomorphic graphs e.g.:
 
-![](images/WL_graphs.png){fig-align="center" height=150}
+![](images/WL_graphs.PNG){fig-align="center" height=150}
 
 . . .
 
 And computes **same color** for different nodes:
 
 
-![](images/WL_nodes.png){fig-align="center" height=150}
+![](images/WL_nodes.PNG){fig-align="center" height=150}
 
 
 . . .
@@ -447,14 +447,14 @@ Graph Representation Learning | Graph Deep Learning
 
 ::: {.column width="50%"}
 
-![](images/MPNN_1_div.png){fig-align="left"}
+![](images/MPNN_1_div.PNG){fig-align="left"}
 
 ::: 
 
 ::: {.column width="50%"}
 
 
-![](images/MPNN_2.png){fig-align="right"}
+![](images/MPNN_2.PNG){fig-align="right"}
 
 :::
 ::::
@@ -470,7 +470,7 @@ MPNN framework prescribes that a GNN is a **stacking of layers** of the form:
 
 $$\vec{h}^{(k+1)}_v = \vec{\text{COMB}}_k\left(\vec{h}^{(k)}_v, \vec{\text{AGGR}}_k\left( \left\{ \vec{\text{MSG}}_k\left(\vec{h}^{(k)}_v, \vec{h}^{(k)}_u, e_{uv} \right) | u \in N(v) \right\} \right)\right)$$
 
-![](images/MPNN_3.png){fig-align="center"}
+![](images/MPNN_3.PNG){fig-align="center"}
 
 
 ## Message Passing Framework #3 {.smaller}
@@ -564,7 +564,7 @@ Graph Representation Learning | Temporal Graph Deep Learning
 
 . . .
 
-![](images/longa2023_taxonomy.png){fig-align="center"}
+![](images/longa2023_taxonomy.PNG){fig-align="center"}
 
 ## ROLAND {.smaller}
 
