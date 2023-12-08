@@ -1,0 +1,89 @@
+% Parts of the discourse
+\newcommand{\definition}{\textbf{\underline{Def.}}}
+\newcommand{\ex}{\textbf{\underline{Example} }}
+\newcommand{\notation}{\textbf{\underline{Notation}}}
+\newcommand{\obs}{\textbf{\underline{Observation: }}}
+\newcommand{\un}[1]{\underline{#1}}
+
+% Greek letters
+\NewCommandCopy{\oldPsi}{\Psi}  % <!-- https://tex.stackexchange.com/questions/47351/can-i-redefine-a-command-to-contain-itself -->
+\renewcommand{\Psi}{\ensuremath{\oldPsi}}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\De}{\ensuremath{\Delta}}
+\newcommand{\de}{\ensuremath{\delta}}
+\newcommand{\al}{\ensuremath{\alpha}}
+\newcommand{\ga}{\ensuremath{\gamma}}
+\newcommand{\Ga}{\ensuremath{\Gamma}}
+\newcommand{\Om}{\ensuremath{\Omega}}
+\newcommand{\om}{\ensuremath{\omega}}
+\newcommand{\Th}{\ensuremath{\Theta}}
+
+\NewCommandCopy{\thorn}{\th}
+\renewcommand{\th}{\ensuremath{\theta}}
+
+\newcommand{\ph}{\ensuremath{\phi}}
+\newcommand{\Ph}{\ensuremath{\Phi}}
+\newcommand{\ps}{\ensuremath{\psi}}
+\newcommand{\Ps}{\ensuremath{\Psi}}
+\newcommand{\rh}{\ensuremath{\rho}}
+\newcommand{\Rh}{\ensuremath{\Rho}}
+
+
+% Utilities
+\newcommand{\e}{\ensuremath{\:\text{e}\:}}
+\newcommand{\an}{\ensuremath{\: \text{and} \:}}
+\newcommand{\st}{\ensuremath{\:|\:}}
+\newcommand{\inverse}[1]{\ensuremath{\frac{1}{#1}}}
+\newcommand{\lvec}[1]{\ensuremath{\overrightarrow{#1}} }
+
+\newcommand{\set}[1]{\ensuremath{\{#1\}}}
+%% tuples and sequences
+\newcommand{\seq}[1]{\ensuremath{(#1)}} 
+
+\NewCommandCopy{\oldImplies}{\implies}  % <!-- https://tex.stackexchange.com/questions/47351/can-i-redefine-a-command-to-contain-itself -->
+\renewcommand{\implies}{\ensuremath{\oldImplies}}
+
+\NewCommandCopy{\oldIff}{\iff}
+\renewcommand{\iff}{\ensuremath{\oldIff}}
+
+% we may try https://tex.stackexchange.com/a/19113
+
+% sections
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}}
+\newcommand{\subsubsubsubsection}[1]{\subparagraph{#1}}
+
+
+% domain specific
+\newcommand{\adjm}{\ensuremath{\pmb{A}}}
+\newcommand{\renormadjm}{\ensuremath{\pmb{\tilde{A}}}}
+\newcommand{\nfm}{\pmb{X} }
+
+\newcommand{\av}{\vec{a}}
+\newcommand{\xv}{\vec{x}}
+\newcommand{\fv}{\vec{f}}
+\newcommand{\zv}{\vec{z}}
+\newcommand{\dzv}{\vec{dz}}
+\newcommand{\vaetheta}{\ensuremath{\pmb{\Theta}}}
+\newcommand{\vaephi}{\ensuremath{\pmb{\Phi}}}
+\newcommand{\vaef}{\ensuremath{ \vec{f}(\vec{z}, \vaetheta) }}
+\newcommand{\vaeg}{\ensuremath{ \vec{g}(\vec{x}, \vaephi)}}
+\newcommand{\vaejoint}{\ensuremath{p(\vec{x},\vec{z}; \vaetheta) }}
+\newcommand{\vaejointsh}{\ensuremath{p_{\vaetheta}(\vec{x},\vec{z}) }}
+\newcommand{\vaeprior}{\ensuremath{p(\vec{z}; \vaetheta) }}
+\newcommand{\vaepriorsh}{\ensuremath{p_{\vaetheta}(\vec{z}) }}
+\newcommand{\vaelikelihood}{\ensuremath{p(\vec{x}; \vaef) }}
+\newcommand{\vaelikelihoodsh}{\ensuremath{p_{\vaetheta}(\xv | \zv) }}
+\newcommand{\vaemarlikelihood}{\ensuremath{p(\vec{x}; \vaetheta) }}
+\newcommand{\vaemarlikelihoodsh}{\ensuremath{p_{\vaetheta}(\vec{x}) }}
+\newcommand{\vaeposterior}{\ensuremath{p(\vec{z} | \vec{x}; \vaetheta) }}
+\newcommand{\vaeposteriorsh}{\ensuremath{p_{\vaetheta}(\zv | \xv) }}
+\newcommand{\vaeq}{\ensuremath{q(\vec{z}; \vaeg) }}
+\newcommand{\vaeqsh}{\ensuremath{q_{\vaephi}(\zv | \xv) }}
+\newcommand{\E}[2]{\ensuremath{E_{#1} \left[ #2 \right]}}
+\newcommand{\ELBO}{\ensuremath{\E{\vaeqsh}{ln\vaejointsh - ln\vaeqsh }}}
+\newcommand{\ELBOsym}{\ensuremath{\mathcal{L}_{\vaetheta,\vaephi}(\xv)}}
+\newcommand{\ev}{\vec{\epsilon}}
+\newcommand{\pe}{\ensuremath{p(\ev)}}
+\newcommand{\vaes}{\ensuremath{\vec{s}(\ev, \vaephi, \xv)}}
+\newcommand{\vaeW}[1]{\ensuremath{\pmb{W_{#1}}}}
