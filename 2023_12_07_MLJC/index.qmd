@@ -203,7 +203,7 @@ Introduction to Deep Learning
 
 Given a Graph:
 
-![](images/network.PNG){fig-align="center" height=150}
+![](images/network.png){fig-align="center" height=150}
 
 . . .
 
