@@ -35,7 +35,7 @@ format:
     chalkboard: 
         buttons: false
     footer: ""
-    logo: images/logo/centai_logo.jpeg
+    logo: images/logo/unito_centai_combined.png
     preview-links: auto
     theme: default
     toc: false
