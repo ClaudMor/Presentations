@@ -871,17 +871,15 @@ $$w_{y_e} = \frac{n_{NB}}{n_{y_e}}$$
 
 ## Future Developments
 
-- Try **Subgraph Matching** task with **Static Representations**
+- Try **Subgraph Matching** task with **Static Representations**;
 
 . . .
 
-- Try generation with VGAE and compare **degree distributions**
-
+- Try generation with VGAE and compare **degree distributions**;
 
 . . .
 
-
--  
+- Try Graph Diffusion (@vignac2023digress) for **graph generation**.
 
 
 # Thanks :pray:
