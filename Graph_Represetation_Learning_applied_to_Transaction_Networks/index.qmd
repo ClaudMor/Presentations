@@ -636,7 +636,7 @@ Test Set(s)
 
 ## Related Works
 
-![Courtesy of @Salha2019](images/salha_results_cora.PNG){fig-align="center"}
+![Courtesy of @Salha2019](images/salha_results_cora.png){fig-align="center"}
 
 
 . . .
