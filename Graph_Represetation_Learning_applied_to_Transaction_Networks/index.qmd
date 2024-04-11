@@ -345,7 +345,7 @@ $$\longrightarrow$$
 ::: {.column width="48%"}
 
 
-![](images/gnn_1.PNG){fig-align="center"}
+![](images/gnn_1.png){fig-align="center"}
 
 :::
 
@@ -636,7 +636,7 @@ Test Set(s)
 
 ## Related Works
 
-![Courtesy of @Salha2019](images/salha_results_cora.png){fig-align="center"}
+![Courtesy of @Salha2019](images/salha_results_cora.PNG){fig-align="center"}
 
 
 . . .
