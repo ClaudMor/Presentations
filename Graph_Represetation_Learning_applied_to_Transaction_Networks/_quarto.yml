@@ -1,0 +1,67 @@
+project:
+  type: default
+  preview:
+    port: 4200
+
+# Authors 
+authors:
+  - name: Claudio Moroni
+    orcid: 0000-0003-1274-6937
+    url: https://github.com/ClaudMor
+    attributes:
+      corresponding: true
+    affiliation: 
+      - ref: UniTo
+      - ref: CENTAI
+
+# Affiliations
+affiliations:
+  - id: UniTo
+    name: University of Turin
+    city: Turin
+    state: Italy
+  - id: CENTAI
+    name: CENTAI Institute S.p.A.
+    city: Turin
+    state: Italy
+
+## Presentation 
+format:
+  revealjs:
+    pdf-separate-fragments: false
+    slide-number: true
+    show-notes: false
+    css: styles.css
+    chalkboard: 
+        buttons: false
+    footer: ""
+    logo: images/logo/unito_centai_combined.png
+    preview-links: auto
+    theme: default
+    toc: false
+    toc-title: "Contents"
+    toc-depth: 1
+    menu: true
+    margin-left: 30px
+filters:
+  - parse-latex
+
+# # Date and Time
+# date: today
+# date-format: iso
+
+# Jupyter Kernels 
+# jupyter: julia-1.8
+
+# execute:
+#   echo: true
+
+# Extra 
+from: markdown+emoji
+
+# References 
+crossref:
+  fig-prefix: Figure
+  tbl-prefix: Table
+# bibliography: references.bib
+fig-format: png

@@ -1,0 +1,878 @@
+---
+title: "Graph Representation Learning applied to Transaction Networks"
+bibliography: bibliography.bib
+---
+
+<!-- https://github.com/quarto-dev/quarto-cli/discussions/4572 -->
+```{=html}
+<style>
+.semi-transparent {
+  opacity: 0.3;
+}
+</style>
+
+<style>
+.center_horiz {
+text-align: center
+}
+</style>
+
+<style> 
+.center_vert {
+  margin: 0;   
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
+
+<style>
+.vertical_center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+</style>
+
+
+<style>
+.horizontal_center {
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform:  translateX(-50%);
+    transform:  translateX(-50%);
+}
+</style>
+```      
+
+<!-- 
+```{=latex}
+\usepackage[table]{xcolor}
+\definecolor{lightgray}{gray}{0.9}
+```
+   -->
+
+   
+<br> 
+ 
+
+
+
+### Outline
+
+:one: Static Representations
+
+:two: Directed Link Prediction
+
+:three: References
+ 
+
+## Static Representations
+
+
+1. Transaction Networks
+
+2. (Anti-)Money Laundering
+
+3. Graph Neural Networks
+
+4. Proposed Framework
+
+
+
+
+
+<!-- ## [Introduction]{.semi-transparent} {.smaller}
+
+1 Transaction Networks
+
+1 (Anti-)Money Laundering
+
+1 Graph Neural Networks -->
+
+
+
+## Transaction Networks
+
+
+::: footer
+Introduction
+:::
+
+![](images/transaction_network.PNG){fig-align="center"}
+
+. . .
+
+## Transaction Networks {.smaller}
+
+:::: {.columns}
+
+::: {.column width="25%"}
+
+Account Features
+
+![Courtesy of @JENSEN2023119037](images/accounts_features.PNG){fig-align="left" height=475}
+
+
+:::
+::: {.column width="75%"}
+
+::: {.fragment}
+Transaction Features
+
+
+![Courtesy of @altman2023realistic](images/transactions_features.PNG){fig-align="center" height=200}
+
+:::
+
+:::
+
+::::
+
+
+
+
+
+## (Anti-)Money Laundering
+
+
+<!-- ::: {.center_vert} -->
+
+::: {.absolute top=40%}
+
+![Courtesy of @altman2023realistic](images/AMLworld_L1_Laundering_Patterns.PNG){fig-align="center" width=5000} 
+
+:::
+<!-- ::: -->
+
+<!-- fig-align="center" Courtesy of @altman2023realistic -->
+
+<!-- . . .
+
+![Courtesy of @TemporalMotifs_Leskovec2017](images/temporal_motif.PNG){fig-align="center"}
+
+. . . -->
+
+
+## Transaction Networks {.smaller}
+
+
+::: footer
+Introduction
+:::
+
+![Courtesy of @Saxena2022_Rabobank](images/transaction_network_saxena.PNG){fig-align="center"}
+
+
+. . .
+
+::: {.center_horiz}
+
+$\implies$ **Neural** Subgraph Matching!
+
+:::
+
+
+## Graph Neural Networks  
+
+<!-- ![Courtesy of [CS224w](https://web.stanford.edu/class/cs224w/)](images/MPNN_3.PNG){fig-align="center"}
+
+. . . -->
+
+![](images/gnn_1.PNG){fig-align="center" height=400}
+
+<!-- $$\vec{h}_A^{(k+1)} = \sigma\left( \sum\limits_{u \in N(A)} \frac{W^{(k)} \vec{h}_u^{(k)} }{|N(A)|} + B^{(k)} \vec{h}_A^{(k)} \right)$$ -->
+
+$$\vec{h}_v^{(1)} = ??$$
+
+
+## Graph Neural Networks  
+
+![](images/gnn_2.PNG){fig-align="center" height=400}
+
+
+$$\vec{h}_v^{(1)} = f(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\})$$
+
+ 
+## Graph Neural Networks  
+
+![](images/gnn_3.PNG){fig-align="center" height=400}
+
+
+
+::: {.absolute top=500 left=10}
+$$\vec{h}_v^{(1)} = f(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\}) = $$
+
+:::
+
+
+
+::: {.absolute top=465 left=650}
+:::{.fragment}
+$$\sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)$$
+:::
+:::
+
+
+
+<!-- :::{.fragment}
+$$\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)$$
+::: -->
+
+
+## Graph Neural Networks  
+
+![](images/gnn_4.PNG){fig-align="center" height=400}
+
+$$\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)$$
+
+
+## Graph Neural Networks  
+
+![](images/gnn_5.PNG){fig-align="center" height=400}
+
+
+
+
+$$\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)$$
+
+
+## Graph Neural Networks  
+
+![](images/gnn_6.PNG){fig-align="center" height=400}
+
+$$\vec{h}_v^{(2)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(1)} \vec{h}_u^{(1)} }{|N(v)|} + B^{(1)} \vec{h}_v^{(1)} \right)$$
+
+
+## Graph Neural Networks  
+
+<!-- ![](images/gnn_6.PNG){fig-align="center" height=400} -->
+
+::: {.center_vert}
+::: {.center_horiz}
+$$\vec{h}_v^{(k+1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(k)} \vec{h}_u^{(k)} }{|N(v)|} + B^{(k)} \vec{h}_v^{(k)} \right)$$
+:::
+:::
+
+
+
+## Graph Neural Networks  
+
+![Courtesy of @rex2020neural](images/NSM.PNG){fig-align="center"}
+
+
+
+::: {.center_horiz .fragment}
+Only for **Static Graphs**!
+:::
+
+
+## Proposed Framework 
+
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+![](images/SR_original.PNG){fig-align="center"}
+
+:::
+
+
+::: {.column width="2%"}
+::: {.center_vert}
+$$\longrightarrow$$
+:::
+
+:::
+
+
+::: {.column width="2%"}
+
+:::
+
+
+::: {.column width="48%"}
+
+![](images/SR_DLGE.PNG){fig-align="center" height=200}
+
+
+![Courtesy of @oetterhsagen2020](images/SR_SEK.PNG){fig-align="center" height=200}
+
+:::
+::::
+
+
+## Proposed Framework 
+
+:::{.center_horiz .center_vert}
+
+| Model     | NDCG@10 |
+| --------- | ------- |
+| Ours      | 0.549   |
+| DygFormer | 0.388   |
+| TGN       | 0.374   |
+
+:::
+
+
+
+
+## Directed Link Prediction
+
+1. Introduction
+
+2. Autoencoders
+
+3. Related Works
+
+4. Naive Approach
+
+5. Proposed Framework: MFDLP
+
+
+## Introduction
+
+
+
+
+:::: {.columns}
+
+::: {.column width="48%"}
+
+
+![](images/gnn_1.PNG){fig-align="center"}
+
+:::
+
+
+::: {.column width="2%"}
+::: {.center_vert}
+$$\longrightarrow$$
+:::
+
+:::
+
+
+::: {.column width="2%"}
+
+:::
+
+
+::: {.column width="48%"}
+
+![](images/generation.PNG){fig-align="center"}
+:::
+::::
+
+
+:::{.fragment .center_horiz}
+
+$\iff$ (Directed Stochastic) **Link Prediction**!
+:::
+
+
+
+## Autoencoders
+
+![](images/AE.PNG){fig-align="center"}
+
+
+<!-- ## Graph Autoencoders
+
+![](images/GAE.PNG){fig-align="center"}
+ -->
+## Variational Autoencoders
+
+
+![](images/VAE.PNG){fig-align="center"}
+
+
+## Variational Graph Autoencoders
+
+
+![](images/VGAE.PNG){fig-align="center"}
+
+
+<!-- ::: {.r-stack} 
+
+::: {.fragment .fade-in-then-out} 
+$$\hat{p}_{ij} = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j)$$
+:::
+
+::: {.fragment .fade-in-then-out}
+$$\hat{p}_{ij} = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j))$$
+:::
+
+::: {.fragment .fade-in-then-out}
+$$\hat{p}_{ij} = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j)) = \text{Dec}(\vec{h}^{(L)}_i, \vec{h}^{(L)}_j)$$
+:::
+
+
+::: {.fragment .fade-in}
+\begin{equation}
+\begin{split}
+\hat{p}_{ij} = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) &= \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j)) = \text{Dec}(\vec{h}^{(L)}_i, \vec{h}^{(L)}_j) \\ &=
+\begin{cases}
+\vec{h}^{(L)}_i \cdot \vec{h}^{(L)}_j \\
+\vec{h}^{(L)}_i[:l/2] \cdot \vec{h}^{(L)}_j[l/2:] 
+\end{cases}
+\end{split}
+\end{equation}
+:::
+
+::: -->
+  
+
+## Variational Graph Autoencoders {.smaller}
+
+<!-- .center_vert .absolute left=0 -->
+
+
+![](images/VGAE_formulae.PNG){fig-align="center"}
+
+::: {.r-stack} 
+
+::: {.fragment .fade-in-then-out} 
+$$\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j)$$
+:::
+
+::: {.fragment .fade-in-then-out}
+$$\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j))$$
+:::
+
+::: {.fragment .fade-in-then-out}
+$$\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j)) = \text{Dec}(\vec{h}^{(L)}_i, \vec{h}^{(L)}_j)$$
+:::
+
+
+::: {.fragment .fade-in}
+\begin{equation}
+\begin{split}
+\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) &= \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j)) = \text{Dec}(\vec{h}^{(L)}_i, \vec{h}^{(L)}_j) \\ &=
+\begin{cases}
+\vec{h}^{(L)}_i \cdot \vec{h}^{(L)}_j \\
+\vec{h}^{(L)}_i[:l/2] \cdot \vec{h}^{(L)}_j[l/2:] 
+\end{cases}
+\end{split}
+\end{equation}
+:::
+
+:::
+
+
+
+## Related Works
+
+![](images/related_works_whole_graph.PNG){fig-align="center"}
+
+
+## Related Works
+
+![](images/rw_dlp_training.PNG){fig-align="center"}
+
+## Related Works
+
+![](images/rw_dlp_training_green.PNG){fig-align="center"}
+
+
+## Related Works
+
+![](images/rw_dlp_training_green_red.PNG){fig-align="center"}
+
+. . .
+
+$$\mathcal{L}(\Theta) = \sum\limits_{e \in {E_{s + n}}} y_e\ln(\hat{p}_{\Theta}(e)) + (1-y_e)\ln(1-\hat{p}_{\Theta}(e))$$
+
+## Related Works {.smaller}
+
+
+:::: {.columns}
+
+::: {.column width=27%}
+
+Training Set
+
+
+![](images/rw_dlp_training_green_red.PNG){fig-align="center"}
+
+
+:::
+
+
+::: {.column width=3%}
+
+
+
+![](images/vert_sep.PNG){fig-align="center" height=300 width=20}
+
+
+
+:::
+
+
+::: {.column width=70%}
+
+Test Set
+
+::: {.fragment}
+
+![](images/rw_dlp_test_general.PNG){fig-align="center" height=250}
+
+:::
+
+:::
+
+::::
+<!-- 
+::: {.fragment}
+
+![](images/plus.PNG){fig-align="center" height=50}
+
+
+![](images/rw_dlp_test_directional.PNG){fig-align="center"}
+
+:::
+
+:::
+
+
+:::: -->
+
+. . .
+
+
+| Metric   | Performance       |
+| -------- | ----------------- |
+| ROC -AUC | 0.829 $\pm$ 0.002 |
+| hits@20  | 0.59 $\pm$ 0.01   |
+| AP-AUC   | 0.872 $\pm$ 0.001 |
+
+
+. . .
+
+**WHY**? Directionality never really tested.
+
+
+
+
+
+
+## Related Works {.smaller .scrollable}
+
+
+:::: {.columns}
+
+
+
+
+::: {.column width=27%}
+
+
+::: {.absolute top=500 left=0}
+
+Training Set
+
+![](images/rw_dlp_training_green_red.PNG){fig-align="left" width=70%}
+
+
+:::
+:::
+
+
+
+::: {.column width=3%}
+
+
+
+![](images/vert_sep.PNG){fig-align="center" height=1350 width=20}
+
+
+
+:::
+
+
+::: {.column width=70%}
+
+Test Set(s)
+
+
+![General](images/rw_dlp_test_general.PNG){fig-align="center" height=250}
+
+
+::: {.fragment}
+
+![](images/plus.PNG){fig-align="center" height=50}
+
+
+![Directional](images/rw_dlp_test_directional.PNG){fig-align="center" height=250}
+
+:::
+
+ 
+::: {.fragment}
+
+![](images/plus.PNG){fig-align="center" height=50}
+
+
+![Bidirectional](images/rw_dlp_test_bidirectional.PNG){fig-align="center" height=250}
+
+<!-- ::: {.aside} -->
+
+
+:::
+
+::: {.fragment}
+@Salha2019, @zhang2021magnet
+:::
+
+:::
+
+::::
+
+## Related Works
+
+![Courtesy of @Salha2019](images/salha_results_cora.PNG){fig-align="center"}
+
+
+. . .
+
+
+::: {.center_horiz .absolute top=70%}
+$\implies$ Find a **UNIQUE** model for **ALL** three sub-tasks.
+
+:::
+
+## Naive Approach
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+General to Directional
+
+|           | gravity_gae   |
+|:----------|:--------------|
+| AUC       | 0.6 +- 0.0    |
+| F1        | 0.6 +- 0.0    |
+| hitsk     | 0.1 +- 0.0    |
+| AP        | 0.6 +- 0.0    |
+
+:::
+
+::: {.column width="50%"}
+
+Directional to General
+
+|           | gravity_gae   |
+|:----------|:--------------|
+| AUC       | 0.4 +- 0.0    |
+| F1        | 0.06 +- 0.0   |
+| hitsk     | 0.02 +- 0.0   |
+| AP        | 0.4 +- 0.0    |
+
+
+:::
+
+::::
+
+. . .
+
+
+::: { .absolute top=80% }
+$\implies$ **Doesn't work**!
+:::
+
+
+## Naive Approach {.smaller .scrollable}
+ 
+::: {.center_horiz}
+**WHY**?
+:::
+
+
+
+:::: {.columns}
+
+
+
+
+::: {.column width=47%}
+
+
+::: {.absolute top=50% left=0}
+
+Training Set
+
+![](images/rw_dlp_training_green_red.PNG){fig-align="left"}
+
+
+:::
+:::
+
+::: {.column width=3%}
+
+
+![](images/vert_sep.PNG){fig-align="center" height=875 width=20}
+
+:::
+
+
+::: {.column width=50%}
+
+Test Set(s)
+
+
+![General](images/rw_dlp_test_general.PNG){fig-align="center" height=250}
+
+
+
+
+![](images/plus.PNG){fig-align="center" height=50}
+
+
+![Directional](images/rw_dlp_test_directional.PNG){fig-align="center" height=250}
+
+:::
+
+::::
+
+## Proposed Framework: MFDLP
+
+
+**SOLUTION**. Map DLP to 4-class Edge Classification:
+
+- Positive Unidirectional (*PU*)
+- Negative Unidirectional (*NU*)
+- Positive Bidirectional (*PB*)
+- Negative Bidirectional (*NB*)
+
+. . .
+
+And then **balance** the loss!
+
+
+## Proposed Framework: MFDLP
+
+$$\mathcal{L}(\Theta) = - \sum\limits_{e \in E_{s+n}} w_{y_e} \ln(\hat{p}_{\Theta}(e))$$
+
+. . .
+
+Where:
+
+$$w_{y_e} = \frac{n_{NB}}{n_{y_e}}$$
+
+ 
+<!-- ```{=latex}
+
+\begin{itemize} 
+\item hello
+\item hello
+\end{itemize}
+
+``` -->
+
+
+## Proposed Framework: MFDLP {.smaller}
+
+```{=latex}
+\begin{table}[tbp]
+  \rowcolors{1}{}{lightgray}
+  \begin{tabular}{|l|c|c|c|}
+  \toprule
+    Model & General & Directional & Bidirectional \\
+  \midrule
+  G-GAE + MFDLP &  81.5 $\pm$ 0.2 & 76.3 $\pm$ 0.2 &  81 $\pm$ 1 \\
+  G-GAE & 79.4 $\pm$ 0.7 & 55 $\pm$ 4 & 63 $\pm$ 6 \\
+  \midrule
+  ST-GAE + MFDLP & 74 $\pm$ 4 & 76 $\pm$ 2 & 83 $\pm$ 3 \\
+  ST-GAE & 82.4 $\pm$ 0.7 & 57 $\pm$ 1 & 70 $\pm$ 5 \\
+  \midrule
+  MIX + MFDLP & 78 $\pm$ 4 & 74 $\pm$ 2 &  84 $\pm$ 1 \\
+  MIX & 82.4 $\pm$ 0.7 &  57 $\pm$ 1 & 70 $\pm$ 5 \\
+  \midrule
+  MIXDIST + MFDLP & 0.807 $\pm$ 0.008 &  0.744 $\pm$ 0.006 & 0.82 $\pm$ 0.01 \\
+  MIXDIST & 0.786 $\pm$ 0.008 & 0.502 $\pm$ 0.002 & 0.71 $\pm$ 0.03  \\
+  \midrule
+  MIXNORM + MFDLP & 0.796 $\pm$ 0.005  & 0.775 $\pm$ 0.002  & 0.79 $\pm$ 0.005 \\
+  MIXNORM & 0.83 $\pm$ 0.01  & 0.539 $\pm$ 0.005  & 0.75 $\pm$ 0.02 \\
+  \bottomrule
+  \end{tabular}
+\end{table}
+```
+  <!-- \midrule
+  MLP + MFDLP & 0.623 $\pm$ 0.007 & 0.78 $\pm$ 0.01 &  0.81 $\pm$ 0.01 \\
+  MLP & 0.654 $\pm$ 0.004 & 0.838 $\pm$ 0.004 & 0.798 $\pm$ 0.008\\ -->
+
+<!-- \begin{table}[tbp]
+    % \begin{adjustwidth}{-3cm}{-3cm}
+    \label{tab-results_table_cora_ap}
+    \vskip 0.15in
+    \begin{center}
+    \begin{small}
+    \begin{sc}
+    \resizebox{\linewidth}{!}{
+    \begin{tabular}{|l|c|c|c|}
+    \toprule
+     Model & General & Directional & Bidirectional \\
+    \midrule
+    GAE & 82 $\pm$ 2 & 50 $\pm$ 0  &  64 $\pm$ 5 \\
+    \midrule
+    G-GAE + MFDLP &  84.8 $\pm$ 0.4  & 75.2 $\pm$ 0.2 & 82 $\pm$ 1 \\
+    G-GAE & 86.0 $\pm$ 0.5 & 55 $\pm$ 4  & 58 $\pm$ 7 \\
+    \midrule
+    ST-GAE + MFDLP & 76 $\pm$ 5  & 77 $\pm$ 1 & 85 $\pm$ 2 \\
+    ST-GAE & 85 $\pm$ 2 & 62 $\pm$ 1 & 73 $\pm$ 4 \\
+    \midrule
+    MIX + MFDLP & 77 $\pm$ 2 &  75 $\pm$ 2 & 84 $\pm$ 1 \\
+    MIX &  85 $\pm$ 2 & 62 $\pm$ 1 & 73 $\pm$ 4 \\
+    \midrule
+    MIXDIST + MFDLP & 0.83 $\pm$ 0.01 & 0.757 $\pm$ 0.005 & 0.834 $\pm$ 0.008 \\
+    MIXDIST & 0.852 $\pm$ 0.006 & 0.505 $\pm$ 0.002 & 0.73 $\pm$ 0.03 \\
+    \midrule
+    MIXNORM + MFDLP & 0.837 $\pm$ 0.006    & 0.783 $\pm$ 0.003  & 0.81 $\pm$ 0.005 \\
+    MIXNORM & 0.874 $\pm$ 0.008  &  0.57 $\pm$ 0.01 & 0.79 $\pm$ 0.02 \\
+    \midrule
+    MLP + MFDLP & 0.635 $\pm$ 0.007 & 0.795 $\pm$ 0.008 & 0.83 $\pm$ 0.01 \\
+    MLP &  0.643 $\pm$ 0.003 & 0.831 $\pm$ 0.003 & 0.825 $\pm$ 0.007\\
+    \bottomrule
+    \end{tabular}
+    }
+    \end{sc}
+    \end{small}
+    \end{center}
+    \vskip -0.1in
+    \caption{AP-AUC test scores of various AE models on Cora Dataset, trained both naively (random train/val/test split and balancing positives and negatives) and with our framework. Scores are in \%.}
+\end{table}
+``` -->
+
+
+## Proposed Framework: MFDLP {.smaller}
+
+
+![](images/MFDLP_DvG.PNG){fig-align="center"}
+
+## Proposed Framework: MFDLP {.smaller}
+
+
+![](images/MFDLP_BvG.PNG){fig-align="center"}
+
+## Proposed Framework: MFDLP {.smaller}
+
+
+![](images/MFDLP_BvD.PNG){fig-align="center"}
+
+
+# Thanks :pray:
+
+
+# References
+
+<!-- IT-AML: link prediction 3 tasks e trova il train set che faccia bene almeno le prime 2 -->
+
+
+
