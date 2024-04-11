@@ -29,7 +29,7 @@ affiliations:
 format:
   revealjs:
     pdf-separate-fragments: false
-    slide-number: true
+    slide-number: false
     show-notes: false
     css: styles.css
     chalkboard: 

@@ -68,7 +68,9 @@ text-align: center
 
 :two: Directed Link Prediction
 
-:three: References
+:three: Future Developments
+
+:four: References
  
 
 ## Static Representations
@@ -865,6 +867,11 @@ $$w_{y_e} = \frac{n_{NB}}{n_{y_e}}$$
 
 
 ![](images/MFDLP_BvD.png){fig-align="center"}
+
+
+## Future Developments
+
+- Try Subgraph Matching task with Static Representations 
 
 
 # Thanks :pray:
