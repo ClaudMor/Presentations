@@ -183,7 +183,7 @@ $\implies$ **Neural** Subgraph Matching!
 
 . . . -->
 
-![](images/gnn_1.PNG){fig-align="center" height=400}
+![](images/gnn_1.png){fig-align="center" height=400}
 
 <!-- $$\vec{h}_A^{(k+1)} = \sigma\left( \sum\limits_{u \in N(A)} \frac{W^{(k)} \vec{h}_u^{(k)} }{|N(A)|} + B^{(k)} \vec{h}_A^{(k)} \right)$$ -->
 
