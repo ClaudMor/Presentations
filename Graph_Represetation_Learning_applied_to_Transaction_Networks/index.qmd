@@ -179,7 +179,7 @@ $\implies$ **Neural** Subgraph Matching!
 
 ## Graph Neural Networks  
 
-<!-- ![Courtesy of [CS224w](https://web.stanford.edu/class/cs224w/)](images/MPNN_3.PNG){fig-align="center"}
+<!-- ![Courtesy of [CS224w](https://web.stanford.edu/class/cs224w/)](images/MPNN_3.png){fig-align="center"}
 
 . . . -->
 
@@ -192,7 +192,7 @@ $$\vec{h}_v^{(1)} = ??$$
 
 ## Graph Neural Networks  
 
-![](images/gnn_2.PNG){fig-align="center" height=400}
+![](images/gnn_2.png){fig-align="center" height=400}
 
 
 $$\vec{h}_v^{(1)} = f(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\})$$
@@ -200,7 +200,7 @@ $$\vec{h}_v^{(1)} = f(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\})$$
  
 ## Graph Neural Networks  
 
-![](images/gnn_3.PNG){fig-align="center" height=400}
+![](images/gnn_3.png){fig-align="center" height=400}
 
 
 
@@ -226,14 +226,14 @@ $$\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}
 
 ## Graph Neural Networks  
 
-![](images/gnn_4.PNG){fig-align="center" height=400}
+![](images/gnn_4.png){fig-align="center" height=400}
 
 $$\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)$$
 
 
 ## Graph Neural Networks  
 
-![](images/gnn_5.PNG){fig-align="center" height=400}
+![](images/gnn_5.png){fig-align="center" height=400}
 
 
 
@@ -243,14 +243,14 @@ $$\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}
 
 ## Graph Neural Networks  
 
-![](images/gnn_6.PNG){fig-align="center" height=400}
+![](images/gnn_6.png){fig-align="center" height=400}
 
 $$\vec{h}_v^{(2)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(1)} \vec{h}_u^{(1)} }{|N(v)|} + B^{(1)} \vec{h}_v^{(1)} \right)$$
 
 
 ## Graph Neural Networks  
 
-<!-- ![](images/gnn_6.PNG){fig-align="center" height=400} -->
+<!-- ![](images/gnn_6.png){fig-align="center" height=400} -->
 
 ::: {.center_vert}
 ::: {.center_horiz}
@@ -379,7 +379,7 @@ $\iff$ (Directed Stochastic) **Link Prediction**!
 
 ## Autoencoders
 
-![](images/AE.PNG){fig-align="center"}
+![](images/AE.png){fig-align="center"}
 
 
 <!-- ## Graph Autoencoders
@@ -389,13 +389,13 @@ $\iff$ (Directed Stochastic) **Link Prediction**!
 ## Variational Autoencoders
 
 
-![](images/VAE.PNG){fig-align="center"}
+![](images/VAE.png){fig-align="center"}
 
 
 ## Variational Graph Autoencoders
 
 
-![](images/VGAE.PNG){fig-align="center"}
+![](images/VGAE.png){fig-align="center"}
 
 
 <!-- ::: {.r-stack} 
@@ -433,7 +433,7 @@ $$\hat{p}_{ij} = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\te
 <!-- .center_vert .absolute left=0 -->
 
 
-![](images/VGAE_formulae.PNG){fig-align="center"}
+![](images/VGAE_formulae.png){fig-align="center"}
 
 ::: {.r-stack} 
 
@@ -468,21 +468,21 @@ $$\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(
 
 ## Related Works
 
-![](images/related_works_whole_graph.PNG){fig-align="center"}
+![](images/related_works_whole_graph.png){fig-align="center"}
 
 
 ## Related Works
 
-![](images/rw_dlp_training.PNG){fig-align="center"}
+![](images/rw_dlp_training.png){fig-align="center"}
 
 ## Related Works
 
-![](images/rw_dlp_training_green.PNG){fig-align="center"}
+![](images/rw_dlp_training_green.png){fig-align="center"}
 
 
 ## Related Works
 
-![](images/rw_dlp_training_green_red.PNG){fig-align="center"}
+![](images/rw_dlp_training_green_red.png){fig-align="center"}
 
 . . .
 
@@ -498,7 +498,7 @@ $$\mathcal{L}(\Theta) = \sum\limits_{e \in {E_{s + n}}} y_e\ln(\hat{p}_{\Theta}(
 Training Set
 
 
-![](images/rw_dlp_training_green_red.PNG){fig-align="center"}
+![](images/rw_dlp_training_green_red.png){fig-align="center"}
 
 
 :::
@@ -508,7 +508,7 @@ Training Set
 
 
 
-![](images/vert_sep.PNG){fig-align="center" height=300 width=20}
+![](images/vert_sep.png){fig-align="center" height=300 width=20}
 
 
 
@@ -521,7 +521,7 @@ Test Set
 
 ::: {.fragment}
 
-![](images/rw_dlp_test_general.PNG){fig-align="center" height=250}
+![](images/rw_dlp_test_general.png){fig-align="center" height=250}
 
 :::
 
@@ -577,7 +577,7 @@ Test Set
 
 Training Set
 
-![](images/rw_dlp_training_green_red.PNG){fig-align="left" width=70%}
+![](images/rw_dlp_training_green_red.png){fig-align="left" width=70%}
 
 
 :::
@@ -589,7 +589,7 @@ Training Set
 
 
 
-![](images/vert_sep.PNG){fig-align="center" height=1350 width=20}
+![](images/vert_sep.png){fig-align="center" height=1350 width=20}
 
 
 
@@ -601,25 +601,25 @@ Training Set
 Test Set(s)
 
 
-![General](images/rw_dlp_test_general.PNG){fig-align="center" height=250}
+![General](images/rw_dlp_test_general.png){fig-align="center" height=250}
 
 
 ::: {.fragment}
 
-![](images/plus.PNG){fig-align="center" height=50}
+![](images/plus.png){fig-align="center" height=50}
 
 
-![Directional](images/rw_dlp_test_directional.PNG){fig-align="center" height=250}
+![Directional](images/rw_dlp_test_directional.png){fig-align="center" height=250}
 
 :::
 
  
 ::: {.fragment}
 
-![](images/plus.PNG){fig-align="center" height=50}
+![](images/plus.png){fig-align="center" height=50}
 
 
-![Bidirectional](images/rw_dlp_test_bidirectional.PNG){fig-align="center" height=250}
+![Bidirectional](images/rw_dlp_test_bidirectional.png){fig-align="center" height=250}
 
 <!-- ::: {.aside} -->
 
@@ -636,7 +636,7 @@ Test Set(s)
 
 ## Related Works
 
-![Courtesy of @Salha2019](images/salha_results_cora.PNG){fig-align="center"}
+![Courtesy of @Salha2019](images/salha_results_cora.png){fig-align="center"}
 
 
 . . .
@@ -708,7 +708,7 @@ $\implies$ **Doesn't work**!
 
 Training Set
 
-![](images/rw_dlp_training_green_red.PNG){fig-align="left"}
+![](images/rw_dlp_training_green_red.png){fig-align="left"}
 
 
 :::
@@ -717,7 +717,7 @@ Training Set
 ::: {.column width=3%}
 
 
-![](images/vert_sep.PNG){fig-align="center" height=875 width=20}
+![](images/vert_sep.png){fig-align="center" height=875 width=20}
 
 :::
 
@@ -727,15 +727,15 @@ Training Set
 Test Set(s)
 
 
-![General](images/rw_dlp_test_general.PNG){fig-align="center" height=250}
+![General](images/rw_dlp_test_general.png){fig-align="center" height=250}
 
 
 
 
-![](images/plus.PNG){fig-align="center" height=50}
+![](images/plus.png){fig-align="center" height=50}
 
 
-![Directional](images/rw_dlp_test_directional.PNG){fig-align="center" height=250}
+![Directional](images/rw_dlp_test_directional.png){fig-align="center" height=250}
 
 :::
 
@@ -854,17 +854,17 @@ $$w_{y_e} = \frac{n_{NB}}{n_{y_e}}$$
 ## Proposed Framework: MFDLP {.smaller}
 
 
-![](images/MFDLP_DvG.PNG){fig-align="center"}
+![](images/MFDLP_DvG.png){fig-align="center"}
 
 ## Proposed Framework: MFDLP {.smaller}
 
 
-![](images/MFDLP_BvG.PNG){fig-align="center"}
+![](images/MFDLP_BvG.png){fig-align="center"}
 
 ## Proposed Framework: MFDLP {.smaller}
 
 
-![](images/MFDLP_BvD.PNG){fig-align="center"}
+![](images/MFDLP_BvD.png){fig-align="center"}
 
 
 # Thanks :pray:
