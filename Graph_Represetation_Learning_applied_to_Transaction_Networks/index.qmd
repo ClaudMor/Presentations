@@ -638,7 +638,7 @@ Test Set(s)
 
 ## Related Works
 
-![Courtesy of @Salha2019](images/salha_results_cora.png){fig-align="center"}
+![Courtesy of @Salha2019](images/salha_results_cora.PNG){fig-align="center"}
 
 
 . . .
@@ -871,7 +871,17 @@ $$w_{y_e} = \frac{n_{NB}}{n_{y_e}}$$
 
 ## Future Developments
 
-- Try Subgraph Matching task with Static Representations 
+- Try **Subgraph Matching** task with **Static Representations**
+
+. . .
+
+- Try generation with VGAE and compare **degree distributions**
+
+
+. . .
+
+
+-  
 
 
 # Thanks :pray:
