@@ -1229,10 +1229,17 @@ $$\hat{p}_{ij} = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\te
 </section>
 <section id="proposed-framework-mfdlp-2" class="slide level2 smaller">
 <h2>Proposed Framework: MFDLP</h2>
-<table>
+<table class="table-striped">
+<caption></caption>
+<colgroup>
+<col style="width: 22%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Model</th>
+<th style="text-align: center;">Model</th>
 <th style="text-align: center;">General</th>
 <th style="text-align: center;">Directional</th>
 <th style="text-align: center;">Bidirectional</th>
@@ -1240,67 +1247,109 @@ $$\hat{p}_{ij} = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\te
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">G-GAE + MFDLP</td>
+<td style="text-align: center;">G-GAE + MFDLP</td>
 <td style="text-align: center;">81.5 <span class="math inline">\(\pm\)</span> 0.2</td>
 <td style="text-align: center;">76.3 <span class="math inline">\(\pm\)</span> 0.2</td>
 <td style="text-align: center;">81 <span class="math inline">\(\pm\)</span> 1</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">G-GAE</td>
+<td style="text-align: center;">G-GAE</td>
 <td style="text-align: center;">79.4 <span class="math inline">\(\pm\)</span> 0.7</td>
 <td style="text-align: center;">55 <span class="math inline">\(\pm\)</span> 4</td>
 <td style="text-align: center;">63 <span class="math inline">\(\pm\)</span> 6</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">ST-GAE + MFDLP</td>
+<td style="text-align: center;">ST-GAE + MFDLP</td>
 <td style="text-align: center;">74 <span class="math inline">\(\pm\)</span> 4</td>
 <td style="text-align: center;">76 <span class="math inline">\(\pm\)</span> 2</td>
 <td style="text-align: center;">83 <span class="math inline">\(\pm\)</span> 3</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ST-GAE</td>
+<td style="text-align: center;">ST-GAE</td>
 <td style="text-align: center;">82.4 <span class="math inline">\(\pm\)</span> 0.7</td>
 <td style="text-align: center;">57 <span class="math inline">\(\pm\)</span> 1</td>
 <td style="text-align: center;">70 <span class="math inline">\(\pm\)</span> 5</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">MIX + MFDLP</td>
+<td style="text-align: center;">MIX + MFDLP</td>
 <td style="text-align: center;">78 <span class="math inline">\(\pm\)</span> 4</td>
 <td style="text-align: center;">74 <span class="math inline">\(\pm\)</span> 2</td>
 <td style="text-align: center;">84 <span class="math inline">\(\pm\)</span> 1</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">MIX</td>
+<td style="text-align: center;">MIX</td>
 <td style="text-align: center;">82.4 <span class="math inline">\(\pm\)</span> 0.7</td>
 <td style="text-align: center;">57 <span class="math inline">\(\pm\)</span> 1</td>
 <td style="text-align: center;">70 <span class="math inline">\(\pm\)</span> 5</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">MIXDIST + MFDLP</td>
+<td style="text-align: center;">MIXDIST + MFDLP</td>
 <td style="text-align: center;">0.807 <span class="math inline">\(\pm\)</span> 0.008</td>
 <td style="text-align: center;">0.744 <span class="math inline">\(\pm\)</span> 0.006</td>
 <td style="text-align: center;">0.82 <span class="math inline">\(\pm\)</span> 0.01</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">MIXDIST</td>
+<td style="text-align: center;">MIXDIST</td>
 <td style="text-align: center;">0.786 <span class="math inline">\(\pm\)</span> 0.008</td>
 <td style="text-align: center;">0.502 <span class="math inline">\(\pm\)</span> 0.002</td>
 <td style="text-align: center;">0.71 <span class="math inline">\(\pm\)</span> 0.03</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">MIXNORM + MFDLP</td>
+<td style="text-align: center;">MIXNORM + MFDLP</td>
 <td style="text-align: center;">0.796 <span class="math inline">\(\pm\)</span> 0.005</td>
 <td style="text-align: center;">0.775 <span class="math inline">\(\pm\)</span> 0.002</td>
 <td style="text-align: center;">0.79 <span class="math inline">\(\pm\)</span> 0.005</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">MIXNORM</td>
+<td style="text-align: center;">MIXNORM</td>
 <td style="text-align: center;">0.83 <span class="math inline">\(\pm\)</span> 0.01</td>
 <td style="text-align: center;">0.539 <span class="math inline">\(\pm\)</span> 0.005</td>
 <td style="text-align: center;">0.75 <span class="math inline">\(\pm\)</span> 0.02</td>
 </tr>
+<tr class="odd">
+<td style="text-align: center;">MLP + MFDLP</td>
+<td style="text-align: center;">0.623 <span class="math inline">\(\pm\)</span> 0.007</td>
+<td style="text-align: center;">0.78 <span class="math inline">\(\pm\)</span> 0.01</td>
+<td style="text-align: center;">0.81 <span class="math inline">\(\pm\)</span> 0.01</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">MLP</td>
+<td style="text-align: center;">0.654 <span class="math inline">\(\pm\)</span> 0.004</td>
+<td style="text-align: center;">0.838 <span class="math inline">\(\pm\)</span> 0.004</td>
+<td style="text-align: center;">0.798 <span class="math inline">\(\pm\)</span> 0.008</td>
+</tr>
 </tbody>
 </table>
+
+<!-- 
+```{=latex}
+\begin{table}[tbp]
+  \rowcolors{1}{}{lightgray}
+  \begin{tabular}{|l|c|c|c|}
+  \toprule
+    Model & General & Directional & Bidirectional \\
+  \midrule
+  G-GAE + MFDLP &  81.5 $\pm$ 0.2 & 76.3 $\pm$ 0.2 &  81 $\pm$ 1 \\
+  G-GAE & 79.4 $\pm$ 0.7 & 55 $\pm$ 4 & 63 $\pm$ 6 \\
+  \midrule
+  ST-GAE + MFDLP & 74 $\pm$ 4 & 76 $\pm$ 2 & 83 $\pm$ 3 \\
+  ST-GAE & 82.4 $\pm$ 0.7 & 57 $\pm$ 1 & 70 $\pm$ 5 \\
+  \midrule
+  MIX + MFDLP & 78 $\pm$ 4 & 74 $\pm$ 2 &  84 $\pm$ 1 \\
+  MIX & 82.4 $\pm$ 0.7 &  57 $\pm$ 1 & 70 $\pm$ 5 \\
+  \midrule
+  MIXDIST + MFDLP & 0.807 $\pm$ 0.008 &  0.744 $\pm$ 0.006 & 0.82 $\pm$ 0.01 \\
+  MIXDIST & 0.786 $\pm$ 0.008 & 0.502 $\pm$ 0.002 & 0.71 $\pm$ 0.03  \\
+  \midrule
+  MIXNORM + MFDLP & 0.796 $\pm$ 0.005  & 0.775 $\pm$ 0.002  & 0.79 $\pm$ 0.005 \\
+  MIXNORM & 0.83 $\pm$ 0.01  & 0.539 $\pm$ 0.005  & 0.75 $\pm$ 0.02 \\
+  \midrule
+  MLP + MFDLP & 0.623 $\pm$ 0.007 & 0.78 $\pm$ 0.01 &  0.81 $\pm$ 0.01 \\
+  MLP & 0.654 $\pm$ 0.004 & 0.838 $\pm$ 0.004 & 0.798 $\pm$ 0.008\\
+  \bottomrule
+  \end{tabular}
+\end{table}
+``` -->
 <p><!-- \midrule
   MLP + MFDLP & 0.623 $\pm$ 0.007 & 0.78 $\pm$ 0.01 &  0.81 $\pm$ 0.01 \\
   MLP & 0.654 $\pm$ 0.004 & 0.838 $\pm$ 0.004 & 0.798 $\pm$ 0.008\\ --></p>
@@ -1350,15 +1399,15 @@ $$\hat{p}_{ij} = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\te
 <section id="proposed-framework-mfdlp-3" class="slide level2 smaller">
 <h2>Proposed Framework: MFDLP</h2>
 
-<img data-src="images/MFDLP_DvG.png" class="r-stretch quarto-figure-center"></section>
+<img data-src="images/MFDLP_DvG_circles.png" class="r-stretch quarto-figure-center"></section>
 <section id="proposed-framework-mfdlp-4" class="slide level2 smaller">
 <h2>Proposed Framework: MFDLP</h2>
 
-<img data-src="images/MFDLP_BvG.png" class="r-stretch quarto-figure-center"></section>
+<img data-src="images/MFDLP_BvG_circles.png" class="r-stretch quarto-figure-center"></section>
 <section id="proposed-framework-mfdlp-5" class="slide level2 smaller">
 <h2>Proposed Framework: MFDLP</h2>
 
-<img data-src="images/MFDLP_BvD.png" class="r-stretch quarto-figure-center"></section>
+<img data-src="images/MFDLP_BvD_circles.png" class="r-stretch quarto-figure-center"></section>
 <section id="future-developments" class="slide level2">
 <h2>Future Developments</h2>
 <ul>
@@ -1624,7 +1673,7 @@ Zhong, Zhiqiang, and Davide Mottin. 2024. <span>“EvolMPNN: Predicting Mutation
         height: 700,
 
         // Factor of the display size that should remain empty around the content
-        margin: 1.0e-2,
+        margin: 0.1,
 
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',

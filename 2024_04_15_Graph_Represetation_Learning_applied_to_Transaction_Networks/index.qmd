@@ -987,7 +987,7 @@ And then **balance** the loss!
 $$\mathcal{L}(\Theta) = - \sum\limits_{e \in E_{s+n}} w_{y_e} \ln(\hat{p}_{\Theta}(e))$$
 
 . . .
-
+ 
 Where:
 
 $$w_{y_e} = \frac{n_{x}}{n_{y_e}}$$
@@ -1000,11 +1000,31 @@ $$w_{y_e} = \frac{n_{x}}{n_{y_e}}$$
 \item hello
 \end{itemize}
 
-``` -->
-
-
+``` -->        
+  
 ## Proposed Framework: MFDLP {.smaller}
 
+
+| Model       | General       | Directional   | Bidirectional |
+|:---------------:|:-----------------:|:-----------------:|:-----------------:|
+| G-GAE + MFDLP   | 81.5 $\pm$ 0.2    | 76.3 $\pm$ 0.2    | 81 $\pm$ 1        |
+| G-GAE           | 79.4 $\pm$ 0.7    | 55 $\pm$ 4        | 63 $\pm$ 6        |
+| ST-GAE + MFDLP  | 74 $\pm$ 4        | 76 $\pm$ 2        | 83 $\pm$ 3        |
+| ST-GAE          | 82.4 $\pm$ 0.7    | 57 $\pm$ 1        | 70 $\pm$ 5        |
+| MIX + MFDLP     | 78 $\pm$ 4        | 74 $\pm$ 2        | 84 $\pm$ 1        |
+| MIX             | 82.4 $\pm$ 0.7    | 57 $\pm$ 1        | 70 $\pm$ 5        |
+| MIXDIST + MFDLP | 0.807 $\pm$ 0.008 | 0.744 $\pm$ 0.006 | 0.82 $\pm$ 0.01   |
+| MIXDIST         | 0.786 $\pm$ 0.008 | 0.502 $\pm$ 0.002 | 0.71 $\pm$ 0.03   |
+| MIXNORM + MFDLP | 0.796 $\pm$ 0.005 | 0.775 $\pm$ 0.002 | 0.79 $\pm$ 0.005  |
+| MIXNORM         | 0.83 $\pm$ 0.01   | 0.539 $\pm$ 0.005 | 0.75 $\pm$ 0.02   |
+| MLP + MFDLP     | 0.623 $\pm$ 0.007 | 0.78 $\pm$ 0.01   | 0.81 $\pm$ 0.01   |
+| MLP             | 0.654 $\pm$ 0.004 | 0.838 $\pm$ 0.004 | 0.798 $\pm$ 0.008 |
+
+: {.table-striped}
+
+
+
+<!-- 
 ```{=latex}
 \begin{table}[tbp]
   \rowcolors{1}{}{lightgray}
@@ -1026,10 +1046,13 @@ $$w_{y_e} = \frac{n_{x}}{n_{y_e}}$$
   \midrule
   MIXNORM + MFDLP & 0.796 $\pm$ 0.005  & 0.775 $\pm$ 0.002  & 0.79 $\pm$ 0.005 \\
   MIXNORM & 0.83 $\pm$ 0.01  & 0.539 $\pm$ 0.005  & 0.75 $\pm$ 0.02 \\
+  \midrule
+  MLP + MFDLP & 0.623 $\pm$ 0.007 & 0.78 $\pm$ 0.01 &  0.81 $\pm$ 0.01 \\
+  MLP & 0.654 $\pm$ 0.004 & 0.838 $\pm$ 0.004 & 0.798 $\pm$ 0.008\\
   \bottomrule
   \end{tabular}
 \end{table}
-```
+``` -->
   <!-- \midrule
   MLP + MFDLP & 0.623 $\pm$ 0.007 & 0.78 $\pm$ 0.01 &  0.81 $\pm$ 0.01 \\
   MLP & 0.654 $\pm$ 0.004 & 0.838 $\pm$ 0.004 & 0.798 $\pm$ 0.008\\ -->
@@ -1080,17 +1103,17 @@ $$w_{y_e} = \frac{n_{x}}{n_{y_e}}$$
 ## Proposed Framework: MFDLP {.smaller}
 
 
-![](images/MFDLP_DvG.png){fig-align="center"}
+![](images/MFDLP_DvG_circles.png){fig-align="center"}
 
 ## Proposed Framework: MFDLP {.smaller}
 
 
-![](images/MFDLP_BvG.png){fig-align="center"}
+![](images/MFDLP_BvG_circles.png){fig-align="center"}
 
 ## Proposed Framework: MFDLP {.smaller}
 
 
-![](images/MFDLP_BvD.png){fig-align="center"}
+![](images/MFDLP_BvD_circles.png){fig-align="center"}
 
 
 ## Future Developments
