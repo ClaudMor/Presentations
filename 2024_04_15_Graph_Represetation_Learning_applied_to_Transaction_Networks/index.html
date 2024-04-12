@@ -366,6 +366,7 @@
 <section class="slide level2">
 
 <!-- https://github.com/quarto-dev/quarto-cli/discussions/4572 -->
+<!-- ```{=html}
 <style>
 .semi-transparent {
   opacity: 0.3;
@@ -409,15 +410,21 @@ text-align: center
 }
 </style>
 
+<style>
+.v-center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+}
+</style>
+```       -->
+
 <!-- 
-
-
 ```{=latex}
 \usepackage[table]{xcolor}
 \definecolor{lightgray}{gray}{0.9}
 ```
-
-
    -->
 <p><br></p>
 <h3 id="outline">Outline</h3>
@@ -492,8 +499,8 @@ text-align: center
 
 . . . -->
 </section>
-<section id="transaction-networks-2" class="slide level2 smaller">
-<h2>Transaction Networks</h2>
+<section id="anti-money-laundering-1" class="slide level2 smaller">
+<h2>(Anti-)Money Laundering</h2>
 <div class="footer">
 <p>Introduction</p>
 </div>
@@ -504,92 +511,250 @@ text-align: center
 </div>
 </div>
 </section>
-<section id="graph-neural-networks" class="slide level2">
-<h2>Graph Neural Networks</h2>
-<!-- ![Courtesy of [CS224w](https://web.stanford.edu/class/cs224w/)](images/MPNN_3.png){fig-align="center"}
-
-. . . -->
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/gnn_1.png" height="400"></p>
-</figure>
-</div>
-<!-- $$\vec{h}_A^{(k+1)} = \sigma\left( \sum\limits_{u \in N(A)} \frac{W^{(k)} \vec{h}_u^{(k)} }{|N(A)|} + B^{(k)} \vec{h}_A^{(k)} \right)$$ -->
-<p><span class="math display">\[\vec{h}_v^{(1)} = ??\]</span></p>
-</section>
-<section id="graph-neural-networks-1" class="slide level2">
-<h2>Graph Neural Networks</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/gnn_2.png" height="400"></p>
-</figure>
-</div>
-<p><span class="math display">\[\vec{h}_v^{(1)} = f(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\})\]</span></p>
-</section>
-<section id="graph-neural-networks-2" class="slide level2">
-<h2>Graph Neural Networks</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/gnn_3.png" height="400"></p>
-</figure>
-</div>
-<div class="absolute" style="top: 500px; left: 10px; ">
-<p><span class="math display">\[\vec{h}_v^{(1)} = f(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\}) = \]</span></p>
-</div>
-<div class="absolute" style="top: 465px; left: 650px; ">
-<div class="fragment">
-<p><span class="math display">\[\sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)\]</span></p>
-</div>
-</div>
-<!-- :::{.fragment}
-$$\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)$$
-::: -->
-</section>
-<section id="graph-neural-networks-3" class="slide level2">
-<h2>Graph Neural Networks</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/gnn_4.png" height="400"></p>
-</figure>
-</div>
-<p><span class="math display">\[\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)\]</span></p>
-</section>
-<section id="graph-neural-networks-4" class="slide level2">
-<h2>Graph Neural Networks</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/gnn_5.png" height="400"></p>
-</figure>
-</div>
-<p><span class="math display">\[\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)\]</span></p>
-</section>
-<section id="graph-neural-networks-5" class="slide level2">
-<h2>Graph Neural Networks</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/gnn_6.png" height="400"></p>
-</figure>
-</div>
-<p><span class="math display">\[\vec{h}_v^{(2)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(1)} \vec{h}_u^{(1)} }{|N(v)|} + B^{(1)} \vec{h}_v^{(1)} \right)\]</span></p>
-</section>
-<section id="graph-neural-networks-6" class="slide level2">
-<h2>Graph Neural Networks</h2>
-<!-- ![](images/gnn_6.png){fig-align="center" height=400} -->
-<div class="center_vert">
+<section id="how-to-proceed" class="slide level2 smaller scrollable">
+<h2>How to Proceed?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="center_horiz">
-<p><span class="math display">\[\vec{h}_v^{(k+1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(k)} \vec{h}_u^{(k)} }{|N(v)|} + B^{(k)} \vec{h}_v^{(k)} \right)\]</span></p>
+<p><strong>Temporal Graph Neural Networks</strong></p>
+</div>
+<div class="fragment">
+<p>Composite Architectures<sup>1</sup>:</p>
+</div>
+<!-- *Recursive*, *Convolutional* and *Meta-Learning* layers -->
+<div class="fragment">
+<ul>
+<li><em>Recursive</em>: LSTM, GRU</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><em>Meta-Learning</em>: <span class="math inline">\(\nabla_{\theta_0}[U^{K}(\mathcal{T}_i, f_{\theta_0})](x_0) \approx \nabla_{\theta}f(x_0, R^{K}_i(\theta_0))\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><em>Learnable Time Encodings</em>: <span class="math display">\[\Phi(t) = \sqrt{\frac{1}{d}} [cos(\omega_i t), sin(\omega_i t)]_{i = 1}^{d}\]</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><em>Self-attention</em>: <span class="math inline">\(\text{softmax} \left( \frac{Q K^T}{\sqrt{d_K}} \right)V\)</span></li>
+</ul>
+</div>
+<!-- $\tilde{\vec{h}}_v^{(l)}(t) =\sum\limits_{u \in N(v;t)} \vec{\sigma} \left(\frac{\vec{q}^{(l-1)}_{v(t)}^t K_{N(v;t)}^{(l-1)}(t)}{\sqrt{d}}\right) \vec{V}_u(t)^{(l-1)}(t)$ -->
+<!-- \text{softmax} \left( \frac{Q^{(l-1)}K^{(l-1)}^T}{\sqrt{d_K}} \right)V -->
+<div class="fragment">
+<p><strong>ADVANTAGES</strong>:</p>
+</div>
+<div class="fragment">
+<ul>
+<li>Default <em>compatibility</em> with TGs;</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>DISADVANTAGES</strong>:</p>
+</div>
+<div class="fragment">
+<ul>
+<li>Not very <em>princlipled</em>;</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Require high <em>expertise</em> and <em>compute</em>;</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><em>Temporal Subgraph Matching</em> not yet well developed.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Reported <em>suboptimal performance</em> on real world tasks<sup>2</sup>:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/tgb_dnpp.PNG" height="400"></p>
+</figure>
 </div>
 </div>
-</section>
-<section id="graph-neural-networks-7" class="slide level2">
-<h2>Graph Neural Networks</h2>
+</div><div class="column" style="width:50%;">
+<div class="center_horiz">
+<p><strong>Graph Neural Networks</strong></p>
+</div>
+<div class="fragment">
+<p>Based on a <em>spectrally-justifiable</em> aggregation strategy:</p>
+<div class="r-stack">
+<div class="fragment fade-in-then-out">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/gnn_1.png" width="400" height="285"></p>
+</figure>
+</div>
+<p><span class="math display">\[ \]</span></p>
+</div>
+<div class="fragment fade-in-then-out">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/gnn_2.png" width="400" height="285"></p>
+</figure>
+</div>
+<p><span class="math display">\[ \]</span></p>
+</div>
+<div class="fragment fade-in-then-out">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/gnn_3.png" width="400" height="285"></p>
+</figure>
+</div>
+<p><span class="math display">\[\vec{h}_v^{(1)} = f_{\Theta_0}(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\})\]</span></p>
+</div>
+<div class="fragment fade-in-then-out">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/gnn_5.png" width="400" height="285"></p>
+</figure>
+</div>
+<p><span class="math display">\[\vec{h}_v^{(1)} = f_{\Theta_0}(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\})\]</span></p>
+</div>
+<div class="fragment fade-in">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/gnn_6.png" width="400" height="285"></p>
+</figure>
+</div>
+<p><span class="math display">\[\vec{h}_v^{(k+1)} = f_{\Theta_k}(\vec{h}_v^{(k)}, \{ \vec{h}_u^{(k)} | u \in N(v)\})\]</span></p>
+</div>
+</div>
+<div class="fragment">
+<p><strong>DISADVANTAGES</strong>:</p>
+</div>
+<div class="fragment">
+<ul>
+<li>Require <em>Static Network</em>;</li>
+</ul>
+</div>
+<div class="fragment">
+<p><strong>ADVANTAGES</strong>:</p>
+</div>
+<div class="fragment">
+<ul>
+<li><em>Principled</em>;</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><em>Easier</em> and <em>cheaper</em> to use;</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><em>(Static) Subgraph Matching</em> already developed<sup>3</sup>;</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><em>Real-world</em>, efficacy<sup>4</sup>.</li>
+</ul>
+</div>
+<!-- ::: {.fragment}
+:::
+  -->
+</div>
+</div>
+</div>
+<!-- 
+## Graph Neural Networks  
 
-<img data-src="images/NSM.PNG" class="r-stretch quarto-figure-center"><p class="caption">Courtesy of <span class="citation" data-cites="rex2020neural">Rex et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></p><div class="center_horiz fragment">
-<p>Only for <strong>Static Graphs</strong>!</p>
-</div>
-</section>
-<section id="proposed-framework" class="slide level2">
-<h2>Proposed Framework</h2>
+
+
+![](images/gnn_1.png){fig-align="center" height=400}
+
+
+
+$$\vec{h}_v^{(1)} = ??$$
+
+
+## Graph Neural Networks  
+
+![](images/gnn_2.png){fig-align="center" height=400}
+
+
+$$\vec{h}_v^{(1)} = f(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\})$$
+
+ 
+## Graph Neural Networks  
+
+![](images/gnn_3.png){fig-align="center" height=400}
+
+
+
+::: {.absolute top=500 left=10}
+$$\vec{h}_v^{(1)} = f(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\}) = $$
+
+:::
+
+
+
+::: {.absolute top=465 left=650}
+:::{.fragment}
+$$\sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)$$
+:::
+:::
+
+
+
+
+## Graph Neural Networks  
+
+![](images/gnn_4.png){fig-align="center" height=400}
+
+$$\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)$$
+
+
+## Graph Neural Networks  
+
+![](images/gnn_5.png){fig-align="center" height=400}
+
+
+
+
+$$\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)$$
+
+
+## Graph Neural Networks  
+
+![](images/gnn_6.png){fig-align="center" height=400}
+
+$$\vec{h}_v^{(2)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(1)} \vec{h}_u^{(1)} }{|N(v)|} + B^{(1)} \vec{h}_v^{(1)} \right)$$
+
+
+## Graph Neural Networks  
+
+
+
+::: {.center_vert}
+::: {.center_horiz}
+$$\vec{h}_v^{(k+1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(k)} \vec{h}_u^{(k)} }{|N(v)|} + B^{(k)} \vec{h}_v^{(k)} \right)$$
+:::
+::: 
+
+
+
+## Graph Neural Networks  
+
+![Courtesy of @rex2020neural](images/NSM.PNG){fig-align="center"}
+
+
+
+::: {.center_horiz .fragment}
+Only for **Static Graphs**!
+::: -->
+<aside><ol class="aside-footnotes"><li id="fn1"><p><span class="citation" data-cites="TGAT">Xu et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>, <span class="citation" data-cites="TGN">Rossi et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>, <span class="citation" data-cites="you2022roland">You, Du, and Leskovec (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>, <span class="citation" data-cites="pareja2019evolvegcn">Pareja et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span></p></li><li id="fn2"><p><a href="https://tgb.complexdatalab.com/">TGB</a></p></li><li id="fn3"><p><span class="citation" data-cites="rex2020neural">Rex et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>, <span class="citation" data-cites="Fey2020Deep">Fey et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></p></li><li id="fn4"><p><span class="citation" data-cites="zhong2024evolmpnn">Zhong and Mottin (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span>, <span class="citation" data-cites="Bloemheuvel2022">Bloemheuvel et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>, <span class="citation" data-cites="egressy2024provably">Egressy et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></p></li></ol></aside></section>
+<section id="previous-works" class="slide level2">
+<h2>Previous Works</h2>
 <div class="columns">
 <div class="column" style="width:48%;">
 <div class="quarto-figure quarto-figure-center">
@@ -618,8 +783,24 @@ $$\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}
 </div>
 </div>
 </section>
-<section id="proposed-framework-1" class="slide level2">
-<h2>Proposed Framework</h2>
+<section id="proposed-static-representation" class="slide level2">
+<h2>Proposed Static Representation</h2>
+<div class="columns" style="display: flex !important; height: 90%;">
+<div class="column" style="width:49%;">
+<p><img data-src="images/triangle_temporal.png" class="absolute" style="top: 25%; width: 300px; "></p>
+<p><!-- fig-align="center" height=300 --></p>
+</div><div class="column" style="width:2%;">
+<div class="absolute" style="top: 40%; left: 300px; ">
+<p><span class="math inline">\(\longrightarrow\)</span></p>
+</div>
+</div><!-- ![](images/arrow.png){fig-align="center" .absolute top=25%} --><div class="column" style="width:49%;">
+<p><img data-src="images/triangle_sr.png" height="400"></p>
+<!-- ![Courtesy of @oetterhsagen2020](images/SR_SEK.PNG){fig-align="center" height=200} -->
+</div>
+</div>
+</section>
+<section id="results" class="slide level2">
+<h2>Results</h2>
 <div class="center_horiz center_vert">
 <table>
 <thead>
@@ -1035,7 +1216,7 @@ $$\hat{p}_{ij} = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\te
 <p><span class="math display">\[\mathcal{L}(\Theta) = - \sum\limits_{e \in E_{s+n}} w_{y_e} \ln(\hat{p}_{\Theta}(e))\]</span></p>
 <div class="fragment">
 <p>Where:</p>
-<p><span class="math display">\[w_{y_e} = \frac{n_{NB}}{n_{y_e}}\]</span></p>
+<p><span class="math display">\[w_{y_e} = \frac{n_{x}}{n_{y_e}}\]</span></p>
 <!-- ```{=latex}
 
 \begin{itemize} 
@@ -1210,14 +1391,29 @@ $$\hat{p}_{ij} = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\te
 <div id="ref-altman2023realistic" class="csl-entry" role="listitem">
 Altman, Erik, Jovan Blanuša, Luc von Niederhäusern, Béni Egressy, Andreea Anghel, and Kubilay Atasu. 2023. <span>“Realistic Synthetic Financial Transactions for Anti-Money Laundering Models.”</span> <a href="https://arxiv.org/abs/2306.16424">https://arxiv.org/abs/2306.16424</a>.
 </div>
+<div id="ref-Bloemheuvel2022" class="csl-entry" role="listitem">
+Bloemheuvel, Stefan, Jurgen van den Hoogen, Dario Jozinović, Alberto Michelini, and Martin Atzmueller. 2022. <span>“Graph Neural Networks for Multivariate Time Series Regression with Application to Seismic Data.”</span> <em>International Journal of Data Science and Analytics</em> 16 (3): 317–32. <a href="https://doi.org/10.1007/s41060-022-00349-6">https://doi.org/10.1007/s41060-022-00349-6</a>.
+</div>
+<div id="ref-egressy2024provably" class="csl-entry" role="listitem">
+Egressy, Béni, Luc von Niederhäusern, Jovan Blanusa, Erik Altman, Roger Wattenhofer, and Kubilay Atasu. 2024. <span>“Provably Powerful Graph Neural Networks for Directed Multigraphs.”</span> <a href="https://arxiv.org/abs/2306.11586">https://arxiv.org/abs/2306.11586</a>.
+</div>
+<div id="ref-Fey2020Deep" class="csl-entry" role="listitem">
+Fey, Matthias, Jan E. Lenssen, Christopher Morris, Jonathan Masci, and Nils M. Kriege. 2020. <span>“Deep Graph Matching Consensus.”</span> In <em>International Conference on Learning Representations</em>. <a href="https://openreview.net/forum?id=HyeJf1HKvS">https://openreview.net/forum?id=HyeJf1HKvS</a>.
+</div>
 <div id="ref-JENSEN2023119037" class="csl-entry" role="listitem">
 Jensen, Rasmus Ingemann Tuffveson, and Alexandros Iosifidis. 2023. <span>“Qualifying and Raising Anti-Money Laundering Alarms with Deep Learning.”</span> <em>Expert Systems with Applications</em> 214: 119037. https://doi.org/<a href="https://doi.org/10.1016/j.eswa.2022.119037">https://doi.org/10.1016/j.eswa.2022.119037</a>.
 </div>
 <div id="ref-oetterhsagen2020" class="csl-entry" role="listitem">
 Oettershagen, Lutz, Nils M. Kriege, Christopher Morris, and Petra Mutzel. 2020. <span>“Temporal Graph Kernels for Classifying Dissemination Processes.”</span> In <em>Proceedings of the 2020 SIAM International Conference on Data Mining (SDM)</em>, 496–504. <a href="https://doi.org/10.1137/1.9781611976236.56">https://doi.org/10.1137/1.9781611976236.56</a>.
 </div>
+<div id="ref-pareja2019evolvegcn" class="csl-entry" role="listitem">
+Pareja, Aldo, Giacomo Domeniconi, Jie Chen, Tengfei Ma, Toyotaro Suzumura, Hiroki Kanezashi, Tim Kaler, Tao B. Schardl, and Charles E. Leiserson. 2019. <span>“EvolveGCN: Evolving Graph Convolutional Networks for Dynamic Graphs.”</span> <a href="https://arxiv.org/abs/1902.10191">https://arxiv.org/abs/1902.10191</a>.
+</div>
 <div id="ref-rex2020neural" class="csl-entry" role="listitem">
 Rex, Ying, Zhaoyu Lou, Jiaxuan You, Chengtao Wen, Arquimedes Canedo, and Jure Leskovec. 2020. <span>“Neural Subgraph Matching.”</span> <a href="https://arxiv.org/abs/2007.03092">https://arxiv.org/abs/2007.03092</a>.
+</div>
+<div id="ref-TGN" class="csl-entry" role="listitem">
+Rossi, Emanuele, Ben Chamberlain, Fabrizio Frasca, Davide Eynard, Federico Monti, and Michael Bronstein. 2020. <span>“Temporal Graph Networks for Deep Learning on Dynamic Graphs.”</span> <a href="https://arxiv.org/abs/2006.10637">https://arxiv.org/abs/2006.10637</a>.
 </div>
 <div id="ref-Salha2019" class="csl-entry" role="listitem">
 Salha, Guillaume, Stratis Limnios, Romain Hennequin, Viet-Anh Tran, and Michalis Vazirgiannis. 2019. <span>“Gravity-Inspired Graph Autoencoders for Directed Link Prediction.”</span> In <em>Proceedings of the 28th ACM International Conference on Information and Knowledge Management</em>, 589–98. CIKM ’19. New York, NY, USA: Association for Computing Machinery. <a href="https://doi.org/10.1145/3357384.3358023">https://doi.org/10.1145/3357384.3358023</a>.
@@ -1228,11 +1424,22 @@ Saxena, Akrati, Yulong Pei, Jan Veldsink, Werner van Ipenburg, George Fletcher, 
 <div id="ref-vignac2023digress" class="csl-entry" role="listitem">
 Vignac, Clement, Igor Krawczuk, Antoine Siraudin, Bohan Wang, Volkan Cevher, and Pascal Frossard. 2023. <span>“DiGress: Discrete Denoising Diffusion for Graph Generation.”</span> In <em>The Eleventh International Conference on Learning Representations</em>. <a href="https://openreview.net/forum?id=UaAD-Nu86WX">https://openreview.net/forum?id=UaAD-Nu86WX</a>.
 </div>
+<div id="ref-TGAT" class="csl-entry" role="listitem">
+Xu, Da, Chuanwei Ruan, Evren Korpeoglu, Sushant Kumar, and Kannan Achan. 2020. <span>“Inductive Representation Learning on Temporal Graphs.”</span> <a href="https://arxiv.org/abs/2002.07962">https://arxiv.org/abs/2002.07962</a>.
+</div>
+<div id="ref-you2022roland" class="csl-entry" role="listitem">
+You, Jiaxuan, Tianyu Du, and Jure Leskovec. 2022. <span>“ROLAND: Graph Learning Framework for Dynamic Graphs.”</span> <a href="https://arxiv.org/abs/2208.07239">https://arxiv.org/abs/2208.07239</a>.
+</div>
 <div id="ref-zhang2021magnet" class="csl-entry" role="listitem">
 Zhang, Xitong, Yixuan He, Nathan Brugnone, Michael Perlmutter, and Matthew Hirn. 2021. <span>“MagNet: A Neural Network for Directed Graphs.”</span> In <em>Advances in Neural Information Processing Systems</em>, edited by A. Beygelzimer, Y. Dauphin, P. Liang, and J. Wortman Vaughan. <a href="https://openreview.net/forum?id=TRDAFiwDq8A">https://openreview.net/forum?id=TRDAFiwDq8A</a>.
 </div>
+<div id="ref-zhong2024evolmpnn" class="csl-entry" role="listitem">
+Zhong, Zhiqiang, and Davide Mottin. 2024. <span>“EvolMPNN: Predicting Mutational Effect on Homologous Proteins by Evolution Encoding.”</span> <a href="https://arxiv.org/abs/2402.13418">https://arxiv.org/abs/2402.13418</a>.
+</div>
 </div>
 </section>
+
+
     </div>
   </div>
 
@@ -1417,7 +1624,7 @@ Zhang, Xitong, Yixuan He, Nathan Brugnone, Michael Perlmutter, and Matthew Hirn.
         height: 700,
 
         // Factor of the display size that should remain empty around the content
-        margin: 0.1,
+        margin: 1.0e-2,
 
         math: {
           mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',

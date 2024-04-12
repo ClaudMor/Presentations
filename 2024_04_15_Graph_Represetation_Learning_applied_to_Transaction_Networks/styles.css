@@ -1,0 +1,53 @@
+.reveal .slide-logo {
+  height: 10% !important;
+  width: 10% !important;
+  max-width: unset !important;
+  max-height: unset !important;
+}
+
+
+.semi-transparent {
+  opacity: 0.3;
+}
+
+.center_horiz {
+text-align: center
+}
+
+.center_vert {
+  margin: 0;   
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+.vertical_center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+
+
+
+.horizontal_center {
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform:  translateX(-50%);
+    transform:  translateX(-50%);
+}
+
+
+
+.v-center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+}

@@ -42,7 +42,8 @@ format:
     toc-title: "Contents"
     toc-depth: 1
     menu: true
-    margin-left: 30px
+    margin: 0.01
+
 filters:
   - parse-latex
 

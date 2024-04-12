@@ -4,7 +4,7 @@ bibliography: bibliography.bib
 ---
 
 <!-- https://github.com/quarto-dev/quarto-cli/discussions/4572 -->
-```{=html}
+<!-- ```{=html}
 <style>
 .semi-transparent {
   opacity: 0.3;
@@ -47,7 +47,16 @@ text-align: center
     transform:  translateX(-50%);
 }
 </style>
-```      
+
+<style>
+.v-center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+}
+</style>
+```       -->
 
 <!-- 
 ```{=latex}
@@ -160,7 +169,8 @@ Transaction Features
 . . . -->
 
 
-## Transaction Networks {.smaller}
+
+## (Anti-)Money Laundering {.smaller}
 
 
 ::: footer
@@ -179,15 +189,196 @@ $\implies$ **Neural** Subgraph Matching!
 :::
 
 
+## How to Proceed? {.smaller .scrollable}
+
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+::: {.center_horiz}
+**Temporal Graph Neural Networks**
+:::
+    
+::: {.fragment}
+Composite Architectures^[@TGAT, @TGN, @you2022roland, @pareja2019evolvegcn]: 
+:::
+
+<!-- *Recursive*, *Convolutional* and *Meta-Learning* layers -->
+
+::: {.fragment}
+- *Recursive*: LSTM, GRU
+:::
+
+::: {.fragment}
+- *Meta-Learning*: $\nabla_{\theta_0}[U^{K}(\mathcal{T}_i, f_{\theta_0})](x_0) \approx \nabla_{\theta}f(x_0, R^{K}_i(\theta_0))$
+:::
+
+
+::: {.fragment}
+- *Learnable Time Encodings*: $$\Phi(t) = \sqrt{\frac{1}{d}} [cos(\omega_i t), sin(\omega_i t)]_{i = 1}^{d}$$
+:::
+
+::: {.fragment}
+- *Self-attention*: $\text{softmax} \left( \frac{Q K^T}{\sqrt{d_K}} \right)V$
+:::
+
+
+
+
+<!-- $\tilde{\vec{h}}_v^{(l)}(t) =\sum\limits_{u \in N(v;t)} \vec{\sigma} \left(\frac{\vec{q}^{(l-1)}_{v(t)}^t K_{N(v;t)}^{(l-1)}(t)}{\sqrt{d}}\right) \vec{V}_u(t)^{(l-1)}(t)$ -->
+
+<!-- \text{softmax} \left( \frac{Q^{(l-1)}K^{(l-1)}^T}{\sqrt{d_K}} \right)V -->
+
+
+::: {.fragment}
+**ADVANTAGES**:
+:::
+
+::: {.fragment}
+- Default *compatibility* with TGs;
+:::
+
+::: {.fragment}
+**DISADVANTAGES**:
+:::
+
+
+
+::: {.fragment}
+- Not very *princlipled*;
+:::
+
+
+::: {.fragment}
+- Require high *expertise* and *compute*;
+:::
+
+::: {.fragment}
+- *Temporal Subgraph Matching* not yet well developed.
+:::
+
+
+::: {.fragment}
+- Reported *suboptimal performance* on real world tasks^[[TGB](https://tgb.complexdatalab.com/)]:
+
+![](images/tgb_dnpp.PNG){fig-align="center" height=400}
+:::
+
+
+
+:::
+
+
+
+::: {.column width="50%"}
+
+
+::: {.center_horiz}
+**Graph Neural Networks**
+:::
+
+
+::: {.fragment}
+Based on a *spectrally-justifiable* aggregation strategy:
+
+::: {.r-stack}
+
+::: {.fragment .fade-in-then-out}
+![](images/gnn_1.png){fig-align="center" width=400 height=285}
+
+$$ $$
+:::
+
+::: {.fragment .fade-in-then-out}
+![](images/gnn_2.png){fig-align="center" width=400 height=285}
+
+$$ $$
+:::
+
+
+::: {.fragment .fade-in-then-out}
+![](images/gnn_3.png){fig-align="center" width=400 height=285}
+
+$$\vec{h}_v^{(1)} = f_{\Theta_0}(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\})$$
+
+:::
+
+
+::: {.fragment .fade-in-then-out}
+![](images/gnn_5.png){fig-align="center" width=400 height=285}
+
+$$\vec{h}_v^{(1)} = f_{\Theta_0}(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\})$$
+
+:::
+
+
+::: {.fragment .fade-in}
+![](images/gnn_6.png){fig-align="center" width=400 height=285}
+
+$$\vec{h}_v^{(k+1)} = f_{\Theta_k}(\vec{h}_v^{(k)}, \{ \vec{h}_u^{(k)} | u \in N(v)\})$$
+
+:::
+
+:::
+
+
+::: {.fragment}
+**DISADVANTAGES**:
+:::
+
+
+
+::: {.fragment}
+- Require *Static Network*;
+:::
+
+
+::: {.fragment}
+**ADVANTAGES**:
+:::
+
+::: {.fragment}
+- *Principled*;
+:::
+
+::: {.fragment}
+- *Easier* and *cheaper* to use;
+:::
+
+::: {.fragment}
+- *(Static) Subgraph Matching* already developed^[@rex2020neural, @Fey2020Deep];
+:::
+
+::: {.fragment}
+- *Real-world*, efficacy^[@zhong2024evolmpnn, @Bloemheuvel2022, @egressy2024provably].
+:::
+
+
+
+
+
+<!-- ::: {.fragment}
+:::
+  -->
+
+:::
+
+
+:::
+
+
+::::
+
+<!-- 
 ## Graph Neural Networks  
 
-<!-- ![Courtesy of [CS224w](https://web.stanford.edu/class/cs224w/)](images/MPNN_3.png){fig-align="center"}
 
-. . . -->
 
 ![](images/gnn_1.png){fig-align="center" height=400}
 
-<!-- $$\vec{h}_A^{(k+1)} = \sigma\left( \sum\limits_{u \in N(A)} \frac{W^{(k)} \vec{h}_u^{(k)} }{|N(A)|} + B^{(k)} \vec{h}_A^{(k)} \right)$$ -->
+
 
 $$\vec{h}_v^{(1)} = ??$$
 
@@ -221,10 +412,6 @@ $$\sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} 
 
 
 
-<!-- :::{.fragment}
-$$\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)$$
-::: -->
-
 
 ## Graph Neural Networks  
 
@@ -252,13 +439,13 @@ $$\vec{h}_v^{(2)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(1)} \vec{h}
 
 ## Graph Neural Networks  
 
-<!-- ![](images/gnn_6.png){fig-align="center" height=400} -->
+
 
 ::: {.center_vert}
 ::: {.center_horiz}
 $$\vec{h}_v^{(k+1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(k)} \vec{h}_u^{(k)} }{|N(v)|} + B^{(k)} \vec{h}_v^{(k)} \right)$$
 :::
-:::
+::: 
 
 
 
@@ -270,10 +457,11 @@ $$\vec{h}_v^{(k+1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(k)} \vec{
 
 ::: {.center_horiz .fragment}
 Only for **Static Graphs**!
-:::
+::: -->
 
 
-## Proposed Framework 
+
+## Previous Works
 
 
 :::: {.columns}
@@ -309,7 +497,43 @@ $$\longrightarrow$$
 ::::
 
 
-## Proposed Framework 
+## Proposed Static Representation 
+
+
+ 
+
+:::: {.columns style='display: flex !important; height: 90%;' }
+
+::: {.column width="49%"}
+
+![](images/triangle_temporal.png){width=300 .absolute top=25%}
+
+ <!-- fig-align="center" height=300 -->
+
+:::
+
+
+::: {.column width="2%"}
+
+::: {.absolute top=40% left=300}
+$\longrightarrow$
+:::
+
+:::
+<!-- ![](images/arrow.png){fig-align="center" .absolute top=25%} -->
+ 
+::: {.column width="49%"}
+
+![](images/triangle_sr.png){height=400}
+
+
+<!-- ![Courtesy of @oetterhsagen2020](images/SR_SEK.PNG){fig-align="center" height=200} -->
+
+:::
+::::
+
+
+## Results
 
 :::{.center_horiz .center_vert}
 
@@ -766,7 +990,7 @@ $$\mathcal{L}(\Theta) = - \sum\limits_{e \in E_{s+n}} w_{y_e} \ln(\hat{p}_{\Thet
 
 Where:
 
-$$w_{y_e} = \frac{n_{NB}}{n_{y_e}}$$
+$$w_{y_e} = \frac{n_{x}}{n_{y_e}}$$
 
  
 <!-- ```{=latex}
