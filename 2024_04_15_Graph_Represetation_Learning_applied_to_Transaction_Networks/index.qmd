@@ -247,7 +247,7 @@ Composite Architectures^[@TGAT, @TGN, @you2022roland, @pareja2019evolvegcn]:
 
 
 ::: {.fragment}
-- Not very *princlipled*;
+- Not very *principled*;
 :::
 
 
@@ -714,6 +714,11 @@ $$\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(
 
 $$\mathcal{L}(\Theta) = \sum\limits_{e \in {E_{s + n}}} y_e\ln(\hat{p}_{\Theta}(e)) + (1-y_e)\ln(1-\hat{p}_{\Theta}(e))$$
 
+
+
+
+
+
 ## Related Works {.smaller}
 
 
@@ -786,6 +791,58 @@ Test Set
 
 
 
+## Related Works {.smaller}
+
+
+Training Set
+
+
+![](images/rw_dlp_training_green_red.png){fig-align="center"  height=150}
+
+
+Test Set(s)^[@Salha2019, @zhang2021magnet]
+
+:::: {.columns}
+
+::: {.column width=31%}
+![General](images/rw_dlp_test_general.png){fig-align="center"}
+:::
+
+
+::: {.column width=2%}
+:::{.fragment}
+![](images/vert_sep.png){fig-align="center" height=200}
+:::
+:::
+
+
+
+
+::: {.column width=32%}
+:::{.fragment}
+
+
+![Directional](images/rw_dlp_test_directional.png){fig-align="center"}
+
+:::
+:::
+
+
+::: {.column width=2%}
+:::{.fragment}
+![](images/vert_sep.png){fig-align="center" height=200}
+:::
+:::
+
+
+
+::: {.column width=32%}
+:::{.fragment}
+![Bdirectional](images/rw_dlp_test_bidirectional.png){fig-align="center"}
+:::
+:::
+
+::::
 
 
 ## Related Works {.smaller .scrollable}
