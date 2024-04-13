@@ -791,7 +791,7 @@ Test Set
 
 
 
-## Related Works {.smaller}
+## Related Works {.smaller .scrollable}
 
 
 Training Set
@@ -844,7 +844,7 @@ Test Set(s)^[@Salha2019, @zhang2021magnet]
 
 ::::
 
-
+<!-- 
 ## Related Works {.smaller .scrollable}
 
 
@@ -904,7 +904,6 @@ Test Set(s)
 
 ![Bidirectional](images/rw_dlp_test_bidirectional.png){fig-align="center" height=250}
 
-<!-- ::: {.aside} -->
 
 
 :::
@@ -915,7 +914,7 @@ Test Set(s)
 
 :::
 
-::::
+:::: -->
 
 ## Related Works
 
@@ -1024,7 +1023,7 @@ Test Set(s)
 
 ::::
 
-## Proposed Framework: MFDLP
+## Proposed Framework: MFDLP {.smaller}
 
 
 **SOLUTION**. Map DLP to 4-class Edge Classification:
@@ -1036,10 +1035,7 @@ Test Set(s)
 
 . . .
 
-And then **balance** the loss!
-
-
-## Proposed Framework: MFDLP
+And then **balance** the loss:
 
 $$\mathcal{L}(\Theta) = - \sum\limits_{e \in E_{s+n}} w_{y_e} \ln(\hat{p}_{\Theta}(e))$$
 
@@ -1049,15 +1045,19 @@ Where:
 
 $$w_{y_e} = \frac{n_{x}}{n_{y_e}}$$
 
+
+<!-- ## Proposed Framework: MFDLP
+
+$$\mathcal{L}(\Theta) = - \sum\limits_{e \in E_{s+n}} w_{y_e} \ln(\hat{p}_{\Theta}(e))$$
+
+. . .
  
-<!-- ```{=latex}
+Where:
 
-\begin{itemize} 
-\item hello
-\item hello
-\end{itemize}
+$$w_{y_e} = \frac{n_{x}}{n_{y_e}}$$ -->
 
-``` -->        
+ 
+
   
 ## Proposed Framework: MFDLP {.smaller}
 
