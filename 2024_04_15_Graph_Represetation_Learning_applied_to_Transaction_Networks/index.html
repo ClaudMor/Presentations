@@ -8,7 +8,7 @@
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.3.433">
 
   <title>Graph Representation Learning applied to Transaction Networks</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -509,83 +509,178 @@ text-align: center
 <div class="center_horiz">
 <p><span class="math inline">\(\implies\)</span> <strong>Neural</strong> Subgraph Matching!</p>
 </div>
+<!-- ## How to Proceed? {.smaller .scrollable}
+
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+::: {.center_horiz}
+**Temporal Graph Neural Networks**
+:::
+    
+::: {.fragment}
+Composite Architectures^[@TGAT, @TGN, @you2022roland, @pareja2019evolvegcn]: 
+:::
+
+::: {.fragment}
+- *Recursive*: LSTM, GRU
+:::
+
+::: {.fragment}
+- *Meta-Learning*: $\nabla_{\theta_0}[U^{K}(\mathcal{T}_i, f_{\theta_0})](x_0) \approx \nabla_{\theta}f(x_0, R^{K}_i(\theta_0))$
+:::
+
+
+::: {.fragment}
+- *Learnable Time Encodings*: $$\Phi(t) = \sqrt{\frac{1}{d}} [cos(\omega_i t), sin(\omega_i t)]_{i = 1}^{d}$$
+:::
+
+::: {.fragment}
+- *Self-attention*: $\text{softmax} \left( \frac{Q K^T}{\sqrt{d_K}} \right)V$
+:::
+
+
+::: {.fragment}
+**ADVANTAGES**:
+:::
+
+::: {.fragment}
+- Default *compatibility* with TGs;
+:::
+
+::: {.fragment}
+**DISADVANTAGES**:
+:::
+
+
+
+::: {.fragment}
+- Not very *principled*;
+:::
+
+
+::: {.fragment}
+- Require high *expertise* and *compute*;
+:::
+
+::: {.fragment}
+- *Temporal Subgraph Matching* not yet well developed.
+:::
+
+
+::: {.fragment}
+- Reported *suboptimal performance* on real world tasks^[[TGB](https://tgb.complexdatalab.com/)]:
+
+![](images/tgb_dnpp.PNG){fig-align="center" height=400}
+:::
+
+
+
+:::
+
+
+
+::: {.column width="50%"}
+
+
+::: {.center_horiz}
+**Graph Neural Networks**
+:::
+
+
+::: {.fragment}
+Based on a *spectrally-justifiable* aggregation strategy:
+
+::: {.r-stack}
+
+::: {.fragment .fade-in-then-out}
+![](images/gnn_1.png){fig-align="center" width=400 height=285}
+
+$$ $$
+:::
+
+::: {.fragment .fade-in-then-out}
+![](images/gnn_2.png){fig-align="center" width=400 height=285}
+
+$$ $$
+:::
+
+
+::: {.fragment .fade-in-then-out}
+![](images/gnn_3.png){fig-align="center" width=400 height=285}
+
+$$\vec{h}_v^{(1)} = f_{\Theta_0}(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\})$$
+
+:::
+
+
+::: {.fragment .fade-in-then-out}
+![](images/gnn_5.png){fig-align="center" width=400 height=285}
+
+$$\vec{h}_v^{(1)} = f_{\Theta_0}(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\})$$
+
+:::
+
+
+::: {.fragment .fade-in}
+![](images/gnn_6.png){fig-align="center" width=400 height=285}
+
+$$\vec{h}_v^{(k+1)} = f_{\Theta_k}(\vec{h}_v^{(k)}, \{ \vec{h}_u^{(k)} | u \in N(v)\})$$
+
+:::
+
+:::
+
+
+::: {.fragment}
+**DISADVANTAGES**:
+:::
+
+
+
+::: {.fragment}
+- Require *Static Network*;
+:::
+
+
+::: {.fragment}
+**ADVANTAGES**:
+:::
+
+::: {.fragment}
+- *Principled*;
+:::
+
+::: {.fragment}
+- *Easier* and *cheaper* to use;
+:::
+
+::: {.fragment}
+- *(Static) Subgraph Matching* already developed^[@rex2020neural, @Fey2020Deep];
+:::
+
+::: {.fragment}
+- *Real-world*, efficacy^[@zhong2024evolmpnn, @Bloemheuvel2022, @egressy2024provably].
+:::
+
+
+:::
+
+
+:::
+
+
+:::: -->
 </div>
 </section>
-<section id="how-to-proceed" class="slide level2 smaller scrollable">
-<h2>How to Proceed?</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="center_horiz">
-<p><strong>Temporal Graph Neural Networks</strong></p>
-</div>
-<div class="fragment">
-<p>Composite Architectures<sup>1</sup>:</p>
-</div>
-<!-- *Recursive*, *Convolutional* and *Meta-Learning* layers -->
-<div class="fragment">
-<ul>
-<li><em>Recursive</em>: LSTM, GRU</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li><em>Meta-Learning</em>: <span class="math inline">\(\nabla_{\theta_0}[U^{K}(\mathcal{T}_i, f_{\theta_0})](x_0) \approx \nabla_{\theta}f(x_0, R^{K}_i(\theta_0))\)</span></li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li><em>Learnable Time Encodings</em>: <span class="math display">\[\Phi(t) = \sqrt{\frac{1}{d}} [cos(\omega_i t), sin(\omega_i t)]_{i = 1}^{d}\]</span></li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li><em>Self-attention</em>: <span class="math inline">\(\text{softmax} \left( \frac{Q K^T}{\sqrt{d_K}} \right)V\)</span></li>
-</ul>
-</div>
-<!-- $\tilde{\vec{h}}_v^{(l)}(t) =\sum\limits_{u \in N(v;t)} \vec{\sigma} \left(\frac{\vec{q}^{(l-1)}_{v(t)}^t K_{N(v;t)}^{(l-1)}(t)}{\sqrt{d}}\right) \vec{V}_u(t)^{(l-1)}(t)$ -->
-<!-- \text{softmax} \left( \frac{Q^{(l-1)}K^{(l-1)}^T}{\sqrt{d_K}} \right)V -->
-<div class="fragment">
-<p><strong>ADVANTAGES</strong>:</p>
-</div>
-<div class="fragment">
-<ul>
-<li>Default <em>compatibility</em> with TGs;</li>
-</ul>
-</div>
-<div class="fragment">
-<p><strong>DISADVANTAGES</strong>:</p>
-</div>
-<div class="fragment">
-<ul>
-<li>Not very <em>principled</em>;</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>Require high <em>expertise</em> and <em>compute</em>;</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li><em>Temporal Subgraph Matching</em> not yet well developed.</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>Reported <em>suboptimal performance</em> on real world tasks<sup>2</sup>:</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/tgb_dnpp.PNG" height="400"></p>
-</figure>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="center_horiz">
-<p><strong>Graph Neural Networks</strong></p>
-</div>
+<section id="graph-neural-networks" class="slide level2 smaller scrollable">
+<h2>Graph Neural Networks</h2>
 <div class="fragment">
 <p>Based on a <em>spectrally-justifiable</em> aggregation strategy:</p>
+</div>
 <div class="r-stack">
 <div class="fragment fade-in-then-out">
 <div class="quarto-figure quarto-figure-center">
@@ -651,108 +746,15 @@ text-align: center
 </div>
 <div class="fragment">
 <ul>
-<li><em>(Static) Subgraph Matching</em> already developed<sup>3</sup>;</li>
+<li><em>(Static) Subgraph Matching</em> already developed<sup>1</sup>;</li>
 </ul>
 </div>
 <div class="fragment">
 <ul>
-<li><em>Real-world</em>, efficacy<sup>4</sup>.</li>
+<li><em>Real-world</em>, efficacy<sup>2</sup>.</li>
 </ul>
 </div>
-<!-- ::: {.fragment}
-:::
-  -->
-</div>
-</div>
-</div>
-<!-- 
-## Graph Neural Networks  
-
-
-
-![](images/gnn_1.png){fig-align="center" height=400}
-
-
-
-$$\vec{h}_v^{(1)} = ??$$
-
-
-## Graph Neural Networks  
-
-![](images/gnn_2.png){fig-align="center" height=400}
-
-
-$$\vec{h}_v^{(1)} = f(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\})$$
-
- 
-## Graph Neural Networks  
-
-![](images/gnn_3.png){fig-align="center" height=400}
-
-
-
-::: {.absolute top=500 left=10}
-$$\vec{h}_v^{(1)} = f(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\}) = $$
-
-:::
-
-
-
-::: {.absolute top=465 left=650}
-:::{.fragment}
-$$\sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)$$
-:::
-:::
-
-
-
-
-## Graph Neural Networks  
-
-![](images/gnn_4.png){fig-align="center" height=400}
-
-$$\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)$$
-
-
-## Graph Neural Networks  
-
-![](images/gnn_5.png){fig-align="center" height=400}
-
-
-
-
-$$\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)$$
-
-
-## Graph Neural Networks  
-
-![](images/gnn_6.png){fig-align="center" height=400}
-
-$$\vec{h}_v^{(2)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(1)} \vec{h}_u^{(1)} }{|N(v)|} + B^{(1)} \vec{h}_v^{(1)} \right)$$
-
-
-## Graph Neural Networks  
-
-
-
-::: {.center_vert}
-::: {.center_horiz}
-$$\vec{h}_v^{(k+1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(k)} \vec{h}_u^{(k)} }{|N(v)|} + B^{(k)} \vec{h}_v^{(k)} \right)$$
-:::
-::: 
-
-
-
-## Graph Neural Networks  
-
-![Courtesy of @rex2020neural](images/NSM.PNG){fig-align="center"}
-
-
-
-::: {.center_horiz .fragment}
-Only for **Static Graphs**!
-::: -->
-<aside><ol class="aside-footnotes"><li id="fn1"><p><span class="citation" data-cites="TGAT">Xu et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>, <span class="citation" data-cites="TGN">Rossi et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>, <span class="citation" data-cites="you2022roland">You, Du, and Leskovec (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>, <span class="citation" data-cites="pareja2019evolvegcn">Pareja et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span></p></li><li id="fn2"><p><a href="https://tgb.complexdatalab.com/">TGB</a></p></li><li id="fn3"><p><span class="citation" data-cites="rex2020neural">Rex et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>, <span class="citation" data-cites="Fey2020Deep">Fey et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></p></li><li id="fn4"><p><span class="citation" data-cites="zhong2024evolmpnn">Zhong and Mottin (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span>, <span class="citation" data-cites="Bloemheuvel2022">Bloemheuvel et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>, <span class="citation" data-cites="egressy2024provably">Egressy et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn1"><p><span class="citation" data-cites="rex2020neural">Rex et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>, <span class="citation" data-cites="Fey2020Deep">Fey et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></p></li><li id="fn2"><p><span class="citation" data-cites="zhong2024evolmpnn">Zhong and Mottin (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span>, <span class="citation" data-cites="Bloemheuvel2022">Bloemheuvel et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>, <span class="citation" data-cites="egressy2024provably">Egressy et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></p></li></ol></aside></section>
 <section id="previous-works" class="slide level2">
 <h2>Previous Works</h2>
 <div class="columns">
@@ -1144,7 +1146,7 @@ Test Set(s)
 :::
 
 :::: -->
-<aside><ol class="aside-footnotes"><li id="fn5"><p><span class="citation" data-cites="Salha2019">Salha et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span>, <span class="citation" data-cites="zhang2021magnet">Zhang et al. (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn3"><p><span class="citation" data-cites="Salha2019">Salha et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span>, <span class="citation" data-cites="zhang2021magnet">Zhang et al. (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p></li></ol></aside></section>
 <section id="related-works-6" class="slide level2">
 <h2>Related Works</h2>
 
@@ -1519,14 +1521,8 @@ Jensen, Rasmus Ingemann Tuffveson, and Alexandros Iosifidis. 2023. <span>“Qual
 <div id="ref-oetterhsagen2020" class="csl-entry" role="listitem">
 Oettershagen, Lutz, Nils M. Kriege, Christopher Morris, and Petra Mutzel. 2020. <span>“Temporal Graph Kernels for Classifying Dissemination Processes.”</span> In <em>Proceedings of the 2020 SIAM International Conference on Data Mining (SDM)</em>, 496–504. <a href="https://doi.org/10.1137/1.9781611976236.56">https://doi.org/10.1137/1.9781611976236.56</a>.
 </div>
-<div id="ref-pareja2019evolvegcn" class="csl-entry" role="listitem">
-Pareja, Aldo, Giacomo Domeniconi, Jie Chen, Tengfei Ma, Toyotaro Suzumura, Hiroki Kanezashi, Tim Kaler, Tao B. Schardl, and Charles E. Leiserson. 2019. <span>“EvolveGCN: Evolving Graph Convolutional Networks for Dynamic Graphs.”</span> <a href="https://arxiv.org/abs/1902.10191">https://arxiv.org/abs/1902.10191</a>.
-</div>
 <div id="ref-rex2020neural" class="csl-entry" role="listitem">
 Rex, Ying, Zhaoyu Lou, Jiaxuan You, Chengtao Wen, Arquimedes Canedo, and Jure Leskovec. 2020. <span>“Neural Subgraph Matching.”</span> <a href="https://arxiv.org/abs/2007.03092">https://arxiv.org/abs/2007.03092</a>.
-</div>
-<div id="ref-TGN" class="csl-entry" role="listitem">
-Rossi, Emanuele, Ben Chamberlain, Fabrizio Frasca, Davide Eynard, Federico Monti, and Michael Bronstein. 2020. <span>“Temporal Graph Networks for Deep Learning on Dynamic Graphs.”</span> <a href="https://arxiv.org/abs/2006.10637">https://arxiv.org/abs/2006.10637</a>.
 </div>
 <div id="ref-Salha2019" class="csl-entry" role="listitem">
 Salha, Guillaume, Stratis Limnios, Romain Hennequin, Viet-Anh Tran, and Michalis Vazirgiannis. 2019. <span>“Gravity-Inspired Graph Autoencoders for Directed Link Prediction.”</span> In <em>Proceedings of the 28th ACM International Conference on Information and Knowledge Management</em>, 589–98. CIKM ’19. New York, NY, USA: Association for Computing Machinery. <a href="https://doi.org/10.1145/3357384.3358023">https://doi.org/10.1145/3357384.3358023</a>.
@@ -1536,12 +1532,6 @@ Saxena, Akrati, Yulong Pei, Jan Veldsink, Werner van Ipenburg, George Fletcher, 
 </div>
 <div id="ref-vignac2023digress" class="csl-entry" role="listitem">
 Vignac, Clement, Igor Krawczuk, Antoine Siraudin, Bohan Wang, Volkan Cevher, and Pascal Frossard. 2023. <span>“DiGress: Discrete Denoising Diffusion for Graph Generation.”</span> In <em>The Eleventh International Conference on Learning Representations</em>. <a href="https://openreview.net/forum?id=UaAD-Nu86WX">https://openreview.net/forum?id=UaAD-Nu86WX</a>.
-</div>
-<div id="ref-TGAT" class="csl-entry" role="listitem">
-Xu, Da, Chuanwei Ruan, Evren Korpeoglu, Sushant Kumar, and Kannan Achan. 2020. <span>“Inductive Representation Learning on Temporal Graphs.”</span> <a href="https://arxiv.org/abs/2002.07962">https://arxiv.org/abs/2002.07962</a>.
-</div>
-<div id="ref-you2022roland" class="csl-entry" role="listitem">
-You, Jiaxuan, Tianyu Du, and Jure Leskovec. 2022. <span>“ROLAND: Graph Learning Framework for Dynamic Graphs.”</span> <a href="https://arxiv.org/abs/2208.07239">https://arxiv.org/abs/2208.07239</a>.
 </div>
 <div id="ref-zhang2021magnet" class="csl-entry" role="listitem">
 Zhang, Xitong, Yixuan He, Nathan Brugnone, Michael Perlmutter, and Matthew Hirn. 2021. <span>“MagNet: A Neural Network for Directed Graphs.”</span> In <em>Advances in Neural Information Processing Systems</em>, edited by A. Beygelzimer, Y. Dauphin, P. Liang, and J. Wortman Vaughan. <a href="https://openreview.net/forum?id=TRDAFiwDq8A">https://openreview.net/forum?id=TRDAFiwDq8A</a>.

@@ -189,7 +189,7 @@ $\implies$ **Neural** Subgraph Matching!
 :::
 
 
-## How to Proceed? {.smaller .scrollable}
+<!-- ## How to Proceed? {.smaller .scrollable}
 
 
 
@@ -204,8 +204,6 @@ $\implies$ **Neural** Subgraph Matching!
 ::: {.fragment}
 Composite Architectures^[@TGAT, @TGN, @you2022roland, @pareja2019evolvegcn]: 
 :::
-
-<!-- *Recursive*, *Convolutional* and *Meta-Learning* layers -->
 
 ::: {.fragment}
 - *Recursive*: LSTM, GRU
@@ -223,13 +221,6 @@ Composite Architectures^[@TGAT, @TGN, @you2022roland, @pareja2019evolvegcn]:
 ::: {.fragment}
 - *Self-attention*: $\text{softmax} \left( \frac{Q K^T}{\sqrt{d_K}} \right)V$
 :::
-
-
-
-
-<!-- $\tilde{\vec{h}}_v^{(l)}(t) =\sum\limits_{u \in N(v;t)} \vec{\sigma} \left(\frac{\vec{q}^{(l-1)}_{v(t)}^t K_{N(v;t)}^{(l-1)}(t)}{\sqrt{d}}\right) \vec{V}_u(t)^{(l-1)}(t)$ -->
-
-<!-- \text{softmax} \left( \frac{Q^{(l-1)}K^{(l-1)}^T}{\sqrt{d_K}} \right)V -->
 
 
 ::: {.fragment}
@@ -356,108 +347,97 @@ $$\vec{h}_v^{(k+1)} = f_{\Theta_k}(\vec{h}_v^{(k)}, \{ \vec{h}_u^{(k)} | u \in N
 :::
 
 
-
-
-
-<!-- ::: {.fragment}
-:::
-  -->
-
 :::
 
 
 :::
 
 
-::::
+:::: -->
 
-<!-- 
-## Graph Neural Networks  
-
-
-
-![](images/gnn_1.png){fig-align="center" height=400}
+## Graph Neural Networks {.smaller .scrollable}
 
 
 
-$$\vec{h}_v^{(1)} = ??$$
+
+::: {.fragment}
+Based on a *spectrally-justifiable* aggregation strategy:
+
+:::
+
+::: {.r-stack}
+
+::: {.fragment .fade-in-then-out}
+![](images/gnn_1.png){fig-align="center" width=400 height=285}
+
+$$ $$
+:::
+
+::: {.fragment .fade-in-then-out}
+![](images/gnn_2.png){fig-align="center" width=400 height=285}
+
+$$ $$
+:::
 
 
-## Graph Neural Networks  
+::: {.fragment .fade-in-then-out}
+![](images/gnn_3.png){fig-align="center" width=400 height=285}
 
-![](images/gnn_2.png){fig-align="center" height=400}
-
-
-$$\vec{h}_v^{(1)} = f(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\})$$
-
- 
-## Graph Neural Networks  
-
-![](images/gnn_3.png){fig-align="center" height=400}
-
-
-
-::: {.absolute top=500 left=10}
-$$\vec{h}_v^{(1)} = f(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\}) = $$
+$$\vec{h}_v^{(1)} = f_{\Theta_0}(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\})$$
 
 :::
 
 
+::: {.fragment .fade-in-then-out}
+![](images/gnn_5.png){fig-align="center" width=400 height=285}
 
-::: {.absolute top=465 left=650}
-:::{.fragment}
-$$\sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)$$
+$$\vec{h}_v^{(1)} = f_{\Theta_0}(\vec{h}_v^{(0)}, \{ \vec{h}_u^{(0)} | u \in N(v)\})$$
+
 :::
+
+
+::: {.fragment .fade-in}
+![](images/gnn_6.png){fig-align="center" width=400 height=285}
+
+$$\vec{h}_v^{(k+1)} = f_{\Theta_k}(\vec{h}_v^{(k)}, \{ \vec{h}_u^{(k)} | u \in N(v)\})$$
+
+:::
+
+:::
+
+
+::: {.fragment}
+**DISADVANTAGES**:
 :::
 
 
 
-
-## Graph Neural Networks  
-
-![](images/gnn_4.png){fig-align="center" height=400}
-
-$$\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)$$
-
-
-## Graph Neural Networks  
-
-![](images/gnn_5.png){fig-align="center" height=400}
-
-
-
-
-$$\vec{h}_v^{(1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(0)} \vec{h}_u^{(0)} }{|N(v)|} + B^{(0)} \vec{h}_v^{(0)} \right)$$
-
-
-## Graph Neural Networks  
-
-![](images/gnn_6.png){fig-align="center" height=400}
-
-$$\vec{h}_v^{(2)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(1)} \vec{h}_u^{(1)} }{|N(v)|} + B^{(1)} \vec{h}_v^{(1)} \right)$$
-
-
-## Graph Neural Networks  
-
-
-
-::: {.center_vert}
-::: {.center_horiz}
-$$\vec{h}_v^{(k+1)} =  \sigma\left( \sum\limits_{u \in N(v)} \frac{W^{(k)} \vec{h}_u^{(k)} }{|N(v)|} + B^{(k)} \vec{h}_v^{(k)} \right)$$
+::: {.fragment}
+- Require *Static Network*;
 :::
-::: 
 
 
+::: {.fragment}
+**ADVANTAGES**:
+:::
 
-## Graph Neural Networks  
+::: {.fragment}
+- *Principled*;
+:::
 
-![Courtesy of @rex2020neural](images/NSM.PNG){fig-align="center"}
+::: {.fragment}
+- *Easier* and *cheaper* to use;
+:::
+
+::: {.fragment}
+- *(Static) Subgraph Matching* already developed^[@rex2020neural, @Fey2020Deep];
+:::
+
+::: {.fragment}
+- *Real-world*, efficacy^[@zhong2024evolmpnn, @Bloemheuvel2022, @egressy2024provably].
+:::
 
 
-
-::: {.center_horiz .fragment}
-Only for **Static Graphs**!
-::: -->
 
 
 
