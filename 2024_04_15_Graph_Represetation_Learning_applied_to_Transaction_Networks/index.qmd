@@ -80,6 +80,8 @@ text-align: center
 :three: Future Developments
 
 :four: References
+
+:five: Extras
  
 
 ## Static Representations
@@ -635,42 +637,6 @@ $$\hat{p}_{ij} = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\te
 ::: -->
   
 
-## Variational Graph Autoencoders {.smaller}
-
-<!-- .center_vert .absolute left=0 -->
-
-
-![](images/VGAE_formulae.png){fig-align="center"}
-
-::: {.r-stack} 
-
-::: {.fragment .fade-in-then-out} 
-$$\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j)$$
-:::
-
-::: {.fragment .fade-in-then-out}
-$$\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j))$$
-:::
-
-::: {.fragment .fade-in-then-out}
-$$\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j)) = \text{Dec}(\vec{h}^{(L)}_i, \vec{h}^{(L)}_j)$$
-:::
-
-
-::: {.fragment .fade-in}
-\begin{equation}
-\begin{split}
-\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) &= \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j)) = \text{Dec}(\vec{h}^{(L)}_i, \vec{h}^{(L)}_j) \\ &=
-\begin{cases}
-\vec{h}^{(L)}_i \cdot \vec{h}^{(L)}_j \\
-\vec{h}^{(L)}_i[:l/2] \cdot \vec{h}^{(L)}_j[l/2:] 
-\end{cases}
-\end{split}
-\end{equation}
-:::
-
-:::
-
 
 
 ## Related Works
@@ -1170,9 +1136,50 @@ $$w_{y_e} = \frac{n_{x}}{n_{y_e}}$$ -->
 # Thanks :pray:
 
 
-# References
-
 <!-- IT-AML: link prediction 3 tasks e trova il train set che faccia bene almeno le prime 2 -->
 
+# Extras
+
+1. Variational Graph Autoencoders
 
 
+
+## Variational Graph Autoencoders {.smaller}
+
+<!-- .center_vert .absolute left=0 -->
+
+
+![](images/VGAE_formulae.png){fig-align="center"}
+
+::: {.r-stack} 
+
+::: {.fragment .fade-in-then-out} 
+$$\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j)$$
+:::
+
+::: {.fragment .fade-in-then-out}
+$$\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j))$$
+:::
+
+::: {.fragment .fade-in-then-out}
+$$\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j)) = \text{Dec}(\vec{h}^{(L)}_i, \vec{h}^{(L)}_j)$$
+:::
+
+
+::: {.fragment .fade-in}
+\begin{equation}
+\begin{split}
+\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) &= \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j)) = \text{Dec}(\vec{h}^{(L)}_i, \vec{h}^{(L)}_j) \\ &=
+\begin{cases}
+\vec{h}^{(L)}_i \cdot \vec{h}^{(L)}_j \\
+\vec{h}^{(L)}_i[:l/2] \cdot \vec{h}^{(L)}_j[l/2:] 
+\end{cases}
+\end{split}
+\end{equation}
+:::
+
+:::
+
+
+
+# References

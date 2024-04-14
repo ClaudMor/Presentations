@@ -432,6 +432,7 @@ text-align: center
 <p><span class="emoji" data-emoji="two">2️⃣</span> Directed Link Prediction</p>
 <p><span class="emoji" data-emoji="three">3️⃣</span> Future Developments</p>
 <p><span class="emoji" data-emoji="four">4️⃣</span> References</p>
+<p><span class="emoji" data-emoji="five">5️⃣</span> Extras</p>
 </section>
 <section id="static-representations" class="slide level2">
 <h2>Static Representations</h2>
@@ -905,31 +906,6 @@ $$\hat{p}_{ij} = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\te
 
 ::: -->
 <img data-src="images/VGAE.png" class="r-stretch quarto-figure-center"></section>
-<section id="variational-graph-autoencoders-1" class="slide level2 smaller">
-<h2>Variational Graph Autoencoders</h2>
-<!-- .center_vert .absolute left=0 -->
-
-<img data-src="images/VGAE_formulae.png" class="r-stretch quarto-figure-center"><div class="r-stack">
-<div class="fragment fade-in-then-out">
-<p><span class="math display">\[\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j)\]</span></p>
-</div>
-<div class="fragment fade-in-then-out">
-<p><span class="math display">\[\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j))\]</span></p>
-</div>
-<div class="fragment fade-in-then-out">
-<p><span class="math display">\[\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j)) = \text{Dec}(\vec{h}^{(L)}_i, \vec{h}^{(L)}_j)\]</span></p>
-</div>
-<div class="fragment fade-in">
-<p><span class="math display">\[\begin{split}
-\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) &amp;= \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j)) = \text{Dec}(\vec{h}^{(L)}_i, \vec{h}^{(L)}_j) \\ &amp;=
-\begin{cases}
-\vec{h}^{(L)}_i \cdot \vec{h}^{(L)}_j \\
-\vec{h}^{(L)}_i[:l/2] \cdot \vec{h}^{(L)}_j[l/2:]
-\end{cases}
-\end{split}\]</span></p>
-</div>
-</div>
-</section>
 <section id="related-works" class="slide level2">
 <h2>Related Works</h2>
 
@@ -1488,12 +1464,43 @@ $$w_{y_e} = \frac{n_{x}}{n_{y_e}}$$ -->
 </section>
 <section id="thanks" class="title-slide slide level1 center">
 <h1>Thanks <span class="emoji" data-emoji="pray">🙏</span></h1>
-
+<!-- IT-AML: link prediction 3 tasks e trova il train set che faccia bene almeno le prime 2 -->
 </section>
 
+<section>
+<section id="extras" class="title-slide slide level1 center">
+<h1>Extras</h1>
+<ol type="1">
+<li>Variational Graph Autoencoders</li>
+</ol>
+</section>
+<section id="variational-graph-autoencoders-1" class="slide level2 smaller">
+<h2>Variational Graph Autoencoders</h2>
+<!-- .center_vert .absolute left=0 -->
+
+<img data-src="images/VGAE_formulae.png" class="r-stretch quarto-figure-center"><div class="r-stack">
+<div class="fragment fade-in-then-out">
+<p><span class="math display">\[\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j)\]</span></p>
+</div>
+<div class="fragment fade-in-then-out">
+<p><span class="math display">\[\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j))\]</span></p>
+</div>
+<div class="fragment fade-in-then-out">
+<p><span class="math display">\[\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j)) = \text{Dec}(\vec{h}^{(L)}_i, \vec{h}^{(L)}_j)\]</span></p>
+</div>
+<div class="fragment fade-in">
+<p><span class="math display">\[\begin{split}
+\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) &amp;= \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j)) = \text{Dec}(\vec{h}^{(L)}_i, \vec{h}^{(L)}_j) \\ &amp;=
+\begin{cases}
+\vec{h}^{(L)}_i \cdot \vec{h}^{(L)}_j \\
+\vec{h}^{(L)}_i[:l/2] \cdot \vec{h}^{(L)}_j[l/2:]
+\end{cases}
+\end{split}\]</span></p>
+</div>
+</div>
+</section></section>
 <section id="references" class="title-slide slide level1 smaller scrollable">
 <h1>References</h1>
-<!-- IT-AML: link prediction 3 tasks e trova il train set che faccia bene almeno le prime 2 -->
 
 <img src="images/logo/unito_centai_combined.png" class="slide-logo r-stretch"><div class="footer footer-default">
 
