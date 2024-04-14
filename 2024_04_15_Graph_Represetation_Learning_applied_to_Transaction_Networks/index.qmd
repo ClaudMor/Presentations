@@ -420,7 +420,7 @@ $$\vec{h}_v^{(k+1)} = f_{\Theta_k}(\vec{h}_v^{(k)}, \{ \vec{h}_u^{(k)} | u \in N
 ::: {.fragment}
 **ADVANTAGES**:
 :::
-
+<!-- 
 ::: {.fragment}
 - *Principled*;
 :::
@@ -428,13 +428,14 @@ $$\vec{h}_v^{(k+1)} = f_{\Theta_k}(\vec{h}_v^{(k)}, \{ \vec{h}_u^{(k)} | u \in N
 ::: {.fragment}
 - *Easy* and *cheap* to use;
 :::
+::: {.fragment}
+- *Real-world*, efficacy^[@zhong2024evolmpnn, @Bloemheuvel2022, @egressy2024provably].
+::: -->
+
+
 
 ::: {.fragment}
 - *(Static) Subgraph Matching* already developed^[@rex2020neural, @Fey2020Deep];
-:::
-
-::: {.fragment}
-- *Real-world*, efficacy^[@zhong2024evolmpnn, @Bloemheuvel2022, @egressy2024provably].
 :::
 
 

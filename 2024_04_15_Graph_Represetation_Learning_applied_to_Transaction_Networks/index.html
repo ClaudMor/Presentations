@@ -734,27 +734,23 @@ $$\vec{h}_v^{(k+1)} = f_{\Theta_k}(\vec{h}_v^{(k)}, \{ \vec{h}_u^{(k)} | u \in N
 <div class="fragment">
 <p><strong>ADVANTAGES</strong>:</p>
 </div>
-<div class="fragment">
-<ul>
-<li><em>Principled</em>;</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li><em>Easy</em> and <em>cheap</em> to use;</li>
-</ul>
-</div>
+<!-- 
+::: {.fragment}
+- *Principled*;
+:::
+
+::: {.fragment}
+- *Easy* and *cheap* to use;
+:::
+::: {.fragment}
+- *Real-world*, efficacy^[@zhong2024evolmpnn, @Bloemheuvel2022, @egressy2024provably].
+::: -->
 <div class="fragment">
 <ul>
 <li><em>(Static) Subgraph Matching</em> already developed<sup>1</sup>;</li>
 </ul>
 </div>
-<div class="fragment">
-<ul>
-<li><em>Real-world</em>, efficacy<sup>2</sup>.</li>
-</ul>
-</div>
-<aside><ol class="aside-footnotes"><li id="fn1"><p><span class="citation" data-cites="rex2020neural">Rex et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>, <span class="citation" data-cites="Fey2020Deep">Fey et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></p></li><li id="fn2"><p><span class="citation" data-cites="zhong2024evolmpnn">Zhong and Mottin (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span>, <span class="citation" data-cites="Bloemheuvel2022">Bloemheuvel et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>, <span class="citation" data-cites="egressy2024provably">Egressy et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn1"><p><span class="citation" data-cites="rex2020neural">Rex et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>, <span class="citation" data-cites="Fey2020Deep">Fey et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></p></li></ol></aside></section>
 <section id="previous-works" class="slide level2">
 <h2>Previous Works</h2>
 <div class="columns">
@@ -1146,7 +1142,7 @@ Test Set(s)
 :::
 
 :::: -->
-<aside><ol class="aside-footnotes"><li id="fn3"><p><span class="citation" data-cites="Salha2019">Salha et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span>, <span class="citation" data-cites="zhang2021magnet">Zhang et al. (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn2"><p><span class="citation" data-cites="Salha2019">Salha et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span>, <span class="citation" data-cites="zhang2021magnet">Zhang et al. (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p></li></ol></aside></section>
 <section id="related-works-6" class="slide level2">
 <h2>Related Works</h2>
 
@@ -1506,12 +1502,6 @@ $$w_{y_e} = \frac{n_{x}}{n_{y_e}}$$ -->
 <div id="ref-altman2023realistic" class="csl-entry" role="listitem">
 Altman, Erik, Jovan Blanuša, Luc von Niederhäusern, Béni Egressy, Andreea Anghel, and Kubilay Atasu. 2023. <span>“Realistic Synthetic Financial Transactions for Anti-Money Laundering Models.”</span> <a href="https://arxiv.org/abs/2306.16424">https://arxiv.org/abs/2306.16424</a>.
 </div>
-<div id="ref-Bloemheuvel2022" class="csl-entry" role="listitem">
-Bloemheuvel, Stefan, Jurgen van den Hoogen, Dario Jozinović, Alberto Michelini, and Martin Atzmueller. 2022. <span>“Graph Neural Networks for Multivariate Time Series Regression with Application to Seismic Data.”</span> <em>International Journal of Data Science and Analytics</em> 16 (3): 317–32. <a href="https://doi.org/10.1007/s41060-022-00349-6">https://doi.org/10.1007/s41060-022-00349-6</a>.
-</div>
-<div id="ref-egressy2024provably" class="csl-entry" role="listitem">
-Egressy, Béni, Luc von Niederhäusern, Jovan Blanusa, Erik Altman, Roger Wattenhofer, and Kubilay Atasu. 2024. <span>“Provably Powerful Graph Neural Networks for Directed Multigraphs.”</span> <a href="https://arxiv.org/abs/2306.11586">https://arxiv.org/abs/2306.11586</a>.
-</div>
 <div id="ref-Fey2020Deep" class="csl-entry" role="listitem">
 Fey, Matthias, Jan E. Lenssen, Christopher Morris, Jonathan Masci, and Nils M. Kriege. 2020. <span>“Deep Graph Matching Consensus.”</span> In <em>International Conference on Learning Representations</em>. <a href="https://openreview.net/forum?id=HyeJf1HKvS">https://openreview.net/forum?id=HyeJf1HKvS</a>.
 </div>
@@ -1535,9 +1525,6 @@ Vignac, Clement, Igor Krawczuk, Antoine Siraudin, Bohan Wang, Volkan Cevher, and
 </div>
 <div id="ref-zhang2021magnet" class="csl-entry" role="listitem">
 Zhang, Xitong, Yixuan He, Nathan Brugnone, Michael Perlmutter, and Matthew Hirn. 2021. <span>“MagNet: A Neural Network for Directed Graphs.”</span> In <em>Advances in Neural Information Processing Systems</em>, edited by A. Beygelzimer, Y. Dauphin, P. Liang, and J. Wortman Vaughan. <a href="https://openreview.net/forum?id=TRDAFiwDq8A">https://openreview.net/forum?id=TRDAFiwDq8A</a>.
-</div>
-<div id="ref-zhong2024evolmpnn" class="csl-entry" role="listitem">
-Zhong, Zhiqiang, and Davide Mottin. 2024. <span>“EvolMPNN: Predicting Mutational Effect on Homologous Proteins by Evolution Encoding.”</span> <a href="https://arxiv.org/abs/2402.13418">https://arxiv.org/abs/2402.13418</a>.
 </div>
 </div>
 </section>
