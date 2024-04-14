@@ -426,7 +426,7 @@ $$\vec{h}_v^{(k+1)} = f_{\Theta_k}(\vec{h}_v^{(k)}, \{ \vec{h}_u^{(k)} | u \in N
 :::
 
 ::: {.fragment}
-- *Easier* and *cheaper* to use;
+- *Easy* and *cheap* to use;
 :::
 
 ::: {.fragment}
