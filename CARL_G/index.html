@@ -669,8 +669,8 @@ b(u) &amp;= \min\limits_{i \neq \mathcal{U}_u} \frac{1}{|C_i|}\sum\limits_{v \in
 </div>
 <div class="fragment">
 <p><strong>UCoDe</strong><sup>2</sup>:</p>
-<p><span class="math display">\[C = text{GCN}(A,X)\]</span></p>
-<p><span class="math display">\[\mathcal{L}_{\text{UCoDE}} = - \frac{1}{2k}\sum\limits_{i = 1}^{k}y_i\ln(\text{Diag}(\sigma(\mathcal{Q} ))_i) - (1-y_{k+i})\ln(1-\text{Diag}(\sigma(\mathcal{Q}))_i)\]</span></p>
+<p><span class="math display">\[C = \text{GCN}(A,X)\]</span></p>
+<p><span class="math display">\[\mathcal{L}_{\text{UCoDE}} = - \frac{1}{2k}\sum\limits_{i = 1}^{k}y_i\ln(\text{Diag}(\sigma(\mathcal{Q} ))_i) - (1-y_{k+i})\ln(1-\text{Diag}(\mathcal{P}(\sigma(\mathcal{Q})))_i)\]</span></p>
 </div>
 <aside><ol class="aside-footnotes"><li id="fn2"><p><span class="citation" data-cites="DMoN">Tsitsulin, Palowitch, and Perozzi (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></p></li><li id="fn3"><p><span class="citation" data-cites="UCoDe">Moradan et al. (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span></p></li></ol></aside></section>
 <section id="dmon-ucode-1" class="slide level2">
@@ -706,7 +706,7 @@ b(u) &amp;= \min\limits_{i \neq \mathcal{U}_u} \frac{1}{|C_i|}\sum\limits_{v \in
 </ol>
 <div class="fragment">
 <ol start="2" type="1">
-<li><span class="math inline">\(C = \vec{\sigma}(\text{GCN}_C(A,X))\)</span> where <span class="math inline">\(\vec{\sigma}\)</span> is <em>softmax</em> or element-wise <em>ReLU</em>;</li>
+<li><span class="math inline">\(C = \vec{\sigma}(\text{GCN}_C(A,X))\)</span> where <span class="math inline">\(\vec{\sigma}\)</span> is <em>softmax</em> or element-wise <em>sigmoid</em>;</li>
 </ol>
 </div>
 <div class="fragment">

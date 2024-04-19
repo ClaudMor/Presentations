@@ -1,0 +1,399 @@
+---
+title: "CARL-G: Clustering-Accelerated Representation Learning on Graphs"
+bibliography: bibliography.bib
+---
+
+
+
+   
+<br> 
+ 
+ 
+
+
+### Outline
+
+:one: Overview
+
+:two: Architecture & Training
+
+:three: Results
+
+:four: Analysis
+
+:five: Possible Extensions
+ 
+
+## Overview
+
+
+1. Overview
+
+
+
+
+
+
+<!-- ## [Introduction]{.semi-transparent} {.smaller}
+
+1 Transaction Networks
+
+1 (Anti-)Money Laundering
+
+1 Graph Neural Networks -->
+
+
+
+## Overview
+
+- Existing literature on graph SSL: **contrastive** and **non-contrastive** methods;
+
+. . .
+
+- The authors propose **CARL-G**^[@CARL_G], a **CVI-based** graph SSL algorithm;
+
+. . .
+
+- CARL-G is simple, fast and computes more expressive representations for downstream **node classification**, **clustering** and **similarity search**
+
+
+
+## Architecture & Training
+
+1. Notation
+
+2. CVIs
+
+3. CARL-G Forward
+
+4. Modified VRC and SIL
+
+5. Clustering Method
+
+
+
+
+## Notation {.smaller}
+
+- **Graph** $G = (V,E)$, with $n = |V|$;
+
+. . .
+
+- **Node features** $X \in \mathbb{R}^{n \times f}$
+
+. . .
+
+- **Node Embeddings**: $H = [\vec{h}_1,...,\vec{h}_n] \in \mathbb{R}^{n \times d}$
+
+. . .
+
+- **Adjacency matrix** $A \in \{0,1\}^{n \times n}$
+
+. . .
+
+
+. . .
+
+- **Partition**: $C = \{C_1,...,C_c\}$
+
+. . .
+
+- **Cluster Assignments**: $\mathcal{U} \in \{1,...,c\}^{n}$, while $\mathcal{U}_u$ is the assignment of node $u$;
+
+. . .
+
+- **Global Centroid**: $\vec{\mu} = \frac{1}{c}\sum\limits_{u \in V}\vec{h}_u$ 
+
+. . .
+
+- i-th **Cluster Centroid**: $\vec{\mu}_i = \frac{1}{c}\sum\limits_{u \in C_i}\vec{h}_u$ 
+
+## CVIs {.smaller .scrollable}
+
+**Cluster Validation Indices** are measures of the *quality* of a partition $C$ that **don't** require ground truth clustering;
+
+. . .
+
+Example: *Silhouette*
+
+$$\text{SIL}(C) := \frac{1}{n}\sum\limits_{u \in V}s(u)$$ Where $$s(u) = \frac{b(u) - a(u)}{\text{max}(a(u),b(u))}$$ and 
+
+\begin{equation}
+\begin{split}
+a(u) &= \frac{1}{C_{\mathcal{U}_u} - 1}\sum\limits_{v \in C_{\mathcal{U}_u}\setminus u} \text{DIST}(\vec{h}_u, \vec{h}_v) \\
+b(u) &= \min\limits_{i \neq \mathcal{U}_u} \frac{1}{|C_i|}\sum\limits_{v \in C_i}\text{DIST}(\vec{h}_u, \vec{h}_v)
+\end{split}
+\end{equation}
+
+## CARL-G Forward
+
+1. $H = \text{ GCN}(X,A)$
+
+. . .
+
+2. $Z = \text{ MLP}(H)$
+
+. . .
+
+3. $C = \textit{ k-means}(Z)$
+
+. . .
+
+4. $\text{Loss } = CVI(Z;C)$
+
+
+. . .
+
+MLP **discarded** for downstream tasks.
+
+
+## Modified VRC and SIL
+
+1. *k-means* may miscluster: $$ \text{L}_{\text{SIL}} = |\tau_{\text{SIL}} - \text{SIL}(C)|, \qquad  \text{L}_{\text{VRC}} = |\tau_{\text{VRC}} - \text{VRC}(C)|$$ {#eq-SIL_VRC} Where $\tau_{\text{SIL}} \in [-1,1] \land \tau_{\text{VRC}} [0, +\infty]$
+
+. . .
+
+2. $\text{SIL}(C) \sim O(n^2) \implies$ *Simplified Silhouette Loss* $L_{\text{SIM}}$: $$a(u) = \text{DIST}(\vec{h}_u, \vec{\mu}_{\mathcal{U}_u}) , \qquad b(u) = \min\limits_{i \neq \mathcal{U}_u} \text{DIST}(\vec{h}_u, \vec{\mu}_i)$$ {#eq-SIM}
+
+## Clustering Method
+
+- *k-means* and *k-medoids* are tested;
+
+. . .
+
+- *k-means* finds optimal $c$ centroids $\vec{\mu}_{1,...,c}$ s.t.: $$\underset{C}{\operatorname{argmin}} \sum\limits_{i=1}^{c}\sum_{\vec{x}\in C_i} \text{DIST}(\vec{x}, \vec{\mu}_i)$$ In CARL-G, centroids are **carried over** between epochs.
+
+
+## Results
+
+1. Overview
+
+2. Node Classification
+
+3. Node Clustering
+
+4. Node Similarity
+
+
+## Overview {.smaller .scrollable}
+
+Three variants of CARL-G:
+
+- $CARL-G_{\text{SIL}}$ (see @eq-SIL_VRC)
+
+- $CARL-G_{\text{VRC}}$ (see @eq-SIL_VRC)
+
+- $CARL-G_{\text{SIM}}$ (see @eq-SIM)
+
+. . .
+
+
+Evaluated over three tasks:
+
+- (Multiclass) **Node Classification**: [OneVsRest](https://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsRestClassifier.html) Logistic Regression over frozen CARL-G embeddings on 5 datasets;
+
+. . .
+
+- **Node Clustering**: NMI and cluster homogeneity between *k-means* over $H$ and label-induced cluster assignments;
+
+
+. . .
+
+- **Node Similarity Search**: Hits@K measure of same-labels within each cluster for every node.
+
+## Node Classification
+
+![](images/results_nclass.PNG){fig-align="center"} 
+
+
+## Node Clustering
+
+![](images/results_nclust.PNG){fig-align="center"}
+
+
+## Similarity Search
+
+
+![](images/results_simsearch.PNG){fig-align="center"}
+
+
+
+## Analysis
+
+1. Margin Loss
+
+2. Ablation study
+
+
+
+## Margin Loss {.smaller}
+
+Can show that contrastive *Margin Loss* $\iff$ *Mean Silhouette*
+
+
+. . .
+
+**Mean Silhouette**
+
+$$L_{MS}(u) = -(b_{MS}(u) - a(u))$$ Where $$b_{MS}(u) = \frac{1}{c-1}\sum\limits_{j \neq i} \frac{1}{|C_j|}\sum\limits_{v \in C_j} \text{DIST}(\vec{h}_u,\vec{h}_v)$$
+
+. . .
+
+**Margin Loss**
+
+$$\text{ML}(u) = \frac{1}{|N(u)|}\sum\limits_{v \in N(u)}\text{DIST}(\vec{h}_u,\vec{h}_v) - \frac{1}{|V \setminus N(u) \cup \{u\}|} \sum\limits_{t \notin N(u)} \text{DIST}(\vec{h}_u,\vec{h}_t)$$
+
+
+
+## Margin Loss {.smaller .scrollable} 
+
+Also defining:
+
+
+
+![](images/ML_dist.PNG){fig-align="center"}
+
+. . .
+
+![](images/ML_hom.PNG){fig-align="center"}
+
+. . .
+
+![](images/ML_err.PNG){fig-align="center"}
+
+
+## Margin Loss {.smaller .scrollable} 
+
+**Claim**: *Given the above assumptions, the expected value of the simplified silhouette loss approaches that of the margin loss as 𝑝 → 1, 𝑞 → 0, and 𝜖, 𝛿 → 0.*
+
+**Proof**:
+
+1. Compute $\text{E}[L_{MS}(u)] = \text{E}[a(u)]  - \text{E}[b_{MS}(u)]$
+
+. . .
+
+2. Take the limit $\lim\limits_{\epsilon,\delta \rightarrow 0} \text{E}[L_{MS}(u)]$
+
+. . .
+
+3. Compute $\text{E}[\text{ML}(u)]$
+
+. . .
+
+4. Take the limit $\lim\limits_{p \rightarrow 1,q \rightarrow 0} \text{E}[\text{ML}(u)]$ and note it coincides with 2.
+
+## Margin Loss {.smaller .scrollable} 
+
+Observations:
+
+1. *Mean Silhouette* is minimized by model error rates $\epsilon$ and $\delta$, while *Margin Loss* depends on $p$ and $q$ which are immutable graph attributes;
+
+. . .
+
+2. *Mean Silhouette* does not require negative sampling 
+
+
+##  Ablation study
+
+1. There is an optimal number of clusters $c$;
+
+. . .
+
+2. *k-means* works better than *k-medoids*;
+
+. . .
+
+3. Extra structural information is not needed: $$\text{DIST}(\vec{h}_u, \vec{h}_v) = \lambda || \vec{h}_u - \vec{h}_v ||_2 + (1-\lambda)D_{uv}$$
+
+
+## Possible Extensions
+
+1. DMoN & UCoDe
+
+2. Soft Silhouette
+
+
+## DMoN & UCoDe {.smaller .scrollable}
+
+**DMoN**^[@DMoN]:
+
+$$\mathcal{Q} = \frac{1}{2m}\sum\limits_{ij}\left[A_{ij}- \frac{k_i k_j}{2m} \right]\delta(c_i,c_j) =  \frac{1}{2m} \text{Tr}(C^TBC)$$
+
+. . .
+
+$$C = \text{softmax}(\text{GCN}(A,X))$$
+
+
+. . .
+
+$$\mathcal{L}_{\text{DMoN}} = -\frac{1}{2m} \text{Tr}(C^TBC) + \text{regularization}$$
+
+
+. . .
+
+**UCoDe**^[@UCoDe]:
+
+$$C = \text{GCN}(A,X)$$
+
+$$\mathcal{L}_{\text{UCoDE}} = - \frac{1}{2k}\sum\limits_{i = 1}^{k}y_i\ln(\text{Diag}(\sigma(\mathcal{Q} ))_i) - (1-y_{k+i})\ln(1-\text{Diag}(\mathcal{P}(\sigma(\mathcal{Q})))_i)$$
+
+
+## DMoN & UCoDe
+
+Suggestions:
+
+. . .
+
+- Compare CARL-G with DMoN and UCoDe;
+
+. . .
+
+- Try $\text{CARL-G}_{\text{Mod}}$ (weak);
+
+## Soft Silhouette {.smaller .scrollable}
+
+Introduced in @SoftSilhouette:
+
+
+$$\text{Sf}(C,X) = \frac{1}{N}\sum\limits_{i = 1}^{N}\text{sf}(x_i)$$
+
+Where, assuming $x_i \in C_I$:
+
+$$a_{C_I}(x_i) := \frac{\sum\limits_{j = 1}^{N} P_{C_I}(x_j) d(x_i,x_j)}{\sum\limits_{j=1,j\neq i}^{N}P_{C_I}(x_j)}, \qquad b_{C_I} := \min\limits_{J \neq I}a_{C_J}(x_i)$$
+
+. . .
+
+$$s_{C_I}(x_i) = \frac{b_{C_I}(x_i) - a_{C_I}(x_i)}{\max\{ a_{C_I}(x_i), b_{C_I}(x_i)\}}$$
+
+$$\text{sf}(x_i) = \sum\limits_{i = 1}^{K}P_{C_I}(x_i)s_{C_I}(x_i)$$
+
+
+## Soft Silhouette 
+
+Suggested approach:
+
+1. $H = \text{GCN}_H(A,X)$
+
+. . .
+
+2. $C = \vec{\sigma}(\text{GCN}_C(A,X))$ where $\vec{\sigma}$ is *softmax* or element-wise *sigmoid*;
+
+. . .
+
+3. Optimize $\text{Sf}(C,H)$ ($\implies C^*, H^*$)
+
+. . .
+
+4. Find optimal clustering by finding $p$ s.t. $\text{SIL}(\hat{C}^*)$ is maximum.
+
+
+
+# Thanks :pray:
+
+
+# References
+
+<!-- IT-AML: link prediction 3 tasks e trova il train set che faccia bene almeno le prime 2 -->
+
+
+
