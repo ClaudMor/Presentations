@@ -288,7 +288,7 @@ $$
 \tau \frac{du}{dt} = -(u(t) - u_{rest}) + RI(T)
 $${#eq-lif}
 
-![](images/books/2014Gerstner-LIF_circuit.png){.absolute top=90 left=850 width=25%}
+![](images/books/2014Gerstner-LIF_circuit.PNG){.absolute top=90 left=850 width=25%}
 
 - With firing mechanism: 
 
@@ -382,8 +382,8 @@ Hodgkin-Huxley models are a bit **unpractical**:
 - No voltage nor current thresholds:
 
 ::: {layout-nrow=1}
-![](images/books/2014Gerstner-no_voltage_threshold.PNG){width=500 height=300}
-![](images/books/2014Gerstner-no_current_threshold.PNG){width=500 height=300}
+![](images/books/2014Gerstner_no_voltage_threshold.PNG){width=500 height=300}
+![](images/books/2014Gerstner_no_current_threshold.PNG){width=500 height=300}
 :::
 
 . . .
