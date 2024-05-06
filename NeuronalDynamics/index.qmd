@@ -382,8 +382,8 @@ Hodgkin-Huxley models are a bit **unpractical**:
 - No voltage nor current thresholds:
 
 ::: {layout-nrow=1}
-![](images/books/2014Gerstner-no_voltage_threshold.png){width=500 height=300}
-![](images/books/2014Gerstner-no_current_threshold.png){width=500 height=300}
+![](images/books/2014Gerstner-no_voltage_threshold.PNG){width=500 height=300}
+![](images/books/2014Gerstner-no_current_threshold.PNG){width=500 height=300}
 :::
 
 . . .
@@ -406,7 +406,7 @@ To these, we'd also add a certain increase in the nuance required to implement a
 
 Note: dynamics of $n$ and $h$ are very slow w.r.t. $m$
 
-![](images/books/2014Gerstner-tau_x){.absolute top=90 left=650 width=40%}
+![](images/books/2014Gerstner-tau_x.PNG){.absolute top=90 left=650 width=40%}
 
 . . .
 
@@ -441,14 +441,14 @@ Examples: Morris-Lecar model, FitzHugh-Nagumo model
 
 Define $\epsilon := \frac{\tau}{\tau_w}$. If $\tau_w \gt \gt \tau$:
 
-![](images/books/2014Gerstner-one_dimensional_reduction_firing_mechanism)<!-- {.absolute top=90 left=650 width=40%} -->
+![](images/books/2014Gerstner-one_dimensional_reduction_firing_mechanism.PNG)<!-- {.absolute top=90 left=650 width=40%} -->
 
 . . .
 
 ::: {.absolute top=80 left=430}
 Since:
 
-- One may **NOT** interested in spike shape;
+- One may **NOT** be interested in spike shape;
 
 ::: {.fragment}
 - The $w$ variable only varies **after** the voltage has reached its maximum.
@@ -485,7 +485,7 @@ How to choose $f(u)$?
 
 . . .
 
-![](images/books/2014Gerstner-AdEx_derivation){height=200}
+![](images/books/2014Gerstner-AdEx_derivation.PNG){height=200}
 
 ::: {.absolute top=150 left=550}
 $$
@@ -501,7 +501,7 @@ $\rightarrow$ best fitting function is: $f(u)= -(u-u_{rest}) + \Delta_T e^{\frac
 
 <!-- Would get the same result by approximating the $F(u,w_{rest})$ of a 2-dimensional Hodgkin-Huxley model: -->
 
-![](images/books/2014Gerstner-AdEx_derivation_hh){height=200}
+![](images/books/2014Gerstner-AdEx_derivation_hh.PNG){height=200}
 
 ::: {.absolute top=500 left=550}
 Same result from reduced 1d Hodgkin Huxley model.
@@ -538,7 +538,7 @@ $$
 
 . . .
 
-![](images/books/2014Gerstner-firing_patterns){height=300 width=800}
+![](images/books/2014Gerstner-firing_patterns.PNG){height=300 width=800}
 
 ::: {.notes}
 The δ-function in the wk equations indicates that, during firing, the adaptation currents wk are increased by an amount bk.The parameters bk  are the ‘jump’ of the spike-triggered adaptation.
@@ -764,7 +764,7 @@ Such set is the **Pareto-optimal front** (**POF**).
 
 - Projection of the *POF* set may assume two configurations:
 
-![Projections of the Pareto optimal front along two sets of features ^[[Druckmann et al. (2007)](https://doi.org/10.3389/neuro.01.1.1.001.2007)]](images/articles/2007Druckmann_POF.png){height=200 width=800}
+![Projections of the Pareto optimal front along two sets of features ^[[Druckmann et al. (2007)](https://doi.org/10.3389/neuro.01.1.1.001.2007)]](images/articles/2007Druckmann_POF.PNG){height=200 width=800}
 
 . . .
 
