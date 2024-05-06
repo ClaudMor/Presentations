@@ -1,0 +1,236 @@
+## Model Specification & Initialisation {.smaller}
+
+### Leaky Integrate-And-Fire (LIF)
+
+To a first phenomenological approximation, neuronal dynamics can be conceived as a summation (“integration”) process combined with a mechanism that triggers action potentials above some critical voltage.
+
+A particularly simple model of a spiking neuron is the leaky integrate-and-fire model (LIF) which is constituted of:
+
+1. A linear differential equation describing how input currents are integrated and transformed into a membrane voltage $u(t)$; 
+2. A spike generation mechanism if the membrane voltage reaches the threshold $θ$; 
+3. A voltage reset mechanism.
+
+::: {.notes}
+INTEGRATE-AND-FIRE MODELS
+
+To a first phenomenological approximation, neuronal dynamics can be conceived as a summation / “integration” process combined with a mechanism that triggers action potentials above some critical voltage.
+
+These "integrate-and-fire" (IF) models have two separate components that are both necessary to define their dynamics:
+
+1. An equation for the evolution of the membrane potential $u_i(t)$;
+2. A mechanism for spike generation.
+
+LEAKY INTEGRATE-AND-FIRE MODEL (LIF) 
+
+A particularly simple model of a spiking neuron is the leaky integrate-and-fire model (LIF). 
+
+First, a linear differential equation describes how input currents are integrated and transformed into a membrane voltage $u(t)$. Here the input can be the input current injected by an experimenter into an isolated neuron or synaptic input currents caused by spikes arriving from other neurons in a large and highly connected network. 
+
+Second, the model neuron generates an output spike if the membrane voltage reaches the threshold $θ$. 
+
+Finally, after spike firing, the integration of the linear differential equation resumes from a reset value $u_r$.
+:::
+
+## Model Specification & Initialisation {.smaller}
+
+### Leaky Integrate-And-Fire (LIF)
+
+:::: {.columns}
+
+::: {.column width="62%"}
+![](images/books/2014Gerstner-LIF.png){.absolute top=150 left=0 width=55%}
+:::
+
+::: {.column width="38%"}
+#### Input  
+$$I(t) = I_R + I_C = \frac{u(t)-u_{\text{rest}}}{R} + C\frac{du}{dt}$$
+
+#### Model 
+
+$$\tau_m\frac{du}{dt} = -[u(t)-u_{\text{rest}}] + RI(t)$$
+
+$$\text{if } u(t) = \theta \text{ then } \lim_{\delta\to0;\delta>0} u(t+\delta) = u_r
+$$
+:::
+::::
+
+::: {.aside}
+Figure from [Gerstner et al. (2014)](https://doi.org/10.1017/cbo9781107447615).
+:::
+
+::: {.notes}
+INPUT  
+
+- $I_R$: Resistive current 
+- $I_C$: Capacitive current 
+- $I(t)$: Total input current 
+
+MODEL
+
+- $\tau_m = RC$: Time constant 
+- $u(t_0)$: Initial condition 
+- $θ$: Threshold voltage 
+- $u_r$: Reset voltage 
+
+FIGURE 1 
+
+A. A neuron, which is enclosed by the cell membrane (big circle), receives a (positive) input current $I(t)$ which increases the electrical charge inside the cell. The cell membrane acts like a capacitor in parallel with a resistor which is in line with a battery of potential $u_{\text{rest}}$ (zoomed inset).
+
+B. The cell membrane reacts to a step current (top) with a smooth voltage trace (bot- tom).
+REFERENCES 
+
+- [Naud et al. (2012)](https://infoscience.epfl.ch/record/168813?ln=en)
+- [Gerstner et al. (2014)](https://doi.org/10.1017/cbo9781107447615)
+:::
+
+## Model Specification & Initialisation {.smaller}
+
+### Leaky Integrate-And-Fire (LIF)
+
+#### Limitations
+
+We cannot expect it to explain the complete biochemistry and biophysics of neurons since:
+
+- The input current from pre-synaptic neurons is integrated linearly independently of the state of the postsynaptic neuron;
+- There is no memory of previous spikes given the reset mechanism described before;
+- It does not account for long-lasting refractoriness or adaptation. 
+  
+But if the voltage dynamics of the LIF model is enhanced by mechanisms of adaptation, then it can be a powerful tool to accurately predict spike times of the soma of cortical neurons (see competition review by [Naud et al. (2012)](https://infoscience.epfl.ch/record/168813?ln=en)). 
+
+## Model Specification & Initialisation {.smaller}
+
+### Hodgkin–Huxley (HH)
+
+It is the basis for: 
+
+- The construction of more detailed neuron models which account for different types of synapse, and the spatial geometry of an individual neuron; 
+- The derivation of simplified, effective neuron models called "generalized integrate-and-fire" models (GIF). 
+
+Each channel type is represented by a resistor: 
+
+- The unspecific channel has a leak resistance $R$
+- The sodium channel a resistance $R_{\text{Na}}$ 
+- The potassium channel a resistance $R_{\text{K}}$. 
+
+There are separate voltages for sodium, potassium, and the unspecific third channel, with battery voltages $E_{\text{Na}}$,$E_{\text{K}}$ and $E_{\text{L}}$, respectively.
+
+::: {.notes}
+HODGKIN–HUXLEY (HH)
+
+The Hodgkin–Huxley model describes the generation of action potentials on the level of ion channels and ion current flow. 
+
+It is the starting point for detailed biophysical neuron models which in general include more than the three types of currents considered by Hodgkin and Huxley (1952). 
+
+The HH equations are the basis for: 
+
+- The construction of more detailed / realistic neuron models which account for different types of synapse, and the spatial geometry of an individual neuron; 
+- The derivation of simplified / effective neuron models we will call "generalized integrate-and-fire" models (GIF).
+
+Neurons are enclosed by a membrane separating the intra-cellular from the extra-cellular space. The difference between intra- and extra-cellular ionic concentration generates an electrical potential driving the neuronal dynamics. 
+
+The semi-permeable cell membrane separates intra-cellular from the extra-cellular liquid and acts as a capacitor. If an input current $I(t)$ is injected into the cell, it may add further charge on the capacitor, or leak through the channels in the cell membrane. 
+
+Each channel type is represented by a resistor: 
+
+- The unspecific channel has a leak resistance $R$
+- The sodium channel a resistance $R_{\text{Na}}$ 
+- The potassium channel a resistance $R_{\text{K}}$. 
+
+Since the equilibrium potential is different for each ion type, there are separate batteries for sodium, potassium, and the unspecific third channel, with battery voltages $E_{\text{Na}}$,$E_{\text{K}}$ and $E_{\text{L}}$, respectively.
+:::
+
+## Model Specification & Initialisation {.smaller}
+
+### Hodgkin–Huxley (HH)
+
+:::: {.columns}
+
+::: {.column width="62%"}
+#### Input  
+$$I(t) = I_C(t) + \sum_k I_k(t) = C\frac{du}{dt}+\sum_k I_k(t)$$
+
+$$\sum_k I_k = g_{\text{Na}}m^3h(u-E_{\text{Na}}) + g_{\text{K}}n^4 (u-E_{\text{K}}) + g_{\text{L}}(u-E_{\text{L}})$$
+
+#### Model 
+
+$$\dot{x} = - \frac{1}{\tau_x(u)}[x-x_0(u)], \quad x \in \{m,n,h\}$$
+
+:::
+
+::: {.column width="38%"}
+![](images/books/2014Gerstner-HH-1.png){.absolute bottom=70 right=-200 width=60%}
+:::
+::::
+
+::: {.aside}
+Figures from [Gerstner et al. (2014)](https://doi.org/10.1017/cbo9781107447615).
+:::
+
+::: {.notes}
+INPUT 
+
+The input current $I(t)$ may be split into a capacitive current $I_C$ which charges the capacitor $C$ and further components $I_k$ which pass through the ion channels. $u$ is the voltage across the membrane and $\sum_k I_k$ is the sum of the ionic currents which pass through the cell membrane. 
+
+MODEL 
+
+The three gating variables $m$, $n$, and $h$ evolve according to differential equations in the slide. 
+
+For a fixed voltage $u$, the variable $x$ approaches the target value $x_0(u)$ with a time constant $\tau_x(u)$.
+
+FIGURE 1 
+
+Diagram for the HH model.
+
+FIGURE 2 
+
+A. Spike train $u(t)$ of the HH model driven by $I(t)$.  
+
+B. Threshold effect: a short current pulse of 1 ms is applied which leads to a excursion of the membrane potential of a few mV (dashed line). A slight increase of the strength of the current pulse leads to the generation of an action potential (solid line) with an amplitude of about 100 mV above rest (out of bounds).
+
+LIMITATIONS 
+
+REFERENCES 
+
+- [Gerstner et al. (2014)](https://doi.org/10.1017/cbo9781107447615)
+- [Harkin et al. (2021)](https://doi.org/10.1007/978-3-030-89439-9_3)
+:::
+
+## Model Specification & Initialisation {.smaller}
+
+### Hodgkin–Huxley (HH)
+
+#### Alternative Formulations
+
+[ASK CLAUDIO HIS PREFERENCE!]
+
+## Model Specification & Initialisation {.smaller}
+
+### Adaptive Exponential IF (AdEx)
+
+NOOOO!
+
+::: {.aside}
+Figure from [Gerstner et al. (2014)](https://doi.org/10.1017/cbo9781107447615).
+:::
+
+::: {.notes}
+GENERALISED INTEGRATE-AND-FIRE MODEL (GIF) 
+
+
+REFERENCES 
+
+- [Gerstner et al. (2014)](https://doi.org/10.1017/cbo9781107447615)
+:::
+
+## Model Calibration & Validation {.smaller}
+
+[PUT CLAUDIO'S SLIDES HERE]
+
+::: {.notes}
+
+REFERENCES 
+
+- [Druckmann (2013)](https://doi.org/10.1007/978-1-4614-8094-5_28)
+- [Gerstner et al. (2014)](https://doi.org/10.1017/cbo9781107447615)
+- [Harkin et al. (2021)](https://doi.org/10.1007/978-3-030-89439-9_3)
+:::

@@ -1,0 +1,574 @@
+---
+title: "NeuronalModelling.jl"
+subtitle: "Quantitative Single-Neuron Modelling in Julia"
+---
+
+# Methods
+
+1.  Model Specification 
+2.  Model Calibration
+
+::: notes
+:::
+
+# [Methods]{.semi-transparent} {.smaller}
+
+1.  Model Specification:
+
+    2.1 Leaky Integrate and Fire
+
+    2.2 Hodgkin-Huxley
+
+    2.3 Two Dimensional Reduction
+
+    2.4 One Dimensional Reduction
+
+    2.5 Exponential NLIF
+
+    2.6 AdEx-NLIF
+
+2.  [Calibration]{.semi-transparent}
+
+
+
+## Models: Leaky integrate and fire {.smaller}
+
+- Subthreshold dynamics:
+$$
+\tau \frac{du}{dt} = -(u(t) - u_{rest}) + RI(T)
+$${#eq-lif}
+
+![](images/books/2014Gerstner-LIF_circuit.png){.absolute top=90 left=850 width=25%}
+
+- With firing mechanism: 
+
+$$
+u(t) \ge \theta \implies u(t+\delta) = u_r
+$${#eq-lif_reset}
+
+
+. . .
+
+- Cannot describe Bursting, Adaptation, Delayed Response, Inhibitory Rebound etc.
+
+. . .
+
+
+- Cannot describe spike features such as spike height, width at half height, etc...
+
+::: {.notes}
+
+Comes from considering the neuron as the circuit in fig A
+
+:::
+
+## Models: Hodgkin-Huxley #1 {.smaller}
+
+$$
+C\frac{du}{dt} = -\sum\limits_k I_k(t) + I(t)
+$${#eq-hh_u}
+
+. . .
+
+
+Where, in the simplest case ^[[Gerstner et al. (2014)](https://neuronaldynamics.epfl.ch/online/Ch2.S2.html)]:
+
+$$
+\sum\limits_k I_k(t) = g_{Na}m^3h(u - E_{Na}) + g_Kn^4(u-E_K) + g_L(u-E_L)
+$${#eq-hh_currents}
+
+. . .
+
+Where, setting $x \in \{m,n,h\}$:
+
+$$
+\dot{x} = \alpha_x(u)(1-x) - \beta_x(u)x
+$${#eq-gating_variable_exp_diffeq}
+
+. . .
+
+Where, for instance:
+
+$$
+\alpha_m(u) = \frac{0.182(u+35)}{1-e^\frac{u+35}{9}} \; , \; \beta_m(u)= \frac{-0.124(u+35)}{1-e^\frac{u+35}{9}}
+$${#eq-boltzmann_terms_exp}
+
+## Models: Hodgkin-Huxley #2 {.smaller}
+
+**Unstable** $\rightarrow$ define^[[Toth et al. (2011)](https://doi.org/10.1007/s00422-011-0459-1)]:
+
+$$
+x_0(u) := \frac{\alpha_x(u)}{\alpha_x(u) +  \beta_x(u)} = \frac{1}{2}\left(1+\tanh\left(\frac{u - u_x}{\kappa_x}\right)\right)
+$${#eq-x_0}
+$$
+\tau_x(u) = \frac{1}{\alpha_x(u) +  \beta_x(u)} = \tau^0_x + \tau^{max}_x\left(1-\tanh\left( \frac{u - u_{\tau,x}}{\sigma_x} \right)^2\right)
+$${#eq-tau}
+
+. . .
+
+And then substitute @eq-gating_variable_exp_diffeq with:
+
+$$
+\dot{x} = \frac{x_0(u) - x(u)}{\tau_x(u)}
+$${#eq-gating_variables_tanh_diffeq}
+
+. . .
+
+$\rightarrow$ solver stability.
+
+::: {.notes}
+The exponential form is numerically unstable → we use the $\tanh$ formalism 1. We define:
+
+. . .
+
+Parameters values must then be fitted to the shapes of @eq-boltzmann_terms_exp
+
+. . .
+
+Which achieves solver stability.
+:::
+
+## Models: two dimensional reduction #1 {.smaller}
+
+Hodgkin-Huxley models are a bit **unpractical**:
+
+- No voltage nor current thresholds:
+
+::: {layout-nrow=1}
+![](images/books/2014Gerstner-no_voltage_threshold.png){width=500 height=300}
+![](images/books/2014Gerstner-no_current_threshold.png){width=500 height=300}
+:::
+
+. . .
+
+- Impossible to visualize and analyze a 4d+ dynamical system;
+
+. . .
+
+- Very hard to identify parameters.
+
+::: {.notes}
+- Usually required for intuitiveness
+- 
+- The dynamical role of parameters is often obscure
+
+To these, we'd also add a certain increase in the nuance required to implement and calibrate HH systems w.r.t. NLIF that we're about to see.
+:::
+
+## Models: two dimensional reduction #2 {.smaller}
+
+Note: dynamics of $n$ and $h$ are very slow w.r.t. $m$
+
+![](images/books/2014Gerstner-tau_x){.absolute top=90 left=650 width=40%}
+
+. . .
+
+
+::: {.absolute top=250}
+$\rightarrow$ define $:w = b-h = an$
+
+
+::: {.fragment}
+So that @eq-hh_u becomes: 
+$$
+\frac{du}{dt} = \frac{1}{\tau}(F(u,w) + RI(t))
+$$
+:::
+
+::: {.fragment}
+And @eq-gating_variable_exp_diffeq (or @eq-gating_variables_tanh_diffeq) reduce to: 
+$$
+\frac{dw}{dt} = \frac{1}{\tau_w}G(u,w)
+$$
+:::
+
+::: {.fragment}
+Examples: Morris-Lecar model, FitzHugh-Nagumo model
+:::
+:::
+
+
+## Models: one dimensional reduction {.smaller}
+
+Define $\epsilon := \frac{\tau}{\tau_w}$. If $\tau \gt \gt \tau_w$:
+
+![](images/books/2014Gerstner-one_dimensional_reduction_firing_mechanism)<!-- {.absolute top=90 left=650 width=40%} -->
+
+. . .
+
+::: {.absolute top=80 left=430}
+Since:
+
+- One may **NOT** interested in spike shape;
+
+::: {.fragment}
+- The $w$ variable only varies **after** the voltage has reached its maximum.
+:::
+:::
+
+. . .
+
+$\rightarrow$ substitute the equation for $\frac{dw}{dt}$ with reset mechanism! $\rightarrow$ **NLIF** models:
+
+$$
+\frac{du}{dt} = \frac{1}{\tau}(F(u,w_{rest}) + RI(t)) =: \frac{1}{\tau}(f(u) + RI(t))
+$${#eq-NLIF} 
+$$
+u(t) \ge \theta \implies u(t+\delta) = u_r
+$${#eq-one_dimensional_reduction}
+
+
+
+::: {.notes}
+Excitability can now be discussed with the help of Fig. 4.21. A current pulse shifts the state of the system horizontally away from the stable fixed point. If the current pulse is small, the system returns immediately (i.e., on the fast time scale) to the stable fixed point. If the current pulse is large enough so as to put the system beyond the middle branch of the u-nullcline, then the trajectory is pushed toward the right branch of the u-nullcline. The trajectory follows the u-nullcline slowly upward until it jumps back (on the fast time scale) to the left branch of the u-nullcline. The ‘jump’ between the branches of the nullcline corresponds to a rapid voltage change. In terms of neuronal modeling, the jump from the right to the left branch corresponds to the downstroke of the action potential. The middle branch of the u-nullcline (where u˙>0) acts as a threshold for spike initiation;
+
+. . .
+- they're roughly all the smae -> they carry no information
+-
+. . .
+
+w_rest is the w at the intersection of the nullclines. Below is the firing mechanism. $\delta$ can be interpreted as the "dead time"
+:::
+
+## Models: Exponential NLIF {.smaller}
+
+How to choose $f(u)$?
+
+. . .
+
+![](images/books/2014Gerstner-AdEx_derivation){height=200}
+
+::: {.absolute top=150 left=550}
+$$
+\frac{f(u(t))}{\tau} = \left<\frac{I(t)}{C} - \frac{du}{dt}\right>
+$$
+:::
+
+. . .
+
+$\rightarrow$ best fitting function is: $f(u)= -(u-u_{rest}) + \Delta_T e^{\frac{u-\theta_{rh}}{\Delta_T}}$
+
+. . .
+
+<!-- Would get the same result by approximating the $F(u,w_{rest})$ of a 2-dimensional Hodgkin-Huxley model: -->
+
+![](images/books/2014Gerstner-AdEx_derivation_hh){height=200}
+
+::: {.absolute top=500 left=550}
+Same result from reduced 1d Hodgkin Huxley model.
+:::
+
+::: {.notes}
+By performing experiments:
+
+In order to determine the function f~(u), an experimentalist injects a time-dependent current I(t) into the soma of a neuron while measuring with a second electrode the voltage u(t). From the voltage time course, one finds the voltage derivative du/dt.
+
+A measurement at time t yields a value u(t) (which we use as value along the x-axis of a plot) and a value [(I(t)/C)−(du/dt)] (which we plot along the y axis). With a thousand or more time points per second, the plot fills up rapidly. For each voltage u there are many data points with different values along the y-axis. The best choice of the parameter C is the one that minimizes the width of this distribution. At the end, we average across all points at a given voltage u to find the empirical function (35)
+
+. . .
+
+We find that the empirical function extracted from experiments is well approximated by a combination of a linear and exponential term
+
+. . .
+
+In figure you see a plot of the $F(u, {w_rest})$ of a reduced to 2d HH model where we make the further assumption to make it 1d (separation of time scales). There a 2 fixed points, the leftmost is stable (u_rest), the one in the middle is unstable and denotes the effective threshold. The rightmost one ends the upswing of the spike. One could discard the rightmost and introduce a numerical threshold $\theta_{reset}$ together with a reset mechanism. This way, what's left of the $F(u, {w_rest})$ can be approximated with the $f(u)$ of the AdEx above.
+
+:::
+
+
+## Models: AdEx-NLIF {.smaller}
+
+A single @eq-NLIF cannot capture all firing patterns $\rightarrow$ add abstract **linear** current:
+
+$$
+\tau\frac{du}{dt} =f(u) -R\sum\limits_k w_k + RI(t) \; , \; \{\tau_k\frac{dw_k}{dt} = a_k(u-u_{rest}) -w_k +b_k\tau_k\sum\limits_{t^{(f)}}\delta(t-t^{(f)})\}
+$$
+$$
+u(t) \ge \theta \implies u(t+\delta) = u_r
+$$
+
+. . .
+
+![](images/books/2014Gerstner-firing_patterns){height=300 width=800}
+
+::: {.notes}
+The δ-function in the wk equations indicates that, during firing, the adaptation currents wk are increased by an amount bk.The parameters bk  are the ‘jump’ of the spike-triggered adaptation.
+
+. . .
+
+Spike-triggered adaptation is controlled by a combination of a and b. The choice of a and b largely determines the firing patterns of the neuron. In figure, you may see al firing patterns as a function of a and b. FOr every pattern, an hight and a low step current are reported.
+:::
+
+# [Theory]{.semi-transparent} {.smaller}
+
+1.  [Goal]{.semi-transparent}
+2.  [Models]{.semi-transparent}
+3.  Calibration:
+
+    3.1 Intro
+
+    3.2 Features
+
+    3.3 Feature selection
+    
+    3.4 MOO
+
+    3.5 BORG-MOEA
+
+    3.6 Pareto-optimal front
+
+## Calibration: Intro
+
+-   **Model calibration** find a parameter set $\vec{w}$ that makes the model *match* experimental trace;
+
+. . .
+
+-   The notion of "matching" will be made precise by the definition of **objective functions** (**loss**);
+
+. . .
+
+-   Calibration methods will need to take into account the **intrinsic stochasticity** of neurons.
+
+:::{.notes}
+- "Model calibration" refers to the task of finding a parameter set $\vec{w}$ that makes the model *match* experimental trace;
+- i.e. functions that measure the degree to which the model is capable of reproducing experimental traces along certain dimensions;
+- i.e. their tendency to produce different voltage traces when injected with the same input.
+:::
+
+## Calibration: Features #1 {.smaller}
+
+We consider two classes of objective functions:
+
+. . .
+
+1.  **Trace-to-trace (direct) comparisons**:
+
+    -   L2 loss;
+    -   Phase plane trajectory distance [^1];
+    -   ...
+
+[^1]: [LeMasson and Maex (2001)](https://www.taylorfrancis.com/chapters/edit/10.1201/9781420039290-8/introduction-equation-solving-parameter-fitting)
+
+. . .
+
+2.  **Feature-based distance functions** [^2]:
+
+    -   Firing frequency;
+    -   Spike height;
+    -   ...
+
+[^2]: [Druckmann et al. (2007)](https://doi.org/10.3389/neuro.01.1.1.001.2007)
+
+::: notes
+1.  These are losses that compare traces point-wise
+2.  These don't take point-wise differences
+:::
+
+## Calibration: Features #2 {.smaller}
+
+*Trace-to-trace (direct) comparisons* usually [^3] perform poorly, since:
+
+[^3]: [We haven't yet considered more sophisticated approach like Brookings et al. (2014)](https://doi.org/10.1152/jn.00007.2014)
+
+-   Sub- and supra-threshold dynamics are *unbalanced*;
+
+. . .
+
+-   Small *shifts* between simulated and measured spikes usually yield large *L2* errors.
+
+. . .
+
+
+-   *Intrinsic stochasticity* makes the selection of the experimental repetition $r \in R$ to match *arbitrary*;
+
+::: notes
+-   
+
+-   in the $V$ and in the $(V, \frac{dV}{dt})$ spaces;
+
+-   
+:::
+
+## Calibration: Features #3 {.smaller}
+
+*Feature-based distance functions* avoid these issues, because:
+
+
+. . .
+
+-   They are not point-wise, thus insensitive to *regime imbalances*;
+
+. . .
+
+-   They directly make the model reproduce *qualitative* features of the target neuron;
+
+. . .
+
+-   They take into account *Intrinsic stochasticity*:
+
+. . .
+
+By defining the loss relative to feature $f$ w.r.t. repetition set $R$ :  $$L_f(\vec{w}, R) = \frac{|\bar{f}_R - f(s(\vec{w}))|}{\sigma^f_R}$$
+
+<!-- $L_f(\vec{w}, R)$   *Intrinsic stochasticity* within repetition set $R$ w.r.t. feature $f$ can be dealt with by defining the loss: -->
+
+. . .
+
+- We say that we have a good fit when every objective is under 2 SD ^[[Druckmann et al. (2007)](https://doi.org/10.3389/neuro.01.1.1.001.2007)].
+
+::: notes
+-   
+
+-   
+
+Where:
+
+-   $R$ is a set of voltage traces produced by the same neuron injected with the same current
+-   $\vec{w}$ is a set of model parameters
+-   $s(\vec{w})$ is a voltage trace simulated by the model with parameters $\vec{w}$
+-   $\bar{f}_R$ is the average value of feature $f$ over $R$
+-   $\sigma^f_R$ is the standard deviation of $f$ over $R$
+-   $f(s(\vec{w}))$ is the value of feature $f$ over $s(\vec{w})$
+:::
+
+
+## Calibration: Feature selection {.smaller .scrollable}
+
+Experiments ^[[Druckmann et al. (2011)](https://doi.org/10.1371/journal.pcbi.1002133)] suggest the following associations:
+
+. . .
+
+- Square inputs:
+
+  - Firing frequency;
+  - Latency;
+  - Accomodation index;
+  - Width of AP at half height (only for HH models);
+  - Average height of AP;
+  - Slow throughs;
+
+. . .
+
+- Ramp inputs:
+
+  - Average height of AP;
+  - Slow throughs;
+  - Slope of the fit of the spike peaks;
+
+. . .
+
+- Colored noisy inputs:
+
+  - Coincidence factor;
+  - Control-adjusted RMS ^[[Brookings et al. (2014)](https://doi.org/10.1152/jn.00007.2014)].
+
+
+
+## Calibration: MOO #1
+
+> How to combine the different features?
+
+. . .
+
+**Weighted sum**? No:
+
+-   Choice of weights is not obvious;
+
+. . .
+
+-   No guarantee on the nature and quality of the compromise;
+
+. . .
+
+$\rightarrow$ **Multi-Objective Optimization** !
+
+
+## Calibration: MOO #2 {.smaller}
+
+**Def.** Given the objectives $\{L_{f_1}, L_{f_2}, ..., L_{f_n}\}$, a set of repetitions $R$ and two parameter sets $\vec{w_1}$ and $\vec{w_2}$ we say that $\vec{w_1}$ **dominates** $\vec{w_2}$ $\iff$:
+
+1.  $L_{f_i}(\vec{w_1},R) \geq L_{f_i}(\vec{w_2},R) \qquad \forall i= 1,...,n$
+2.  $\exists \bar{i} \in \{1,..,n\} | L_{f_\bar{i}}(\vec{w_1},R) \gt L_{f_\bar{i}}(\vec{w_2},R)$
+
+. . .
+
+MOO purpose: find the set of all $\vec{w}$ that do not dominate each other.
+
+. . .
+
+Such set is the **Pareto-optimal front** (**POF**).
+
+
+## Calibration: BORG-MOEA
+
+- Calibration algorithm: [BORG-MOEA](http://borgmoea.org/);
+
+. . .
+
+- It is an evolutionary algorithm with self-tuning capabilities;
+
+. . .
+
+- Pitting it against other algorithms determined its advantage.
+
+## Calibration: Pareto-optimal front #1 {.smaller}
+
+- The purpose of a *MOEA* is to approximate the *POF* by finding some of its elements;
+
+. . .
+
+- Projection of the *POF* set may assume two configurations:
+
+![Projections of the Pareto optimal front along two sets of features ^[[Druckmann et al. (2007)](https://doi.org/10.3389/neuro.01.1.1.001.2007)]](images/articles/2007Druckmann_POF.png){height=200 width=800}
+
+. . .
+
+- First configuration $\rightarrow$ the two objectives do not conflict each other;
+
+. . .
+
+- Second configuration $\rightarrow$ the two objectives do conflict each other;
+
+
+## Calibration: Pareto-optimal front #2
+
+- Calibration algorithms work better the less objectives they have;
+
+. . .
+
+- $\rightarrow$ one may think to sum together features repeated across stimuli;
+
+. . .
+
+- Only possible if the two features are **NOT** in a tradeoff ^[[Druckmann (2013)](https://doi.org/10.1007/s00422-008-0269-2)]
+
+
+:::{.notes}
+-
+-
+- In fact if they are not in a tradeoff the calibration algorithm, can minimize the sum of the two. Instead if they are in a tradeoff, if we sum them the algorithm will find a compromise whose nature and quality we're not guaranteed of 8we'd be bak to the problem in the MOO #1 slide.
+:::
+
+
+
+## Calibration: Pareto-optimal front #3
+
+- Configuration of the projections of the POF are not known a priori $\rightarrow$ features must be kept separate;
+
+. . .
+
+- To anyway reduce the number of features, one may resort to objectives combinations ^[[Hay et al. (2011)](https://doi.org/10.1371/journal.pcbi.1002107)];
+
+. . .
+
+- They consists in substituting two features with the maximum or other combinations of the two. 
+
+
+
+::: notes
+REFERENCES
+
+-   [Druckmann (2013)](https://doi.org/10.1007/978-1-4614-8094-5_28)
+-   [Gerstner et al. (2014)](https://doi.org/10.1017/cbo9781107447615)
+-   [Harkin et al. (2021)](https://doi.org/10.1007/978-3-030-89439-9_3) , control-adjusted RMS [^4]
+:::

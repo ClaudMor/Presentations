@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="index_theory_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_theory_files/libs/quarto-html/tabby.min.js"></script>
+<script src="index_theory_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_theory_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="index_theory_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_theory_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="index_theory_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="index_theory_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.3.313">
+
+  <meta name="dcterms.date" content="2023-06-23">
+  <title>NeuronalModelling.jl</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="index_theory_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="index_theory_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="index_theory_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link rel="stylesheet" href="styles.css">
+  <link href="index_theory_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="index_theory_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="index_theory_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="index_theory_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="index_theory_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="index_theory_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">NeuronalModelling.jl</h1>
+  <p class="subtitle">Quantitative Single-Neuron Modelling in Julia</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+<a href="https://github.com/ClaudMor">Claudio Moroni</a> <a href="https://orcid.org/0000-0003-1274-6937" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+</div>
+        <p class="quarto-title-affiliation">
+            University of Turin
+          </p>
+    </div>
+</div>
+
+  <p class="date">2023-06-23</p>
+</section>
+<section>
+<section id="introduction" class="title-slide slide level1 center">
+<h1><span class="emoji" data-emoji="clapper">🎬</span> Introduction</h1>
+<aside class="notes">
+<p>…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="section" class="slide level2 smaller">
+<h2></h2>
+<h3 id="outline">Outline</h3>
+<p><span class="emoji" data-emoji="one">1️⃣</span> <a href="#/Objectives">Objectives</a></p>
+<p><span class="emoji" data-emoji="two">2️⃣</span> <a href="#/Motivations">Motivations</a></p>
+<p><span class="emoji" data-emoji="three">3️⃣</span> <a href="#/Methods">Methods</a></p>
+<p><span class="emoji" data-emoji="four">4️⃣</span> <a href="#/Tools">Tools</a></p>
+<p><span class="emoji" data-emoji="five">5️⃣</span> <a href="#/Results">Results</a></p>
+<h3 id="resources">Resources</h3>
+<p><img data-src="images/logo/JuliaDots.svg" class="absolute" style="left: 0px; bottom: 252px; width: 3.2%; "> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Package: <a href="https://github.com/InPhyT/ModellingFramework.jl">ModellingFramework.jl</a></p>
+<p><img data-src="images/logo/JuliaDots.svg" class="absolute" style="left: 0px; bottom: 205px; width: 3.2%; "> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Package: <a href="https://github.com/InPhyT/NeuronalModelling.jl">NeuronalModelling.jl</a></p>
+<p><img data-src="images/logo/GitHub.svg" class="absolute" style="left: 0px; bottom: 155px; width: 3.2%; "> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Data: <a href="https://github.com/InPhyT/Quantitative_Single_Neuron_Modeling_Competition_2007">Competition (2007)</a></p>
+<p><img data-src="images/logo/GitHub.svg" class="absolute" style="left: 0px; bottom: 107px; width: 3.2%; "> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Data: <a href="https://github.com/InPhyT/Quantitative_Single_Neuron_Modeling_Competition_2009">Competition (2009)</a></p>
+<p><img data-src="images/logo/GitHub.svg" class="absolute" style="left: 0px; bottom: 59px; width: 3.2%; "> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Data: <a href="https://github.com/AllenInstitute/AllenSDK">Allen Brain Atlas (2023)</a></p>
+<p><img data-src="images/logo/NeuronalModelling.svg" class="absolute" style="bottom: 120px; right: 0px; width: 45%; "></p>
+<aside class="notes">
+<p>…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!-- https://github.com/quarto-dev/quarto-cli/discussions/4572 -->
+<style>
+.semi-transparent {
+  opacity: 0.3;
+}
+</style>
+</section></section>
+<section>
+<section id="objectives" class="title-slide slide level1 center">
+<h1><span class="emoji" data-emoji="exclamation">❗</span> Objectives</h1>
+
+</section>
+<section id="objectives-1" class="slide level2 smaller">
+<h2>Objectives</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<h3 id="theory">Theory</h3>
+<p>Flexible and high-performance computational framework for the specification, calibration and simulation of single-neuron models.</p>
+<h3 id="application">Application</h3>
+<p>Electrophysiological time series inference and prediction for individual neurons.</p>
+</div><div class="column" style="width:60%;">
+<p><img data-src="images/articles/2009Gerstner.png" class="absolute" style="bottom: 90px; right: -180px; width: 80%; "></p>
+</div>
+</div>
+
+<aside class="notes">
+<p>GENERAL / THEORY / METHODOLOGY</p>
+<p>Construction / Development / Implementation of an automatic, high-performance, quantitative single-neuron modelling framework providing a robust specification-calibration-simulation workflow.</p>
+<p>SPECIFIC / APPLICATION / DATA</p>
+<p>Single-neuron electrophysiological time series inference and prediction.</p>
+<p>REFERENCES <a href="https://doi.org/10.1126/science.1181936">Gerstner and Naud (2009)</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Figure from <a href="https://doi.org/10.1126/science.1181936">Gerstner and Naud (2009)</a>.</p>
+</div></aside></section></section>
+<section>
+<section id="motivations" class="title-slide slide level1 center">
+<h1><span class="emoji" data-emoji="question">❓</span> Motivations</h1>
+
+</section>
+<section id="why-single-neuron-modelling" class="slide level2 smaller">
+<h2>Why Single-Neuron Modelling?</h2>
+<p><img data-src="images/articles/2012Naud.png" class="absolute" style="top: 78px; left: 0px; width: 48%; "> <img data-src="images/articles/2013Druckmann.png" class="absolute" style="left: 0px; bottom: 80px; width: 48%; "> <img data-src="images/articles/2011Rossant.png" class="absolute" style="top: 78px; right: 0px; width: 40%; "> <img data-src="images/articles/2011Naud.png" class="absolute" style="bottom: 0px; right: 0px; width: 45%; "></p>
+
+<aside class="notes">
+<p>WHY NEURONAL MODELLING? / WHY THIS PROJECT? / WHY A SINGLE-NEURON MODELLING FRAMEWORK?</p>
+<p>FOUNDATIONS OF NEUROSCIENCE</p>
+<ul>
+<li>Unraveling and characterising the dynamics of the single neuron, the basic biophysical unit of neural information processing, is one of the most fundamental problems in theoretical, computational and systems neuroscience.</li>
+<li>Single-neuron models often have a large number of free parameters that must be constrained / optimised / estimated. Despite the seemingly straightforward nature of this problem, the main challenge is properly defining and quantifying the match between a given model and a target data set (the similarity / error / distance / loss / cost function).</li>
+<li>Over the last 20 years many researchers have shown that it is not only the temporally averaged firing rate that carries information about the stimulus, but also the exact timing of spikes. Therefore, if spike timing is important, a whole series of questions arises: What is the precision of spike timing if the same stimulus is repeated several times? Do spikes always appear at the same time? What would be a sensible measure of spike timing precision and reliability? Can a neuron model match the spike timing precision of a real neuron? Does it matter which neuron or what stimulus we take? If so, what would be a useful stimulus? More generally: is it possible to predict the spike times of a neuron with millisecond precision?</li>
+</ul>
+<p>INTERNATIONAL COMPETITIONS [DESCRIBE WITH MUCH MORE DETAILS AND ADD TO SLIDES!]</p>
+<ul>
+<li>The above challenge has been turned into a single-neuron modeling competition that was first run by Brain Mind Institute at the Ecole Polytechnique Fe ́de ́rale de Lausanne (EPFL) in Switzerland and was officially handed over to the International Neuroinformatic Coordinating Facility (INCF) in Sweden in 2009.</li>
+<li>The idea behind the competition was that a good model can predict neuronal activity based on data that were not adopted in the parameter training / fitting phase.</li>
+<li>The first spike timing competition in 2007 used an Ornstein-Uhlenbeck current injection with various means and variance to mimic the combined effect of a large number of synapses. In 2008, the competition was modified to replace the dynamic current by dynamic inhibitory and excitatory conductances using dynamic clamp. Then in 2009 the injected current was changed to a current produced by the simulation of six populations of presynaptic neurons changing their firing rate every 200-500 ms.</li>
+<li>Conclusions: High prediction performance is possible in many neuronal systems and <strong>depends strongly on the choice of model structure and calibration method</strong>. One important model feature for high prediction performance is the presence of spike-frequency adaptation. The choice of the model formalism can also influence the fitting method that can be used. High quality prediction is most of the time associated with an efficient and convex fitting method.</li>
+<li>“The data of the challenge will remain available in the future for bench-marking purposes, leaving the possibility for such a deed to be accomplished”.</li>
+<li>Among the lessons to be learned from the INCF competition is that every neu- ron is different and one should not think of “the” model of a pyramidal cell or interneuron. Rather, parameters need to be tuned on a neuron-by-neuron basis. Another lesson is that the quality of a neuron model has to be measured on new data that are not accessible during the phase of parameter tuning.</li>
+</ul>
+<p>METHODOLOGICAL DEVELOPMENTS</p>
+<p>Many recently (and not so recently) developed calibration / optimisation methods (Bayesian, evolutionary, mono- and multi-objective, etc.) are dramatically under-explored in the theoretical and computational neuroscience literature.</p>
+<p>LIMITED PROGRESS IN 10+ YEARS</p>
+<p>New optimisation / calibration algorithms have been developed (<a href="https://doi.org/10.3389/fninf.2022.771730">AbdelAty et al.&nbsp;(2022)</a>) which improved fitting when compared with the old ones between 5 and 8% (coincidence factor).</p>
+<p>REFERENCES</p>
+<ul>
+<li><a href="https://doi.org/10.1016/j.jneumeth.2007.11.006">Jolivet et al.&nbsp;(2008)</a></li>
+<li><a href="https://doi.org/10.1007/s00422-008-0261-x">Jolivet et al.&nbsp;(2008)</a></li>
+<li><a href="https://doi.org/10.1126/science.1181936">Gerstner and Naud (2009)</a></li>
+<li><a href="https://doi.org/10.3389/fnins.2011.00009">Rossant et al.&nbsp;(2011)</a></li>
+<li><a href="https://doi.org/10.1162/neco_a_00208">Naud et al.&nbsp;(2011)</a></li>
+<li><a href="https://infoscience.epfl.ch/record/168813?ln=en">Naud et al.&nbsp;(2012)</a></li>
+<li><a href="https://doi.org/10.1007/978-1-4614-8094-5_28">Druckmann (2013)</a></li>
+<li><a href="https://doi.org/10.1017/cbo9781107447615">Gerstner et al.&nbsp;(2014)</a></li>
+<li><a href="https://doi.org/10.1109/ijcnn48605.2020.9206692">Mohacsi et al.&nbsp;(2020)</a></li>
+<li><a href="https://doi.org/10.3389/fninf.2022.771730">AbdelAty et al.&nbsp;(2022)</a></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><br> <br> <br> <br> Figures from <a href="https://doi.org/10.1162/neco_a_00208">Naud et al.&nbsp;(2011)</a>, <a href="https://doi.org/10.3389/fnins.2011.00009">Rossant et al.&nbsp;(2011)</a>, <br> <a href="https://infoscience.epfl.ch/record/168813?ln=en">Naud et al.&nbsp;(2012)</a> and <a href="https://doi.org/10.1007/978-1-4614-8094-5_28">Druckmann (2013)</a>.</p>
+</div></aside></section>
+<section id="why-julia-language" class="slide level2 smaller">
+<h2>Why Julia Language?</h2>
+<p><img data-src="images/articles/2023Roesch-1.webp" class="absolute" style="left: 0px; bottom: 80px; width: 50%; "> <img data-src="images/articles/2023Roesch-2.webp" class="absolute" style="bottom: 120px; right: -200px; width: 65%; "></p>
+
+<aside class="notes">
+<p>WHY JULIA?</p>
+<ul>
+<li>Julia solves the two-language problem: users do not have to choose between ease of use and high performance.</li>
+<li>Julia is user friendly. It is easy to code.</li>
+<li>Julia is a high performance language. It is fast.</li>
+<li>Julia offers a high level of abstraction. It is flexible.</li>
+<li>Julia can be used for metaprogramming. It can code automatically.</li>
+<li>Julia is not only good in one area but in many. It enables “one language” projects.</li>
+<li>Easy to learn due to intuitive semantics and easy to read syntax.</li>
+<li>Accessible via various interfaces, REPL, IDE, or Jupyter notebook.</li>
+<li>Existing non-Julia code can be easily integrated into new Julia projects via language specific packages (interoperability).</li>
+<li>Julia is free, open-source and hosted on GitHub.</li>
+<li>Julia offers (generally) excellent documentation, tutorials, and help available directly from active and welcoming community members via various communication channels such as Slack, Discourse, Twitter or Zulip.</li>
+<li>Julia’s package ecosystem provides functionality for a wide range of oft-performed tasks in computational biology research.</li>
+<li>Julia code is smoothly extendable which enables and encourages easy contributions and collaborations to/with existing projects, as well as writing, integrating and sharing new, user specific packages.</li>
+</ul>
+<p>REFERENCES</p>
+<p><a href="https://doi.org/10.1038/s41592-023-01832-z">Roesch et al.&nbsp;(2023)</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Figures from <a href="https://doi.org/10.1038/s41592-023-01832-z">Roesch et al.&nbsp;(2023)</a>.</p>
+</div></aside></section>
+<section class="slide level2">
+
+<p><em>Julia writes like Python but executes as fast as C…</em></p>
+<div class="fragment">
+<p><em>…assuming you know how to use it.</em></p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="performance-functions-versus-methods">Performance: Functions versus Methods</h3>
+<p>In programming, usually each function has several methods, one per combination of its arguments’ types:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">methods</span>(<span class="op">+</span>)[<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>] <span class="co"># 206 total methods at the time of writing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource nothing number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>[1] +(x::T, y::T) where T&lt;:Union{Int128, Int16, Int32, Int64, Int8, UInt128, UInt16, UInt32, UInt64, UInt8} in Base at int.jl:87</span>
+<span id="cb2-2"><a href="#cb2-2"></a>[2] +(x::T, y::T) where T&lt;:Union{Float16, Float32, Float64} in Base at float.jl:383</span>
+<span id="cb2-3"><a href="#cb2-3"></a>[3] +(c::Union{UInt16, UInt32, UInt8}, x::BigInt) in Base.GMP at gmp.jl:531     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<h3 id="performance-method-selection">Performance: Method selection</h3>
+<p>Whenever a function is called with certain arguments, the right method has to be selected. The method selection has two parts:</p>
+<ol type="1">
+<li>(Arguments’) Type Inference;</li>
+<li>Method lookup.</li>
+</ol>
+</section>
+<section class="slide level2">
+
+<h3 id="performance-type-inference-at-compile-time">Performance: Type inference at compile time</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1"></a>julia<span class="op">&gt;</span> <span class="pp">@code_warntype</span>(MultilayerGraphs.<span class="fu">add_node!</span>(multilayerdigraph, <span class="fu">Node</span>(<span class="st">"new_node"</span>); add_vertex_to_layers <span class="op">=</span> <span class="dt">Symbol</span>[]))</span>
+<span id="cb3-2"><a href="#cb3-2"></a>MethodInstance <span class="cf">for</span> (<span class="op">::</span><span class="dt">MultilayerGraphs.var"#add_node!##kw"</span>)(<span class="op">::</span><span class="dt">NamedTuple{(:add_vertex_to_layers,), Tuple{Vector{Symbol}}}</span>, <span class="op">::</span><span class="dt">typeof</span>(MultilayerGraphs.add_node!), <span class="op">::</span><span class="dt">MultilayerDiGraph{Int64, Float64}</span>, <span class="op">::</span><span class="dt">Node</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  from (<span class="op">::</span><span class="dt">MultilayerGraphs.var"#add_node!##kw"</span>)(<span class="op">::</span><span class="dt">Any</span>, <span class="op">::</span><span class="dt">typeof</span>(MultilayerGraphs.add_node!), mg<span class="op">::</span><span class="dt">MultilayerDiGraph</span>, n<span class="op">::</span><span class="dt">Node</span>) <span class="kw">in</span> MultilayerGraphs at <span class="cn">e</span><span class="op">:\</span>other_drives<span class="op">\</span>developer07<span class="op">\</span>package_development<span class="op">\</span>MultilayerGraphs<span class="op">\</span>dev<span class="op">\</span>MultilayerGraphs<span class="op">\</span>src<span class="op">\</span>multilayerdigraph.jl<span class="op">:</span><span class="fl">221</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>Arguments</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  _<span class="op">::</span><span class="dt">Core.Const</span>(MultilayerGraphs.var<span class="st">"#add_node!##kw"</span>())</span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="pp">@_2</span><span class="op">::</span><span class="dt">NamedTuple{(:add_vertex_to_layers,), Tuple{Vector{Symbol}}}</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  <span class="pp">@_3</span><span class="op">::</span><span class="dt">Core.Const</span>(MultilayerGraphs.add_node!)</span>
+<span id="cb3-8"><a href="#cb3-8"></a>  mg<span class="op">::</span><span class="dt">MultilayerDiGraph{Int64, Float64}</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>  n<span class="op">::</span><span class="dt">Node</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>Locals</span>
+<span id="cb3-11"><a href="#cb3-11"></a>  add_vertex_to_layers<span class="op">::</span><span class="dt">Vector{Symbol}</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>  <span class="pp">@_7</span><span class="op">::</span><span class="dt">Vector{Symbol}</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>Body<span class="op">::</span><span class="dt">Bool</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="fl">1</span> ─ <span class="op">%</span><span class="fl">1</span>  <span class="op">=</span> <span class="bu">Base</span>.<span class="fu">haskey</span>(<span class="pp">@_2</span>, <span class="op">:</span>add_vertex_to_layers)<span class="op">::</span><span class="dt">Core.Const</span>(<span class="cn">true</span>)</span>
+<span id="cb3-15"><a href="#cb3-15"></a>│         <span class="bu">Core</span>.<span class="fu">typeassert</span>(<span class="op">%</span><span class="fl">1</span>, <span class="bu">Core</span>.<span class="dt">Bool</span>)</span>
+<span id="cb3-16"><a href="#cb3-16"></a>│   <span class="op">%</span><span class="fl">3</span>  <span class="op">=</span> <span class="bu">Base</span>.<span class="fu">getindex</span>(<span class="pp">@_2</span>, <span class="op">:</span>add_vertex_to_layers)<span class="op">::</span><span class="dt">Vector{Symbol}</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a>│   <span class="op">%</span><span class="fl">4</span>  <span class="op">=</span> <span class="bu">Core</span>.<span class="fu">apply_type</span>(MultilayerGraphs.<span class="dt">Vector</span>, MultilayerGraphs.<span class="dt">Symbol</span>)<span class="op">::</span><span class="dt">Core.Const</span>(<span class="dt">Vector</span>{<span class="dt">Symbol</span>})</span>
+<span id="cb3-18"><a href="#cb3-18"></a>│   <span class="op">%</span><span class="fl">5</span>  <span class="op">=</span> <span class="bu">Core</span>.<span class="fu">apply_type</span>(MultilayerGraphs.<span class="dt">Union</span>, <span class="op">%</span><span class="fl">4</span>, MultilayerGraphs.<span class="dt">Symbol</span>)<span class="op">::</span><span class="dt">Core.Const</span>(<span class="dt">Union</span>{<span class="dt">Symbol</span>, <span class="dt">Vector</span>{<span class="dt">Symbol</span>}})</span>
+<span id="cb3-19"><a href="#cb3-19"></a>│   <span class="op">%</span><span class="fl">6</span>  <span class="op">=</span> (<span class="op">%</span><span class="fl">3</span> isa <span class="op">%</span><span class="fl">5</span>)<span class="op">::</span><span class="dt">Core.Const</span>(<span class="cn">true</span>)</span>
+<span id="cb3-20"><a href="#cb3-20"></a>│         <span class="bu">Core</span>.<span class="fu">typeassert</span>(<span class="op">%</span><span class="fl">6</span>, <span class="bu">Core</span>.<span class="dt">Bool</span>)</span>
+<span id="cb3-21"><a href="#cb3-21"></a>└──       goto <span class="co">#3</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="fl">2</span> ─       <span class="bu">Core</span>.<span class="fu">Const</span>(<span class="op">:</span>(<span class="bu">Core</span>.<span class="fu">apply_type</span>(MultilayerGraphs.<span class="dt">Vector</span>, MultilayerGraphs.<span class="dt">Symbol</span>)))</span>
+<span id="cb3-23"><a href="#cb3-23"></a>│         <span class="bu">Core</span>.<span class="fu">Const</span>(<span class="op">:</span>(<span class="bu">Core</span>.<span class="fu">apply_type</span>(MultilayerGraphs.<span class="dt">Union</span>, <span class="op">%</span><span class="fl">9</span>, MultilayerGraphs.<span class="dt">Symbol</span>)))</span>
+<span id="cb3-24"><a href="#cb3-24"></a>│         <span class="bu">Core</span>.<span class="fu">Const</span>(<span class="op">:</span>(<span class="op">%</span><span class="fu">new</span>(<span class="bu">Core</span>.<span class="dt">TypeError</span>, <span class="fu">Symbol</span>(<span class="st">"keyword argument"</span>), <span class="op">:</span>add_vertex_to_layers, <span class="op">%</span><span class="fl">10</span>, <span class="op">%</span><span class="fl">3</span>)))</span>
+<span id="cb3-25"><a href="#cb3-25"></a>└──       <span class="bu">Core</span>.<span class="fu">Const</span>(<span class="op">:</span>(<span class="bu">Core</span>.<span class="fu">throw</span>(<span class="op">%</span><span class="fl">11</span>)))</span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="fl">3</span> ┄       (<span class="pp">@_7</span> <span class="op">=</span> <span class="op">%</span><span class="fl">3</span>)</span>
+<span id="cb3-27"><a href="#cb3-27"></a>└──       goto <span class="co">#5</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="fl">4</span> ─       <span class="bu">Core</span>.<span class="fu">Const</span>(<span class="op">:</span>(<span class="pp">@_7</span> <span class="op">=</span> <span class="bu">Base</span>.<span class="fu">getindex</span>(MultilayerGraphs.<span class="dt">Symbol</span>)))</span>
+<span id="cb3-29"><a href="#cb3-29"></a><span class="fl">5</span> ┄ <span class="op">%</span><span class="fl">16</span> <span class="op">=</span> <span class="pp">@_7</span><span class="op">::</span><span class="dt">Vector{Symbol}</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a>│         (add_vertex_to_layers <span class="op">=</span> <span class="op">%</span><span class="fl">16</span>)</span>
+<span id="cb3-31"><a href="#cb3-31"></a>│   <span class="op">%</span><span class="fl">18</span> <span class="op">=</span> (<span class="op">:</span>add_vertex_to_layers,)<span class="op">::</span><span class="dt">Core.Const</span>((<span class="op">:</span>add_vertex_to_layers,))</span>
+<span id="cb3-32"><a href="#cb3-32"></a>│   <span class="op">%</span><span class="fl">19</span> <span class="op">=</span> <span class="bu">Core</span>.<span class="fu">apply_type</span>(<span class="bu">Core</span>.<span class="dt">NamedTuple</span>, <span class="op">%</span><span class="fl">18</span>)<span class="op">::</span><span class="dt">Core.Const</span>(<span class="dt">NamedTuple</span>{(<span class="op">:</span>add_vertex_to_layers,)})</span>
+<span id="cb3-33"><a href="#cb3-33"></a>│   <span class="op">%</span><span class="fl">20</span> <span class="op">=</span> <span class="bu">Base</span>.<span class="fu">structdiff</span>(<span class="pp">@_2</span>, <span class="op">%</span><span class="fl">19</span>)<span class="op">::</span><span class="dt">Core.Const</span>(<span class="fu">NamedTuple</span>())</span>
+<span id="cb3-34"><a href="#cb3-34"></a>│   <span class="op">%</span><span class="fl">21</span> <span class="op">=</span> <span class="bu">Base</span>.<span class="fu">pairs</span>(<span class="op">%</span><span class="fl">20</span>)<span class="op">::</span><span class="dt">Core.Const</span>(<span class="bu">Base</span>.<span class="fu">Pairs</span><span class="dt">{Symbol, Union{}, Tuple{}, NamedTuple{(), Tuple{}}}</span>())</span>
+<span id="cb3-35"><a href="#cb3-35"></a>│   <span class="op">%</span><span class="fl">22</span> <span class="op">=</span> <span class="bu">Base</span>.<span class="fu">isempty</span>(<span class="op">%</span><span class="fl">21</span>)<span class="op">::</span><span class="dt">Core.Const</span>(<span class="cn">true</span>)</span>
+<span id="cb3-36"><a href="#cb3-36"></a>│         <span class="bu">Core</span>.<span class="fu">typeassert</span>(<span class="op">%</span><span class="fl">22</span>, <span class="bu">Core</span>.<span class="dt">Bool</span>)</span>
+<span id="cb3-37"><a href="#cb3-37"></a>└──       goto <span class="co">#7</span></span>
+<span id="cb3-38"><a href="#cb3-38"></a><span class="fl">6</span> ─       <span class="bu">Core</span>.<span class="fu">Const</span>(<span class="op">:</span>(<span class="bu">Base</span>.<span class="fu">kwerr</span>(<span class="pp">@_2</span>, <span class="pp">@_3</span>, mg, n)))</span>
+<span id="cb3-39"><a href="#cb3-39"></a><span class="fl">7</span> ┄ <span class="op">%</span><span class="fl">26</span> <span class="op">=</span> MultilayerGraphs.<span class="op">:</span>(var<span class="st">"#add_node!#592"</span>)(add_vertex_to_layers, <span class="pp">@_3</span>, mg, n)<span class="op">::</span><span class="dt">Bool</span></span>
+<span id="cb3-40"><a href="#cb3-40"></a>└──       <span class="cf">return</span> <span class="op">%</span><span class="fl">26</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<h3 id="performance-summary-on-performance">Performance: Summary on Performance</h3>
+<p><em>If successful, type inference at compile time will also trigger method lookup at compile time, which has the potential to speed up code by orders of magnitude.</em></p>
+</section></section>
+<section>
+<section id="practice-implementation" class="title-slide slide level1 center">
+<h1><span class="semi-transparent">Practice / Implementation</span></h1>
+<p><span class="semi-transparent">In this section, we are going to see:</span></p>
+<ol type="1">
+<li><p>Why Julia?</p>
+<p><span class="semi-transparent">1. Performance;</span></p>
+<ol start="2" type="1">
+<li>Metaprogramming;</li>
+</ol>
+<p><span class="semi-transparent">3. Easy-to-work-with environment.</span></p></li>
+</ol>
+<p><span class="semi-transparent">2. Overview of Graphs.jl;</span></p>
+<p><span class="semi-transparent">3. MultilayerGraphs.jl’s main design features;</span></p>
+<p><span class="semi-transparent">4. MultilayerGraphs.jl’s future developments;</span></p>
+<p><span class="semi-transparent">5. Brief showcase/tutorial.</span></p>
+</section>
+<section id="why-julia-metaprogramming" class="slide level2">
+<h2>Why Julia?: Metaprogramming</h2>
+<p>It refers to the set of features that allows a program to generate and execute parts of its code at run time. An example from the Julia Manual:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource julia number-lines code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1"></a><span class="cf">for</span> op <span class="op">=</span> (<span class="op">:</span>sin, <span class="op">:</span>cos, <span class="op">:</span>tan, <span class="op">:</span>log, <span class="op">:</span>exp)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="fu">eval</span>(<span class="kw">quote</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>        <span class="bu">Base</span><span class="op">.$</span><span class="fu">op</span>(a<span class="op">::</span><span class="dt">MyNumber</span>) <span class="op">=</span> <span class="fu">MyNumber</span>(<span class="op">$</span><span class="fu">op</span>(a.x))</span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="cf">end</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Notable applications are Domain Specific Languages (DSLs) such as Turing.jl.</p>
+</section></section>
+<section id="methods" class="title-slide slide level1 center">
+<h1><span class="emoji" data-emoji="bookmark_tabs">📑</span> Methods</h1>
+<ol type="1">
+<li>Models</li>
+<li>Calibration</li>
+</ol>
+<aside class="notes">
+<p>Computational neuroscientists use mathematical models built on observational data to investigate what’s happening in the brain. Models can simulate brain activity from the behavior of a single neuron right through to the patterns of collective activity in whole neural networks. Collecting the experimental data is the first step, then the challenge becomes deciding which computer models best represent the data and can explain the underlying causes of how the brain behaves.</p>
+<p>Researchers usually find the right model for their data through trial and error. This involves tweaking a model’s parameters until the model can reproduce the data of interest. But this process is laborious and not systematic. Moreover, with the ever-increasing complexity of both data and computer models in neuroscience, the old-school approach of building models is starting to show its limitations.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section>
+<section id="methods-1" class="title-slide slide level1 smaller center">
+<h1><span class="semi-transparent">Methods</span></h1>
+<ol type="1">
+<li><p>Models:</p>
+<p>2.1 Leaky Integrate and Fire</p>
+<p>2.2 Hodgkin-Huxley</p>
+<p>2.3 Two Dimensional Reduction</p>
+<p>2.4 One Dimensional Reduction</p>
+<p>2.5 Exponential NLIF</p>
+<p>2.6 AdEx-NLIF</p></li>
+<li><p><span class="semi-transparent">Calibration</span></p></li>
+</ol>
+</section>
+<section id="models-leaky-integrate-and-fire" class="slide level2 smaller">
+<h2>Models: Leaky integrate and fire</h2>
+<ul>
+<li>Subthreshold dynamics: <span id="eq-lif"><span class="math display">\[
+\tau \frac{du}{dt} = -(u(t) - u_{rest}) + RI(T)
+\qquad(1)\]</span></span></li>
+</ul>
+<p><img data-src="images/books/2014Gerstner-LIF_circuit.png" class="absolute" style="top: 90px; left: 850px; width: 25%; "></p>
+<ul>
+<li>With firing mechanism:</li>
+</ul>
+<p><span id="eq-lif_reset"><span class="math display">\[
+u(t) \ge \theta \implies u(t+\delta) = u_r
+\qquad(2)\]</span></span></p>
+<div class="fragment">
+<ul>
+<li>Cannot describe Bursting, Adaptation, Delayed Response, Inhibitory Rebound etc.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Cannot describe spike features such as spike height, width at half height, etc…</li>
+</ul>
+<aside class="notes">
+<p>Comes from considering the neuron as the circuit in fig A.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="models-hodgkin-huxley" class="slide level2 smaller">
+<h2>Models: Hodgkin-Huxley</h2>
+<p><span id="eq-hh_u"><span class="math display">\[
+C\frac{du}{dt} = -\sum\limits_k I_k(t) + I(t)
+\qquad(3)\]</span></span></p>
+<div class="fragment">
+<p>Where, in the simplest case <sup>1</sup>:</p>
+<p><span id="eq-hh_currents"><span class="math display">\[
+\sum\limits_k I_k(t) = g_{Na}m^3h(u - E_{Na}) + g_Kn^4(u-E_K) + g_L(u-E_L)
+\qquad(4)\]</span></span></p>
+</div>
+<div class="fragment">
+<p>Where, setting <span class="math inline">\(x \in \{m,n,h\}\)</span>:</p>
+<p><span id="eq-gating_variable_exp_diffeq"><span class="math display">\[
+\dot{x} = \alpha_x(u)(1-x) - \beta_x(u)x
+\qquad(5)\]</span></span></p>
+</div>
+<div class="fragment">
+<p>Where, for instance:</p>
+<p><span id="eq-boltzmann_terms_exp"><span class="math display">\[
+\alpha_m(u) = \frac{0.182(u+35)}{1-e^\frac{u+35}{9}} \; , \; \beta_m(u)= \frac{-0.124(u+35)}{1-e^\frac{u+35}{9}}
+\qquad(6)\]</span></span></p>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn1"><p><a href="https://neuronaldynamics.epfl.ch/online/Ch2.S2.html">Gerstner et al.&nbsp;(2014)</a></p></li></ol></aside></section>
+<section id="models-hodgkin-huxley-1" class="slide level2 smaller">
+<h2>Models: Hodgkin-Huxley</h2>
+<p><strong>Unstable</strong> <span class="math inline">\(\rightarrow\)</span> define<sup>1</sup>:</p>
+<p><span id="eq-x_0"><span class="math display">\[
+x_0(u) := \frac{\alpha_x(u)}{\alpha_x(u) +  \beta_x(u)} = \frac{1}{2}\left(1+\tanh\left(\frac{u - u_x}{\kappa_x}\right)\right)
+\qquad(7)\]</span></span> <span id="eq-tau"><span class="math display">\[
+\tau_x(u) = \frac{1}{\alpha_x(u) +  \beta_x(u)} = \tau^0_x + \tau^{max}_x\left(1-\tanh\left( \frac{u - u_{\tau,x}}{\sigma_x} \right)^2\right)
+\qquad(8)\]</span></span></p>
+<div class="fragment">
+<p>And then substitute <a href="#/models-hodgkin-huxley">Equation&nbsp;5</a> with:</p>
+<p><span id="eq-gating_variables_tanh_diffeq"><span class="math display">\[
+\dot{x} = \frac{x_0(u) - x(u)}{\tau_x(u)}
+\qquad(9)\]</span></span></p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(\rightarrow\)</span> solver stability.</p>
+<aside class="notes">
+<p>The exponential form is numerically unstable → we use the <span class="math inline">\(\tanh\)</span> formalism 1. We define:</p>
+<p>. . .</p>
+<p>Parameters values must then be fitted to the shapes of <a href="#/models-hodgkin-huxley">Equation&nbsp;6</a></p>
+<p>. . .</p>
+<p>Which achieves solver stability.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn2"><p><a href="https://doi.org/10.1007/s00422-011-0459-1">Toth et al.&nbsp;(2011)</a></p></li></ol></aside></section>
+<section id="models-two-dimensional-reduction" class="slide level2 smaller">
+<h2>Models: two dimensional reduction</h2>
+<p>Hodgkin-Huxley models are a bit <strong>unpractical</strong>:</p>
+<ul>
+<li>No voltage nor current thresholds:</li>
+</ul>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
+<p><img data-src="images/books/2014Gerstner-no_voltage_threshold.png" width="500" height="300"> <img data-src="images/books/2014Gerstner-no_current_threshold.png" width="500" height="300"></p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<ul>
+<li>Impossible to visualize and analyze a 4d+ dynamical system;</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Very hard to identify parameters.</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Usually required for intuitiveness</li>
+<li></li>
+<li>The dynamical role of parameters is often obscure</li>
+</ul>
+<p>To these, we’d also add a certain increase in the nuance required to implement and calibrate HH systems w.r.t. NLIF that we’re about to see.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="models-two-dimensional-reduction-1" class="slide level2 smaller">
+<h2>Models: two dimensional reduction</h2>
+<p>Note: dynamics of <span class="math inline">\(n\)</span> and <span class="math inline">\(h\)</span> are very slow w.r.t. <span class="math inline">\(m\)</span></p>
+<p><img data-src="images/books/2014Gerstner-tau_x.png" class="absolute" style="top: 90px; left: 650px; width: 40%; "></p>
+<div class="fragment">
+<div class="absolute" style="top: 250px; ">
+<p><span class="math inline">\(\rightarrow\)</span> define <span class="math inline">\(:w = b-h = an\)</span></p>
+<div class="fragment">
+<p>So that <a href="#/models-hodgkin-huxley">Equation&nbsp;3</a> becomes: <span class="math display">\[
+\frac{du}{dt} = \frac{1}{\tau}(F(u,w) + RI(t))
+\]</span></p>
+</div>
+<div class="fragment">
+<p>And <a href="#/models-hodgkin-huxley">Equation&nbsp;5</a> (or <a href="#/models-hodgkin-huxley-1">Equation&nbsp;9</a>) reduce to: <span class="math display">\[
+\frac{dw}{dt} = \frac{1}{\tau_w}G(u,w)
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Examples: Morris-Lecar model, FitzHugh-Nagumo model</p>
+</div>
+</div>
+</div>
+</section>
+<section id="models-one-dimensional-reduction" class="slide level2 smaller">
+<h2>Models: one dimensional reduction</h2>
+<p>Define <span class="math inline">\(\epsilon := \frac{\tau}{\tau_w}\)</span>. If <span class="math inline">\(\tau \gt \gt \tau_w\)</span>:</p>
+<p><img data-src="images/books/2014Gerstner-one_dimensional_reduction_firing_mechanism.png"><!-- {.absolute top=90 left=650 width=40%} --></p>
+<div class="fragment">
+<div class="absolute" style="top: 80px; left: 430px; ">
+<p>Since:</p>
+<ul>
+<li>One may <strong>NOT</strong> interested in spike shape;</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>The <span class="math inline">\(w\)</span> variable only varies <strong>after</strong> the voltage has reached its maximum.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(\rightarrow\)</span> substitute the equation for <span class="math inline">\(\frac{dw}{dt}\)</span> with reset mechanism! <span class="math inline">\(\rightarrow\)</span> <strong>NLIF</strong> models:</p>
+<p><span id="eq-NLIF"><span class="math display">\[
+\frac{du}{dt} = \frac{1}{\tau}(F(u,w_{rest}) + RI(t)) =: \frac{1}{\tau}(f(u) + RI(t))
+\qquad(10)\]</span></span> <span id="eq-one_dimensional_reduction"><span class="math display">\[
+u(t) \ge \theta \implies u(t+\delta) = u_r
+\qquad(11)\]</span></span></p>
+<aside class="notes">
+<p>Excitability can now be discussed with the help of Fig. 4.21. A current pulse shifts the state of the system horizontally away from the stable fixed point. If the current pulse is small, the system returns immediately (i.e., on the fast time scale) to the stable fixed point. If the current pulse is large enough so as to put the system beyond the middle branch of the u-nullcline, then the trajectory is pushed toward the right branch of the u-nullcline. The trajectory follows the u-nullcline slowly upward until it jumps back (on the fast time scale) to the left branch of the u-nullcline. The ‘jump’ between the branches of the nullcline corresponds to a rapid voltage change. In terms of neuronal modeling, the jump from the right to the left branch corresponds to the downstroke of the action potential. The middle branch of the u-nullcline (where u˙&gt;0) acts as a threshold for spike initiation;</p>
+<p>. . . - they’re roughly all the smae -&gt; they carry no information - . . .</p>
+<p>w_rest is the w at the intersection of the nullclines. Below is the firing mechanism. <span class="math inline">\(\delta\)</span> can be interpreted as the “dead time”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="models-exponential-nlif" class="slide level2 smaller">
+<h2>Models: Exponential NLIF</h2>
+<p>How to choose <span class="math inline">\(f(u)\)</span>?</p>
+<div class="fragment">
+<p><img data-src="images/books/2014Gerstner-AdEx_derivation.png" height="200"></p>
+<div class="absolute" style="top: 150px; left: 550px; ">
+<p><span class="math display">\[
+\frac{f(u(t))}{\tau} = \left&lt;\frac{I(t)}{C} - \frac{du}{dt}\right&gt;
+\]</span></p>
+</div>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(\rightarrow\)</span> best fitting function is: <span class="math inline">\(f(u)= -(u-u_{rest}) + \Delta_T e^{\frac{u-\theta_{rh}}{\Delta_T}}\)</span></p>
+</div>
+<div class="fragment">
+<!-- Would get the same result by approximating the $F(u,w_{rest})$ of a 2-dimensional Hodgkin-Huxley model: -->
+<p><img data-src="images/books/2014Gerstner-AdEx_derivation_hh.png" height="200"></p>
+<div class="absolute" style="top: 500px; left: 550px; ">
+<p>Same result from reduced 1d Hodgkin Huxley model.</p>
+</div>
+<aside class="notes">
+<p>By performing experiments:</p>
+<p>In order to determine the function f~(u), an experimentalist injects a time-dependent current I(t) into the soma of a neuron while measuring with a second electrode the voltage u(t). From the voltage time course, one finds the voltage derivative du/dt.</p>
+<p>A measurement at time t yields a value u(t) (which we use as value along the x-axis of a plot) and a value [(I(t)/C)−(du/dt)] (which we plot along the y axis). With a thousand or more time points per second, the plot fills up rapidly. For each voltage u there are many data points with different values along the y-axis. The best choice of the parameter C is the one that minimizes the width of this distribution. At the end, we average across all points at a given voltage u to find the empirical function (35)</p>
+<p>. . .</p>
+<p>We find that the empirical function extracted from experiments is well approximated by a combination of a linear and exponential term</p>
+<p>. . .</p>
+<p>In figure you see a plot of the <span class="math inline">\(F(u, {w_rest})\)</span> of a reduced to 2d HH model where we make the further assumption to make it 1d (separation of time scales). There a 2 fixed points, the leftmost is stable (u_rest), the one in the middle is unstable and denotes the effective threshold. The rightmost one ends the upswing of the spike. One could discard the rightmost and introduce a numerical threshold <span class="math inline">\(\theta_{reset}\)</span> together with a reset mechanism. This way, what’s left of the <span class="math inline">\(F(u, {w_rest})\)</span> can be approximated with the <span class="math inline">\(f(u)\)</span> of the AdEx above.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="models-adex-nlif" class="slide level2 smaller">
+<h2>Models: AdEx-NLIF</h2>
+<p>A single <a href="#/models-one-dimensional-reduction">Equation&nbsp;10</a> cannot capture all firing patterns <span class="math inline">\(\rightarrow\)</span> add abstract <strong>linear</strong> current:</p>
+<p><span class="math display">\[
+\tau\frac{du}{dt} =f(u) -R\sum\limits_k w_k + RI(t) \; , \; \{\tau_k\frac{dw_k}{dt} = a_k(u-u_{rest}) -w_k +b_k\tau_k\sum\limits_{t^{(f)}}\delta(t-t^{(f)})\}
+\]</span> <span class="math display">\[
+u(t) \ge \theta \implies u(t+\delta) = u_r
+\]</span></p>
+<div class="fragment">
+<p><img data-src="images/books/2014Gerstner-firing_patterns.png" width="800" height="300"></p>
+<aside class="notes">
+<p>The δ-function in the wk equations indicates that, during firing, the adaptation currents wk are increased by an amount bk.The parameters bk are the ‘jump’ of the spike-triggered adaptation.</p>
+<p>. . .</p>
+<p>Spike-triggered adaptation is controlled by a combination of a and b. The choice of a and b largely determines the firing patterns of the neuron. In figure, you may see al firing patterns as a function of a and b. FOr every pattern, an hight and a low step current are reported.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section></section>
+<section>
+<section id="methods-2" class="title-slide slide level1 smaller center">
+<h1><span class="semi-transparent">Methods</span></h1>
+<ol type="1">
+<li><p><span class="semi-transparent">Model Specification</span></p></li>
+<li><p>Model Calibration:</p>
+<p>3.1 Intro</p>
+<p>3.2 Features</p>
+<p>3.3 Feature selection</p>
+<p>3.4 MOO</p>
+<p>3.5 BORG-MOEA</p>
+<p>3.6 Pareto-optimal front</p></li>
+</ol>
+</section>
+<section id="calibration-intro" class="slide level2">
+<h2>Calibration: Intro</h2>
+<ul>
+<li><strong>Model calibration</strong> find a parameter set <span class="math inline">\(\vec{w}\)</span> that makes the model <em>match</em> experimental trace;</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>The notion of “matching” will be made precise by the definition of <strong>objective functions</strong> (<strong>loss</strong>);</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Calibration methods will need to take into account the <strong>intrinsic stochasticity</strong> of neurons.</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>“Model calibration” refers to the task of finding a parameter set <span class="math inline">\(\vec{w}\)</span> that makes the model <em>match</em> experimental trace;</li>
+<li>i.e.&nbsp;functions that measure the degree to which the model is capable of reproducing experimental traces along certain dimensions;</li>
+<li>i.e.&nbsp;their tendency to produce different voltage traces when injected with the same input.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="calibration-features" class="slide level2 smaller">
+<h2>Calibration: Features</h2>
+<p>We consider two classes of objective functions:</p>
+<div class="fragment">
+<ol type="1">
+<li><p><strong>Trace-to-trace (direct) comparisons</strong>:</p>
+<ul>
+<li>L2 loss;</li>
+<li>Phase plane trajectory distance <sup>1</sup>;</li>
+<li>…</li>
+</ul></li>
+</ol>
+</div>
+<div class="fragment">
+<ol start="2" type="1">
+<li><p><strong>Feature-based distance functions</strong> <sup>2</sup>:</p>
+<ul>
+<li>Firing frequency;</li>
+<li>Spike height;</li>
+<li>…</li>
+</ul></li>
+</ol>
+<aside class="notes">
+<ol type="1">
+<li>These are losses that compare traces point-wise</li>
+<li>These don’t take point-wise differences</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn3"><p><a href="https://www.taylorfrancis.com/chapters/edit/10.1201/9781420039290-8/introduction-equation-solving-parameter-fitting">LeMasson and Maex (2001)</a></p></li><li id="fn4"><p><a href="https://doi.org/10.3389/neuro.01.1.1.001.2007">Druckmann et al.&nbsp;(2007)</a></p></li></ol></aside></section>
+<section id="calibration-features-1" class="slide level2 smaller">
+<h2>Calibration: Features</h2>
+<p><em>Trace-to-trace (direct) comparisons</em> usually <sup>1</sup> perform poorly, since:</p>
+<ul>
+<li>Sub- and supra-threshold dynamics are <em>unbalanced</em>;</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Small <em>shifts</em> between simulated and measured spikes usually yield large <em>L2</em> errors.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><em>Intrinsic stochasticity</em> makes the selection of the experimental repetition <span class="math inline">\(r \in R\)</span> to match <em>arbitrary</em>;</li>
+</ul>
+<aside class="notes">
+<ul>
+<li></li>
+<li><p>in the <span class="math inline">\(V\)</span> and in the <span class="math inline">\((V, \frac{dV}{dt})\)</span> spaces;</p></li>
+<li></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn5"><p><a href="https://doi.org/10.1152/jn.00007.2014">We haven’t yet considered more sophisticated approach like Brookings et al.&nbsp;(2014)</a></p></li></ol></aside></section>
+<section id="calibration-features-2" class="slide level2 smaller">
+<h2>Calibration: Features</h2>
+<p><em>Feature-based distance functions</em> avoid these issues, because:</p>
+<div class="fragment">
+<ul>
+<li>They are not point-wise, thus insensitive to <em>regime imbalances</em>;</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>They directly make the model reproduce <em>qualitative</em> features of the target neuron;</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>They take into account <em>Intrinsic stochasticity</em>:</li>
+</ul>
+</div>
+<div class="fragment">
+<p>By defining the loss relative to feature <span class="math inline">\(f\)</span> w.r.t. repetition set <span class="math inline">\(R\)</span> : <span class="math display">\[L_f(\vec{w}, R) = \frac{|\bar{f}_R - f(s(\vec{w}))|}{\sigma^f_R}\]</span></p>
+<!-- $L_f(\vec{w}, R)$   *Intrinsic stochasticity* within repetition set $R$ w.r.t. feature $f$ can be dealt with by defining the loss: -->
+</div>
+<div class="fragment">
+<ul>
+<li>We say that we have a good fit when every objective is under 2 SD <sup>1</sup>.</li>
+</ul>
+<aside class="notes">
+<ul>
+<li></li>
+<li></li>
+</ul>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(R\)</span> is a set of voltage traces produced by the same neuron injected with the same current</li>
+<li><span class="math inline">\(\vec{w}\)</span> is a set of model parameters</li>
+<li><span class="math inline">\(s(\vec{w})\)</span> is a voltage trace simulated by the model with parameters <span class="math inline">\(\vec{w}\)</span></li>
+<li><span class="math inline">\(\bar{f}_R\)</span> is the average value of feature <span class="math inline">\(f\)</span> over <span class="math inline">\(R\)</span></li>
+<li><span class="math inline">\(\sigma^f_R\)</span> is the standard deviation of <span class="math inline">\(f\)</span> over <span class="math inline">\(R\)</span></li>
+<li><span class="math inline">\(f(s(\vec{w}))\)</span> is the value of feature <span class="math inline">\(f\)</span> over <span class="math inline">\(s(\vec{w})\)</span></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn6"><p><a href="https://doi.org/10.3389/neuro.01.1.1.001.2007">Druckmann et al.&nbsp;(2007)</a></p></li></ol></aside></section>
+<section id="calibration-feature-selection" class="slide level2 smaller scrollable">
+<h2>Calibration: Feature selection</h2>
+<p>Experiments <sup>1</sup> suggest the following associations:</p>
+<div class="fragment">
+<ul>
+<li><p>Square inputs:</p>
+<ul>
+<li>Firing frequency;</li>
+<li>Latency;</li>
+<li>Accomodation index;</li>
+<li>Width of AP at half height (only for HH models);</li>
+<li>Average height of AP;</li>
+<li>Slow throughs;</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><p>Ramp inputs:</p>
+<ul>
+<li>Average height of AP;</li>
+<li>Slow throughs;</li>
+<li>Slope of the fit of the spike peaks;</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><p>Colored noisy inputs:</p>
+<ul>
+<li>Coincidence factor;</li>
+<li>Control-adjusted RMS <sup>2</sup>.</li>
+</ul></li>
+</ul>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn7"><p><a href="https://doi.org/10.1371/journal.pcbi.1002133">Druckmann et al.&nbsp;(2011)</a></p></li><li id="fn8"><p><a href="https://doi.org/10.1152/jn.00007.2014">Brookings et al.&nbsp;(2014)</a></p></li></ol></aside></section>
+<section id="calibration-moo" class="slide level2">
+<h2>Calibration: MOO</h2>
+<blockquote>
+<p>How to combine the different features?</p>
+</blockquote>
+<div class="fragment">
+<p><strong>Weighted sum</strong>? No:</p>
+<ul>
+<li>Choice of weights is not obvious;</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>No guarantee on the nature and quality of the compromise;</li>
+</ul>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(\rightarrow\)</span> <strong>Multi-Objective Optimization</strong> !</p>
+</div>
+</section>
+<section id="calibration-moo-1" class="slide level2 smaller">
+<h2>Calibration: MOO</h2>
+<p><strong>Def.</strong> Given the objectives <span class="math inline">\(\{L_{f_1}, L_{f_2}, ..., L_{f_n}\}\)</span>, a set of repetitions <span class="math inline">\(R\)</span> and two parameter sets <span class="math inline">\(\vec{w_1}\)</span> and <span class="math inline">\(\vec{w_2}\)</span> we say that <span class="math inline">\(\vec{w_1}\)</span> <strong>dominates</strong> <span class="math inline">\(\vec{w_2}\)</span> <span class="math inline">\(\iff\)</span>:</p>
+<ol type="1">
+<li><span class="math inline">\(L_{f_i}(\vec{w_1},R) \geq L_{f_i}(\vec{w_2},R) \qquad \forall i= 1,...,n\)</span></li>
+<li><span class="math inline">\(\exists \bar{i} \in \{1,..,n\} | L_{f_\bar{i}}(\vec{w_1},R) \gt L_{f_\bar{i}}(\vec{w_2},R)\)</span></li>
+</ol>
+<div class="fragment">
+<p>MOO purpose: find the set of all <span class="math inline">\(\vec{w}\)</span> that do not dominate each other.</p>
+</div>
+<div class="fragment">
+<p>Such set is the <strong>Pareto-optimal front</strong> (<strong>POF</strong>).</p>
+</div>
+</section>
+<section id="calibration-borg-moea" class="slide level2">
+<h2>Calibration: BORG-MOEA</h2>
+<ul>
+<li>Calibration algorithm: <a href="http://borgmoea.org/">BORG-MOEA</a>;</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>It is an evolutionary algorithm with self-tuning capabilities;</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Pitting it against other algorithms determined its advantage.</li>
+</ul>
+</div>
+</section>
+<section id="calibration-pareto-optimal-front" class="slide level2 smaller">
+<h2>Calibration: Pareto-optimal front</h2>
+<ul>
+<li>The purpose of a <em>MOEA</em> is to approximate the <em>POF</em> by finding some of its elements;</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Projection of the <em>POF</em> set may assume two configurations:</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/articles/2007Druckmann_POF.png" width="800" height="200"></p>
+<p></p><figcaption>Projections of the Pareto optimal front along two sets of features <sup>1</sup></figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="fragment">
+<ul>
+<li>First configuration <span class="math inline">\(\rightarrow\)</span> the two objectives do not conflict each other;</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Second configuration <span class="math inline">\(\rightarrow\)</span> the two objectives do conflict each other;</li>
+</ul>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn9"><p><a href="https://doi.org/10.3389/neuro.01.1.1.001.2007">Druckmann et al.&nbsp;(2007)</a></p></li></ol></aside></section>
+<section id="calibration-pareto-optimal-front-1" class="slide level2">
+<h2>Calibration: Pareto-optimal front</h2>
+<ul>
+<li>Calibration algorithms work better the less objectives they have;</li>
+</ul>
+<div class="fragment">
+<ul>
+<li><span class="math inline">\(\rightarrow\)</span> one may think to sum together features repeated across stimuli;</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Only possible if the two features are <strong>NOT</strong> in a tradeoff <sup>1</sup></li>
+</ul>
+<aside class="notes">
+<ul>
+<li></li>
+<li></li>
+<li>In fact if they are not in a tradeoff the calibration algorithm, can minimize the sum of the two. Instead if they are in a tradeoff, if we sum them the algorithm will find a compromise whose nature and quality we’re not guaranteed of 8we’d be bak to the problem in the MOO #1 slide.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn10"><p><a href="https://doi.org/10.1007/s00422-008-0269-2">Druckmann (2013)</a></p></li></ol></aside></section>
+<section id="calibration-pareto-optimal-front-3" class="slide level2">
+<h2>Calibration: Pareto-optimal front #3</h2>
+<ul>
+<li>Configuration of the projections of the POF are not known a priori <span class="math inline">\(\rightarrow\)</span> features must be kept separate;</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>To anyway reduce the number of features, one may resort to objectives combinations <sup>1</sup>;</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>They consists in substituting two features with the maximum or other combinations of the two.</li>
+</ul>
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn11"><p><a href="https://doi.org/10.1371/journal.pcbi.1002107">Hay et al.&nbsp;(2011)</a></p></li></ol></aside></section></section>
+<section id="tools" class="title-slide slide level1 center">
+<h1><span class="emoji" data-emoji="computer">💻</span> Tools</h1>
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section>
+<section id="related-packages" class="title-slide slide level1 center">
+<h1><span class="emoji" data-emoji="package">📦</span> Related Packages</h1>
+
+</section>
+<section id="related-packages-1" class="slide level2">
+<h2>Related Packages</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="julia">Julia</h3>
+<ul>
+<li><a href="https://github.com/robertfeldt/BlackBoxOptim.jl"><strong>BlackBoxOptim</strong></a></li>
+<li><a href="https://github.com/SciML/DifferentialEquations.jl"><strong>DifferentialEquations</strong></a></li>
+<li><a href="https://github.com/wildart/Evolutionary.jl"><strong>Evolutionary</strong></a></li>
+<li><a href="https://github.com/jmejia8/Metaheuristics.jl"><strong>Metaheuristics</strong></a></li>
+<li><a href="https://github.com/SciML/ModelingToolkit.jl"><strong>ModelingToolkit</strong></a></li>
+<li><a href="https://github.com/JuliaNLSolvers/Optim.jl"><strong>Optim</strong></a></li>
+<li><a href="https://github.com/TuringLang/Turing.jl">Turing</a></li>
+<li><a href="https://github.com/wsphillips/Conductor.jl">Conductor</a></li>
+</ul>
+<p><img data-src="images/logo/JuliaDots.svg" class="absolute" style="top: 83px; left: 130px; width: 5%; "></p>
+</div><div class="column" style="width:50%;">
+<h3 id="python">Python</h3>
+<ul>
+<li><a href="https://github.com/AllenInstitute/AllenSDK"><strong>AllenSDK</strong></a></li>
+<li><a href="https://github.com/BlueBrain/BluePyEfe">BluePyEfe</a></li>
+<li><a href="https://github.com/BlueBrain/BluePyOpt">BluePyOpt</a></li>
+<li><a href="https://github.com/BlueBrain/eFEL"><strong>eFEL</strong></a></li>
+<li><a href="https://github.com/neuronsimulator/nrn">NEURON</a></li>
+<li><a href="https://github.com/KaliLab/optimizer">Optimizer</a></li>
+<li><a href="https://nest-simulator.readthedocs.io/en/stable/tutorials/index.html">PyNEST</a></li>
+</ul>
+<p><img data-src="images/logo/Python.png" class="absolute" style="top: 83px; right: 260px; width: 5%; "></p>
+</div>
+</div>
+</section></section>
+<section>
+<section id="references" class="title-slide slide level1 center">
+<h1><span class="emoji" data-emoji="books">📚</span> References</h1>
+
+</section>
+<section id="references-1" class="slide level2 smaller">
+<h2>References</h2>
+<div class="columns">
+<div class="column" style="width:35%;">
+<h3 id="present">Present</h3>
+<ul>
+<li><a href="https://doi.org/10.1152/jn.00686.2005">Brette and Gerstner (2005)</a></li>
+<li><a href="https://doi.org/10.1007/s00422-008-0263-8">Pospischil et al.&nbsp;(2008)</a></li>
+<li><a href="https://doi.org/10.3389/neuro.01.1.1.001.2007">Druckmann et al.&nbsp;(2007)</a></li>
+<li><a href="https://doi.org/10.1007/s00422-008-0269-2">Druckmann et al.&nbsp;(2008)</a></li>
+<li><a href="https://doi.org/10.1007/s00422-008-0261-x">Jolivet et al.&nbsp;(2008)</a></li>
+<li><a href="https://doi.org/10.1126/science.1181936">Gerstner and Naud (2009)</a></li>
+<li><a href="https://doi.org/10.1371/journal.pcbi.1002133">Druckmann et al.&nbsp;(2011)</a></li>
+<li><a href="https://doi.org/10.1007/s00422-011-0459-1">Toth et al.&nbsp;(2011)</a></li>
+<li><a href="https://infoscience.epfl.ch/record/168813?ln=en">Naud et al.&nbsp;(2012)</a></li>
+<li><a href="https://doi.org/10.1007/978-1-4614-8094-5_28">Druckmann (2013)</a></li>
+<li><a href="https://doi.org/10.1017/cbo9781107447615">Gerstner et al.&nbsp;(2014)</a></li>
+</ul>
+</div><div class="column" style="width:35%;">
+<h3 id="future">Future</h3>
+<ul>
+<li><a href="https://doi.org/10.1007/s00422-008-0257-6">Van Geit et al.&nbsp;(2008)</a></li>
+<li><a href="https://doi.org/10.3389/neuro.10.009.2009">Kobayashi et al.&nbsp;(2009)</a></li>
+<li><a href="https://doi.org/10.1186/1471-2202-10-s1-p260">Smolinski et al.&nbsp;(2009)</a></li>
+<li><a href="https://doi.org/10.1162/neco_a_00208">Naud et al.&nbsp;(2011)</a></li>
+<li><a href="https://doi.org/10.1007/s12021-012-9140-7">Svensson et al.&nbsp;(2012)</a></li>
+<li><a href="https://doi.org/10.3389/fninf.2014.00063">Friedrich et al.&nbsp;(2014)</a></li>
+<li><a href="https://doi.org/10.1007/978-1-4614-7320-6_159-1">Druckmann (2014)</a></li>
+<li><a href="https://doi.org/10.1007/s00422-014-0615-5">Meliza et al.&nbsp;(2014)</a></li>
+<li><a href="https://doi.org/10.3389/fninf.2015.00010">Lynch and Houghton (2015)</a></li>
+<li><a href="https://doi.org/10.3389/fninf.2016.00017">Van Geit et al.&nbsp;(2016)</a></li>
+<li><a href="https://doi.org/10.3389/fncel.2017.00071">Masoli et al.&nbsp;(2017)</a></li>
+</ul>
+</div><div class="column" style="width:30%;">
+<h3 id="future-1">Future</h3>
+<ul>
+<li><a href="https://doi.org/10.7554/elife.56261">Gonçalves et al.&nbsp;(2020)</a></li>
+<li><a href="https://doi.org/10.1109/ijcnn48605.2020.9206692">Mohacsi et al.&nbsp;(2020)</a></li>
+<li><a href="https://doi.org/10.1371/journal.pcbi.1008114">Saray et al.&nbsp;(2021)</a></li>
+<li><a href="https://doi.org/10.3389/fninf.2022.771730">AbdelAty et al.&nbsp;(2022)</a></li>
+<li><a href="https://doi.org/10.1007/978-1-0716-1006-0_409">Kreuz et al.&nbsp;(2022)</a></li>
+<li><a href="https://doi.org/10.1016/j.celrep.2022.111176">Nandi et al.&nbsp;(2022)</a></li>
+</ul>
+</div>
+</div>
+<aside class="notes">
+<p>…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="thanks" class="title-slide slide level1 center">
+<h1>Thanks <span class="emoji" data-emoji="pray">🙏</span></h1>
+
+</section>
+<section id="section-1" class="slide level2 smaller">
+<h2></h2>
+<h3 id="outline-1">Outline</h3>
+<p><span class="emoji" data-emoji="one">1️⃣</span> <a href="#/Objectives">Objectives</a></p>
+<p><span class="emoji" data-emoji="two">2️⃣</span> <a href="#/Motivations">Motivations</a></p>
+<p><span class="emoji" data-emoji="three">3️⃣</span> <a href="#/Methods">Methods</a></p>
+<p><span class="emoji" data-emoji="four">4️⃣</span> <a href="#/Tools">Tools</a></p>
+<p><span class="emoji" data-emoji="five">5️⃣</span> <a href="#/Results">Results</a></p>
+<h3 id="resources-1">Resources</h3>
+<p><img data-src="images/logo/JuliaDots.svg" class="absolute" style="left: 0px; bottom: 252px; width: 3.2%; "> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Package: <a href="https://github.com/InPhyT/ModellingFramework.jl">ModellingFramework.jl</a></p>
+<p><img data-src="images/logo/JuliaDots.svg" class="absolute" style="left: 0px; bottom: 205px; width: 3.2%; "> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Package: <a href="https://github.com/InPhyT/NeuronalModelling.jl">NeuronalModelling.jl</a></p>
+<p><img data-src="images/logo/GitHub.svg" class="absolute" style="left: 0px; bottom: 155px; width: 3.2%; "> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Data: <a href="https://github.com/InPhyT/Quantitative_Single_Neuron_Modeling_Competition_2007">Competition (2007)</a></p>
+<p><img data-src="images/logo/GitHub.svg" class="absolute" style="left: 0px; bottom: 107px; width: 3.2%; "> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Data: <a href="https://github.com/InPhyT/Quantitative_Single_Neuron_Modeling_Competition_2009">Competition (2009)</a></p>
+<p><img data-src="images/logo/GitHub.svg" class="absolute" style="left: 0px; bottom: 59px; width: 3.2%; "> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Data: <a href="https://github.com/AllenInstitute/AllenSDK">Allen Brain Atlas (2023)</a></p>
+<p><img data-src="images/logo/NeuronalModelling.svg" class="absolute" style="bottom: 120px; right: 0px; width: 45%; "></p>
+<aside class="notes">
+<p>…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p><img src="images/logo/unito.svg" class="slide-logo"></p>
+<div class="footer footer-default">
+<p><a href="https://github.com/InPhyT/NeuronalModelling.jl">NeuronalModelling.jl: Quantitative Single-Neuron Modelling in Julia</a></p>
+</div>
+</section></section>
+
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="index_theory_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="index_theory_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="index_theory_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="index_theory_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="index_theory_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="index_theory_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="index_theory_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="index_theory_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="index_theory_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="index_theory_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="index_theory_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":false},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
