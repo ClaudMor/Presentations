@@ -288,7 +288,7 @@ $$
 \tau \frac{du}{dt} = -(u(t) - u_{rest}) + RI(T)
 $${#eq-lif}
 
-![](images/books/2014Gerstner-LIF_circuit.PNG){.absolute top=90 left=850 width=25%}
+![](images/books/A2014Gerstner_LIF_circuit.PNG){.absolute top=90 left=850 width=25%}
 
 - With firing mechanism: 
 
