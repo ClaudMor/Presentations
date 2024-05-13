@@ -1,6 +1,5 @@
 ---
 title: "FCAI Presentation Talk"
-subtitle: '2024-05-10'
 bibliography: presentation.bib
 ---
 
