@@ -1,0 +1,187 @@
+---
+title: "Modelling green credit scores for a network of retail and business clients"
+bibliography: presentation.bib
+---
+
+<!-- https://github.com/quarto-dev/quarto-cli/discussions/4572 -->
+```{=html}
+<style>
+.semi-transparent {
+  opacity: 0.3;
+}
+</style> 
+```         
+   
+<br> 
+ 
+
+### Outline
+
+
+:one: Introducing Myself
+
+:two: PhD Overview
+
+
+## Introducing Myself {.smaller .scrollable}
+
+
+**B.Sc.** (Physics, 110L, University of Turin). Thesis: 
+
+- AeroSpace Software Engineering - MCS @[ALTEC S.p.A.](https://www.altecspace.it/);
+- Scientific/Experimental - Feasibility (Data) Analysis for [MINI-EUSO](https://www.jemeuso.org/missions/mini-euso/) Mission;
+- [Slides](http://personalpages.to.infn.it/~bertaina/tesi-scaricate/Moroni-laurea2.pdf).
+
+. . .
+
+**M.Sc.**:
+
+- Physics of Complex Systems, 110L University of Turin:
+
+    - **Background**: Physics (Stat. Mech., SDEs, QFT,...), Complex Systems (ABM, Comp. Soc. Sci. ([practice review](https://github.com/ClaudMor/Algorithmic_Bias_in_Echo_Chamber_Formation/blob/main/Algorithmic_Bias_In_Echo_Camber_Formation.pdf)), Network Theory, Comp. Neur. );
+
+    - **Machine/Deep Learning**: NLP ([ensemble models](https://github.com/ClaudMor/Reddit_Text_Classification), [large models](https://github.com/ClaudMor/IMDb_Sentiment_Analysis_BERT)), [Computer Vision](https://github.com/ClaudMor/Plant_Disease_Classification_CNN);
+
+    - Thesis at [CENTAI](https://centai.eu/home).    
+
+. . .
+
+- Co-Founded **Interdiscipliary Physics Team** ([Twitter](https://twitter.com/In_Phy_T), [LinkedIn](https://www.linkedin.com/company/interdisciplinary-physics-team-inphyt/?viewAsMember=true), [GitHub](https://github.com/InPhyT)):
+
+    - @Moroni2023 ([MIT Talk](https://youtu.be/Q2PwKQCkZJ4?si=Qj3QrHy7NmhQXllW), [Fields Institute Talk](https://youtu.be/hB8Vrwkwax0?si=R0fNmrtFxNXQ15fw))
+
+    - [COVID-19_Piedmont](https://github.com/UniTo-SEPI)
+
+    - [COVID-19 Integrated Surveillance Data in Italy](https://github.com/InPhyT/COVID19-Italy-Integrated-Surveillance-Data)
+
+    - [UnrollingAverages.jl](https://github.com/InPhyT/UnrollingAverages.jl)
+
+    - [ICD_GEMs.jl](https://github.com/UniTo-SEPI/ICD_GEMs.jl)
+
+    - [Neuronal Dynamics](https://claudmor.github.io/Presentations/NeuronalDynamics/#/title-slide)
+
+. . . 
+
+- More Extracurricular:
+
+    - Deep Architectures for Stock Index Tracking (Sella Bank-UniUPO, [link](https://of.uniupo.it/syllabus/didattica.php/en/2023/1407#222400))
+
+    - [IPSP2023](https://event.unitn.it/ipsp2023/) (UniTrento)
+
+    - ...
+
+. . .
+
+- Currently employed as Data Scientist Intern at [ORS](https://ors.ai/).
+
+
+## PhD Plan {.smaller .scrollable}
+
+**Brief Review**:
+
+- Climate Change influences Credit Risk [@Virgilio2024]:
+
+  - Legislatively;
+  - Naturally;
+  - Energy transition;
+  - Monetary Policy [@ECB].
+
+. . .
+
+- ML approaches to Credit Risk Assessment have surged [@CreditRiskML_Review]:
+
+  - Standard FFNN/ML approaches  [@kuznietsova2021approach], [@Feng2022BankGC];
+
+  - Graph Machine Learning [@CreditRiskGNN_Lee], [@CreditRiskGNN_Liu].
+
+. . .
+
+**PhD Plan**:
+
+- Understand how climate will affect risk;
+
+. . .
+
+- Identify all available data sources [@Virgilio2024], especially for energy mix;
+
+. . .
+
+- Study in detail all ML approaches: `credit AND ( scor* OR risk ) AND ( predict* OR model* OR measur* OR assess* )`;
+
+. . .
+
+- Combine information above to produce models.
+
+. . .
+
+**Ideas**: 
+
+- Networks in [@CreditRiskGNN_Lee], [@CreditRiskGNN_Liu] constructed assuming L2/Manhattan separability $\implies$ use [@CARLG] instead;
+
+. . .
+
+- Use transaction networks [@CreditRiskGNN_Liu]
+
+
+
+
+<!-- [^1]: @Virgilio2024 
+[^2]: @CreditRiskML_Review
+[^3]: @kuznietsova2021approach, @Feng2022BankGC
+[^4]: @CreditRiskGNN_Lee, @CreditRiskGNN_Liu
+[^5]: @ECB -->
+
+
+
+
+
+
+# Thanks :pray:
+
+
+<!-- IT-AML: link prediction 3 tasks e trova il train set che faccia bene almeno le prime 2 -->
+
+<!-- # Extras
+
+1. Variational Graph Autoencoders
+
+
+
+## Variational Graph Autoencoders {.smaller}
+
+
+
+![](images/VGAE_formulae.png){fig-align="center"}
+
+::: {.r-stack} 
+
+::: {.fragment .fade-in-then-out} 
+$$\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j)$$
+:::
+
+::: {.fragment .fade-in-then-out}
+$$\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j))$$
+:::
+
+::: {.fragment .fade-in-then-out}
+$$\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) = \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j)) = \text{Dec}(\vec{h}^{(L)}_i, \vec{h}^{(L)}_j)$$
+:::
+
+
+::: {.fragment .fade-in}
+\begin{equation}
+\begin{split}
+\hat{p}(e_{ij}) = \text{Model}(\vec{h}^{(0)}_i, \vec{h}^{(0)}_j) &= \text{Dec}(\text{Enc}(\vec{h}^{(0)}_i), \text{Enc}(\vec{h}^{(0)}_j)) = \text{Dec}(\vec{h}^{(L)}_i, \vec{h}^{(L)}_j) \\ &=
+\begin{cases}
+\vec{h}^{(L)}_i \cdot \vec{h}^{(L)}_j \\
+\vec{h}^{(L)}_i[:l/2] \cdot \vec{h}^{(L)}_j[l/2:] 
+\end{cases}
+\end{split}
+\end{equation}
+:::
+
+::: -->
+
+
+
+# References
